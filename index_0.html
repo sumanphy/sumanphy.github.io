@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suman Mondal - Quantum Many-Body Physics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f4f4f4;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .profile-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin: 0 auto 1.5rem;
+            display: block;
+            object-fit: cover;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        
+        nav {
+            background: #2a5298;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        nav a:hover {
+            opacity: 0.7;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #1e3c72;
+            border-bottom: 3px solid #2a5298;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h3 {
+            color: #2a5298;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .research-area {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f9f9f9;
+            border-left: 4px solid #2a5298;
+            border-radius: 4px;
+        }
+        
+        .research-area h3 {
+            margin-top: 0;
+            color: #2a5298;
+            margin-bottom: 1rem;
+        }
+        
+        .research-area-content {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+        
+        .research-content {
+            flex: 1;
+        }
+        
+        .research-content h4 {
+            color: #1e3c72;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .research-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .research-content li {
+            margin-bottom: 0.3rem;
+        }
+        
+        .research-image {
+            width: 250px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            flex-shrink: 0;
+        }
+        
+        .publication {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f9f9f9;
+            border-radius: 4px;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .publication-content {
+            flex: 1;
+        }
+        
+        .publication-image {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            flex-shrink: 0;
+        }
+        
+        .publication-title {
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 0.3rem;
+        }
+        
+        .publication-authors {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 0.3rem;
+        }
+        
+        .publication-venue {
+            color: #666;
+        }
+        
+        .publication a {
+            color: #2a5298;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .publication a:hover {
+            text-decoration: underline;
+        }
+        
+        .affiliation-item {
+            margin-bottom: 1rem;
+        }
+        
+        .interest-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        
+        .interest-tag {
+            background: #2a5298;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            background: white;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .research-area-content {
+                flex-direction: column;
+            }
+            
+            .research-image {
+                width: 100%;
+                height: 200px;
+            }
+            
+            .publication {
+                flex-direction: column;
+            }
+            
+            .publication-image {
+                width: 100%;
+                height: 180px;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Hide all sections except the Home section
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById('home').style.display = 'block';
+
+            // Add click event listeners to navigation links
+            const navLinks = document.querySelectorAll('nav a, .quick-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    sections.forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    const targetSection = document.querySelector(this.getAttribute('href'));
+                    targetSection.style.display = 'block';
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <img src="images/my_photo.JPG" alt="Suman Mondal" class="profile-photo">
+        <h1>Suman Mondal</h1>
+        <p style="margin-top: 0.5rem; font-size: 1rem;">
+            <strong>[Guest Scientist]</strong><br>
+            [Max Planck Institute for the Physics of Complex Systems, Dresden, Germany]<br>
+        </p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#research">Research</a></li>
+            <li><a href="#numerical">Numerical Methods</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#teaching">Teaching</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section id="home">
+            <h2>Home</h2>
+            <p>
+            Welcome to my research homepage. 
+            My research spans a diverse array of topics, 
+            including quantum phases in strongly correlated systems, 
+            topological phases and phase transitions, topological Thouless charge pumping, 
+            nonequilibrium physics in closed quantum systems, many-body localization in the presence of disorder, 
+            kinetically constrained systems, and electron-phonon coupled systems. Through a combination of 
+            theoretical modeling and advanced numerical techniques, I have studied several systems to make a contributions to the field.
+            </p>
+
+            <p>
+
+            I use several numerical techniques to analyze these systems. While small systems are dealt with exact diagonalization (ED) methods, 
+            I use the Matrix Product State (MPS) based Density Matrix Renormalization Group (DMRG) method and time-dependent 
+            versions of MPS methods for larger systems. I also have implemented quantum typically based 
+            methods to study systems in finite temperature. Regarding electron-phonon coupled systems, 
+            I use the multi-trajectory Ehrenfest (MTE) method, which is a semi-classical approach. 
+            For one of our ongoing projects, we have developed a method where we integrate MTE into the time-evolving block decimation (TEBD) method.
+            </p>
+            
+            <h3>Quick Links</h3>
+            <div class="interest-list">
+            <a href="#research" class="interest-tag quick-link">Research</a>
+            <a href="#numerical" class="interest-tag quick-link">Numerical Methods</a>
+            <a href="#publications" class="interest-tag quick-link">Publications</a>
+            <a href="#teaching" class="interest-tag quick-link">Teaching</a>
+            <a href="#contact" class="interest-tag quick-link">Contact</a>
+            </div>
+            
+            <h3 style="margin-top: 2rem;">Get In Touch</h3>
+            <p>
+            <strong>Email:</strong>  mondal[a]pks.mpg.de <br>
+            <strong>Office:</strong> [2A13]<br>
+            <strong>Address:</strong> [Nöthnitzer Str. 38, 01187 Dresden, Germany]
+            </p>
+            <p style="margin-top: 1rem;">
+            <a href="https://scholar.google.com/citations?user=GygfZgYAAAAJ&hl=en" target="_blank">Google Scholar</a> |
+            <a href="https://orcid.org/0000-0002-2512-1533" target="_blank">ORCID</a> |
+            <a href="https://www.researchgate.net/profile/Suman-Mondal-12" target="_blank">ResearchGate</a> |
+            <a href="https://github.com/sumanphy" target="_blank">GitHub</a> | 
+            <a href="https://www.linkedin.com/in/suman-mondal-468904342/" target="_blank">LinkedIn</a>
+            </p>
+        </section>
+        
+        
+        <section id="research">
+            <h2>Research</h2>
+            <!-- Content for Research section -->
+        </section>
+       
+
+        <section id="teaching">
+            <h2>Teaching</h2>
+            <!-- Content for Teaching section -->
+        </section>
+        
+        <section id="numerical">
+            <h2>Numerical Methods & Computational Tools</h2>
+            <!-- Content for Numerical Methods section -->
+        </section>
+        
+        <section id="publications">
+            <h2>Selected Publications</h2>
+            <!-- Content for Publications section -->
+        </section>
+        
+        <section id="about">
+            <h2>About Me</h2>
+            <!-- Content for About Me section -->
+        </section>
+        
+        <section id="contact">
+            <h2>Contact</h2>
+            <!-- Content for Contact section -->
+        </section>
+    </div>
+    
+    <footer>
+        <p>&copy; 2026 [Suman Mondal]. Last updated: January 2026</p>
+    </footer>
+</body>
+</html>
