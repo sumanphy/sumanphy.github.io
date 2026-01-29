@@ -128,12 +128,21 @@
                 $p$. 
                 Other than the truncation error, there are two more sources of error. One arises from the iterative process 
                 of the numerical diagonalization and the other from the lack of convergence 
-                within the class of the MPS states. In this thesis, we have implemented the DMRG method for one-dimensional 
+                within the class of the MPS states. In general, it can be utilized for systems with periodic boundary conditions, infinite 
+                systems and two-dimensional lattices. In this chapter, we have implemented the DMRG method for one-dimensional 
                 open boundary systems where it works 
-                the best. In general, it can be utilized for systems with periodic boundary conditions, infinite 
-                systems and two-dimensional lattices.
+                the best. To compare the DMRG method with other methods, mean-field (SDMFT in the figure), CMFT and ED, I have shown the first Mott lobe of the Bose Hubbard model in the 
+                <a href="#mott">figure below</a>. Note that, I have considered three-body constraint for this calculation and the 
+                DMRG result is extracted to $L=\infty$.
             </div>
-            
+
+            <div style="text-align: center; margin: 2rem 0;" id="dmrg">
+                <img src="images/allmethod1d.jpg" alt="DMRG" class="research-image-medium">
+                <p style="color: #666; font-style: italic; margin-top: 1rem; margin-bottom: 0rem; text-align: center;">
+                    A comparison of different methods. The first Mott lobe of the Bose Hubbard model is shown. 
+                    Three body constraint is considered is considered to get the reselts.
+                </p>
+            </div>
             
             
             <h3 id="references">Related References</h3>

@@ -42,7 +42,7 @@
                 </p>
             </div>
 
-
+            <div style="margin-top: 1rem; ">
             In principle, the ED method allows us to calculate the full spectrum 
             of the Hamiltonian describing a particular system. The method is 
             based on three major steps, namely (a) create appropriate basis 
@@ -58,8 +58,10 @@
             single vector for a large system. For example, if we consider 
             hard-core bosons ($m = 2$) and small system of length $L=30$ it takes $8$GB of memory to 
             store a single $2^{30}$ dimensional vector with "double" precision. 
-            On the other hand, the computational complexity to get all the eigenstate cranks up to $\mathcal{O} (D^3)$. 
-
+            On the other hand, the computational complexity to get all the eigenstate cranks up to $\mathcal{O} (D^3)$.
+            </div> 
+            
+            <div style="margin-top: 1rem; ">
             However, one can exploit the use of good quantum numbers of the system to reduce the basis dimension substantially. To get the essence, in the model
             <div class="equation-wrapper">
             \begin{equation}\label{eq:bhham}
@@ -72,7 +74,9 @@
             separately. This substantially reduces the effective computational cost and memory needed for the calculations. 
             Note that this process makes the Hamiltonian matrix less sparse, which consumes more 
             time to diagonalize.
+            </div>
 
+            <div style="margin-top: 1rem; ">
             Lanczos or Arnoldi method makes it more efficient if we are only interested in 
             lowe-lying states, which is often sufficient for essential studies. In this process, 
             we approximate a Hamiltonian ($H$) 
@@ -87,7 +91,14 @@
             converges rapidly to that of $H$ with increasing $p$. In general, with $p\ll D$, the 
             first eigenstate is achieved with high accuracy and to improve the accuracy of excited 
             states, one can increase $p$ further.
+            </div>
 
+            <div style="margin-top: 1rem; ">
+            To compare the ED method with other numerical methods, I have shown the first Mott lobe of the Bose Hubbard model in the 
+            <a href="DMRG.html">DMRG</a> section.
+            </div>
+
+            <div style="margin-top: 1rem; ">
             The ED method can also be used to study the dynamics of systems. As mentioned in the 
             beginning, we can have access to the system's dynamical property by solving the  
             corresponding time-dependent Schrödinger-equation. In other words, we need to calculate the time-evolution 
@@ -99,6 +110,7 @@
             \end{equation}
             Note that the exponentiation is a computationally demanding task, which again 
             restricts us to small system sizes.
+            </div>
 
 
             
