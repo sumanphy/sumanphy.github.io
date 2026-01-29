@@ -69,27 +69,27 @@
                 the Hamiltonian of interest contains only the nearest-neighbor 
                 interactions, then the Hamiltonian can be re-written in terms of 
                 local two site terms as
-                <p>
+                <div class="equation-wrapper">
                 \begin{equation}
                     H = \sum_i h_{(2i-1), 2i} + \sum_i h_{2i, (2i+1)} = H_{odd} + H_{even}.
                 \end{equation}
-                </p>
+                </div>
                 Here all $H_{odd}$ or $H_{even}$ terms commute among themselves but, 
                 $h_{(2i-1), 2i}$ and $ h_{2i, (2i+1)}$ do not commute in general since they share a 
                 common site $2i$. This non-commutative nature gives rise to an error in the ST 
                 decomposed time evolution operator. The first order Suzuki-Trotter (ST(1)) decomposed 
                 $U(\delta t)$ can be written as
-                <p>
+                <div class="equation-wrapper">
                 \begin{equation}
                     e^{-iH\delta t} = e^{-iH_{odd}\delta t} + e^{-iH_{even}\delta t}+ O(\delta t ^2).
                 \end{equation}
-                </p>
+                </div>
                 So, the time evolved wavefunction becomes
-                <p>
+                <div class="equation-wrapper">
                 \begin{equation}\label{eq:tebd}
                     |\Psi(t+\delta t)\rangle = e^{-iH_{odd}\delta t} e^{-iH_{even}\delta t} |\Psi(t)\rangle
                 \end{equation}
-                </p>
+                </div>
                 In the MPS description of the wavefunction, the two site operators in $H_{odd}$ 
                 or $H_{even}$ can be operated independently since they commute with each other. 
                 After operating a two-site 
@@ -117,11 +117,11 @@
                 higher-order ST decomposition since in ST($n$), the error comes of 
                 the order of $\delta t^{n+1}$. In the following, an ST($2$) 
                 decomposition is shown.
-                <p>
+                <div class="equation-wrapper">
                 \begin{equation}
                     e^{-iH\delta t} = e^{-iH_{odd}\delta t/2} e^{-iH_{even}\delta t} e^{-iH_{odd}\delta t/2}+ O(\delta t ^3).
                 \end{equation}
-                </p>
+                </div>
                 Using small time steps and higher-order ST decomposition, this error can also be 
                 significantly minimized. Nevertheless, considering all these sources of errors, the 
                 accessible time scale allows us to study the system of interest efficiently. There is also a TEBD algorithm for infinite 

@@ -61,11 +61,11 @@
             On the other hand, the computational complexity to get all the eigenstate cranks up to $\mathcal{O} (D^3)$. 
 
             However, one can exploit the use of good quantum numbers of the system to reduce the basis dimension substantially. To get the essence, in the model
-            <p>
+            <div class="equation-wrapper">
             \begin{equation}\label{eq:bhham}
             {H} = -\sum\limits_{\langle i,j \rangle}t_{i,j}(a^\dagger_{i}a_{j}+ H.c.) + \frac{U}{2}\sum\limits_i{n}_{i}({n}_{i} - 1) - \sum\limits_i\mu_i n_{i}
             \end{equation}
-            </p>
+            </div>
             for example, known as the Hubbard model, 
             the total number of particles $N=\sum_j n_j$ is a conserved quantity.
             This assumption ensures that the Hamiltonian is block diagonal, and each block can be solved 
@@ -78,11 +78,11 @@
             we approximate a Hamiltonian ($H$) 
             in a $p$-dimensional orthonormal basis space generated from Krylov space: a vector 
             space created by an arbitrary vector $v$ and the $H$, given by
-            <p>
+            <div class="equation-wrapper">
             \begin{equation}
             \{ v,~Hv,~H^2v,~H^3v,~.~.~.~H^{p-1}v \}.
             \end{equation}
-            </p>
+            </div>
             In this orthonormal basis, the $H$ becomes $\tilde H$, whose largest eigenvalue 
             converges rapidly to that of $H$ with increasing $p$. In general, with $p\ll D$, the 
             first eigenstate is achieved with high accuracy and to improve the accuracy of excited 
@@ -94,16 +94,13 @@
             operator ${\mathcal{U}}(t) = e^{-iH(t)t/\hbar}$ and a given state 
             $|\Psi(t=0)\rangle$ can be 
             evolved in time $t$ as
-            <p>
             \begin{equation}\label{eq:tSchr}
                |\Psi(t)\rangle = {\mathcal{U}}(t) |\Psi(t)\rangle.
             \end{equation}
-            </p>
             Note that the exponentiation is a computationally demanding task, which again 
             restricts us to small system sizes.
 
-            
-            
+
             
             <h3>Related References</h3>
             

@@ -60,42 +60,38 @@
                 eliminating a part of the singular value spectrum that is negligible in weight. For 
                 example, in the low entangled states like the gapped state, the singular 
                 values ($\lambda_k$) decrease exponentially with its spectral position ($k$),
-                <p>
                 \begin{equation}
                     \lambda_k \propto e^{-\alpha k}, ~~~ \alpha > 0.
                 \end{equation}
-                </p>
             <div> 
 
             <div style="margin-top: 1rem; ">
                 In a variational process of ground state search, the aim is to minimize the energy 
                 functional defined by,
-                <p>
+                <div class="equation-wrapper">
                 \begin{equation}
                     E_g  = \frac{\langle \Psi_g | H | \Psi_g \rangle}{\langle \Psi_g | \Psi_g \rangle} \leq \frac{\langle \Psi| H |\Psi \rangle}{\langle \Psi| \Psi \rangle} 
                 \end{equation}
-                </p>
+                </div>
                 However, in the MPS description, this is a high dimensional non-linear problem to solve. 
                 In this case, the local update using the DMRG sweep helps to optimize the local tensors. 
                 In a so-called two site DMRG process we write the Hamiltonian in the following form
-                <p>
                 \begin{equation}
                     H = \sum_k H^k_L \otimes H^k_{i,j} \otimes H^k_R.
                 \end{equation}
-                </p>
                 Here, the Hamiltonian is divided into the left and the right part which are called the system parts. In this 
                 case, the local minimization becomes an eigenvalue problem
-                <p>
+                <div class="equation-wrapper">
                 \begin{equation}\label{eq:mps_eig}
                     \tilde{H}^{a'\sigma_i'\sigma_j'b'}_{a\sigma_i\sigma_jb} X_{a'\sigma_i'\sigma_j'b'} = E X_{a'\sigma_i'\sigma_j'b'}
                 \end{equation}
-                </p>
+                </div>
                 where
-                <p>
+                <div class="equation-wrapper">
                 \begin{equation}
                     \tilde{H}^{a'\sigma_i'\sigma_j'b'}_{a\sigma_i\sigma_jb} = \sum_k (\tilde{H}_R^k)_a^{a'} (\tilde{H}_L^k)_b^{b'} (H_{i,j}^k)_{\sigma_i\sigma_j}^{\sigma_i'\sigma_j'}
                 \end{equation}
-                </p>
+                </div>
                 Here $\tilde{H}_R^k$ and $\tilde{H}_L^k$ may be obtained from the previous step and 
                 $X_{a'\sigma_i'\sigma_j'b'}$ describes the local wavefunction. The eigenvalue problem 
                 shown in Eq. \ref{eq:mps_eig} can be solved using the Lanczos algorithm. Using an initial guess 
@@ -123,11 +119,9 @@
                 There are different sources of error in this process of finding the 
                 eigenstates. Most important of 
                 them is the <em>truncation error</em>,
-                <p>
                 \begin{equation}
                     p = \sum_{a=M+1}^D S^2_\alpha = 1 - \sum_{\alpha = 1}^{M} S_{\alpha}^2.
                 \end{equation}
-                </p>
                 which arises due to the discarded part of the singular 
                 value spectrum during the DMRG process.
                 It has been shown that the error in the ground-state energy is proportional to 

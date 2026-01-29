@@ -490,34 +490,50 @@ html {
     scroll-margin-top: 80px; 
 }
 
-/* MathJax equation overflow handling */
-.MJXc-display, 
-.MathJax_Display,
+/* Equation wrapper - the ONLY container that should scroll */
+.equation-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    margin: 1rem 0;
+    padding: 0.5rem 0;
+}
+
+/* MathJax containers inside wrapper should NOT scroll */
+.equation-wrapper mjx-container[display="true"],
+.equation-wrapper mjx-container[display="false"],
+.equation-wrapper .MJXc-display,
+.equation-wrapper .MathJax_Display {
+    overflow: visible !important;
+    display: block;
+}
+
+/* Standalone MathJax (if any exist outside wrappers) */
 mjx-container[display="true"] {
     overflow-x: auto;
     overflow-y: hidden;
     max-width: 100%;
-    padding: 0.5rem 0;
+    display: block;
+    margin: 1rem 0;
 }
 
-/* For inline math */
 mjx-container[display="false"] {
-    max-width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     display: inline-block;
 }
 
-/* Ensure the parent containers don't cause overflow */
-section p,
-section div {
-    overflow-x: auto;
+/* Prevent ALL other containers from scrolling */
+section,
+section > div:not(.equation-wrapper),
+section p {
+    overflow: visible !important;
 }
 
-/* Make equation containers scrollable on small screens */
+/* Make research topic containers scrollable (these are intentional) */
 .research-topic-content,
 .research-content {
-    overflow-x: auto;
+    overflow-x: auto !important;
 }
 
 footer {

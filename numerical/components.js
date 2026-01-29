@@ -20,10 +20,10 @@ async function loadFooter() {
 }
 
 function setActiveNav() {
-    // For subpages, mark Research as active
+    // For subpages, mark Numerical as active
     const navLinks = document.querySelectorAll('nav a');
     navLinks.forEach(link => {
-        if (link.getAttribute('href') === '../research.html') {
+        if (link.getAttribute('href') === '../numerical.html') {
             link.classList.add('active');
         }
     });

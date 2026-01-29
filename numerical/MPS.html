@@ -63,56 +63,58 @@
                 Consider a one-dimensional system with open boundary condition consists of $L$ number of sites and a $d$-dimensional 
                 local state spaces $\{\sigma_i\}$ where $i$ is the lattice index. A most general wave 
                 function for this system can be written as
-                <p>
+                <div class="equation-wrapper">
+                <div class="equation-wrapper">
                 \begin{equation}\label{eq:genState}
                     |\Psi\rangle = \sum\limits_{\sigma_1,...,\sigma_L} c_{\sigma_1...\sigma_L} {|\sigma_1,...,\sigma_L\rangle}.
                 \end{equation}
-                </p>
+                </div>
+                </div>
                 The number of coefficients $c_{\sigma_1...\sigma_L}$ is equal to the dimension of the 
                 Hilbert space of the system which increases exponentially with $L$. Now, a matrix can 
                 represent the coefficient vector as
-                <p>
+                <div class="equation-wrapper">
                 \begin{equation}
                     c_{\sigma_1...\sigma_L} = c_{\sigma_1,(\sigma_2...\sigma_L)}. 
                 \end{equation}
-                </p>
+                </div>
                 An SVD performed on this matrix  leads to ,
-                <p>
+                <div class="equation-wrapper">
                 \begin{equation}
                     c_{\sigma_1...\sigma_L} = c_{\sigma_1,(\sigma_2...\sigma_L)} = \sum\limits_{a_1}U_{\sigma_1,a_1} S_{a_1,a_1} (V^\dagger)_{a_1,(\sigma_2...\sigma_L)}. 
                 \end{equation}
-                </p>
+                </div>
                 Here $U$ and $V$ are unitary matrices and $S$ is a diagonal matrix containing the singular values. 
                 Now the $a_1$ index of the $S_{a_1,a_1} $ and 
                 $ (V^\dagger)_{a_1,(\sigma_2...\sigma_L)}$ can be contructed and transformed into 
                 $c_{a_1,(\sigma_2...\sigma_L)}$. By renaming $U_{\sigma_1,a_1}$ with 
                 $A_{a_1}^{\sigma_1}$, the above equation becomes
-                <p>
+                <div class="equation-wrapper">
                 \begin{equation}
                     c_{\sigma_1...\sigma_L} = \sum\limits_{a_1} A_{a_1}^{\sigma_1} c_{a_1,(\sigma_2...\sigma_L)}
                 \end{equation}
-                </p>
+                </div>
                 Note the we have not discurded anythig to compress in this SVD process. We will discuss the compression in the <a href="DMRG.html">DMRG chapter</a>.
                 Then, by transforming $c_{a_1,(\sigma_2...\sigma_L)}$ to 
                 $c_{(a_1\sigma_2),(\sigma_3...\sigma_L)}$, and after an SVD we have
-                <p>
+                <div class="equation-wrapper">
                 \begin{equation}
                     c_{\sigma_1...\sigma_L} = \sum\limits_{a_1} \sum\limits_{a_2} A_{a_1}^{\sigma_1} U_{(a_1\sigma_2),a_2} S_{a_1,a_2}(V^\dagger)_{a_2,(\sigma_3...\sigma_L)}.
                 \end{equation}
-                </p>
+                </div>
                 Contracting $a_2$ in $S$ and $V$, the above equation can be modified as
-                <p>
+                <div class="equation-wrapper">
                 \begin{equation}
                     c_{\sigma_1...\sigma_L} = \sum\limits_{a_1} \sum\limits_{a_2} A_{a_1}^{\sigma_1} A_{a_1,a_2}^{\sigma_2} c_{(a_2\sigma_3),(\sigma_4...\sigma_L)}.
                 \end{equation}
-                </p>
+                </div>
                 This process is repeated until the other end of the lattice is reached. Finally, the 
                 wave function transforms into an MPS which is given by
-                <p>
+                <div class="equation-wrapper">
                 \begin{equation}\label{eq:lcMPS}
                     |\Psi\rangle = \sum\limits_{a_1,...,a_L} A_{a_1}^{\sigma_1} A_{a_1,a_2}^{\sigma_2}...A_{a_{L-2},a_{L-1}}^{\sigma_{L-1}} A_{a_{L-1}}^{\sigma_{L}}{|\sigma_1,...,\sigma_L\rangle}.
                 \end{equation}
-                </p>
+                </div>
                 In the above equation, $a_i$ are called bond indices, whereas $\sigma_i$ are the 
                 physical indices.
                 The MPS can be conveniently represented in a graphical way. In <a href="#MPSgraph">figure above</a>, we depict an 
@@ -135,20 +137,20 @@
                 Left-canonical MPS. However, the right-canonical MPS is developed 
                 by contracting from right to left instead of left to right. 
                 The Right-canonical MPS of $|\Psi\rangle$ can be written as 
-                <p>
+                <div class="equation-wrapper">
                 \begin{equation}\label{eq:rcMPS}
                     |\Psi\rangle = \sum\limits_{a_1,...,a_L} B_{a_1}^{\sigma_1} B_{a_1,a_2}^{\sigma_2}...B_{a_{L-2},a_{L-1}}^{\sigma_{L-1}} B_{a_{L-1}}^{\sigma_{L}}{|\sigma_1,...,\sigma_L\rangle}.
                 \end{equation}
-                </p>
+                </div>
                 where $B_{a_{i-1},a_i}^{\sigma_i}$ are created from the corresponding $(V^\dagger)$ matrices.
                 The last variant that we are going to use in the DMRG method is called the Mixed-canonical 
                 MPS. In this scenario, we create an MPS of a state from both left ($1^{st}$ to the $l^{th}$ sites) and 
                 right ($L^{th}$ to $(L-l)^{th}$ sites) ways. A typical Mixed-canonical MPS can be written as
-                <p>
+                <div class="equation-wrapper">
                 \begin{equation}\label{eq:mcMPS}
                     |\Psi\rangle = \sum\limits_{a_1,...,a_L} A_{a_1}^{\sigma_1} ... A_{a_{l-1},a_l}^{\sigma_l} S_{a_l,a_{l}} B_{a_{l},a_{l+1}}^{\sigma_{l+1}} ... B_{a_{L-1}}^{\sigma_{L}}{|\sigma_1,...,\sigma_L\rangle}.
                 \end{equation}
-                </p>
+                </div>
                 A graphical representation of a Mixed-canonical MPS for $L=8$ is shown in 
                 <a href="#mcMPS">figure below</a> where we consider $l=4$. Since the representations discussed above 
                 are exact, the total dimension would scale exponentially with $L$.
@@ -171,11 +173,11 @@
                 described by the networks of $A^{\sigma_l}$ and $\tilde{A}^{\sigma_l}$ ($a_i$ indices are hidden) matrices respectively. 
                 The overlap between them can be 
                 calculated efficiently by contracting the common indices from one boundary to another (say, $1$ to $ L $):
-                <p>
+                <div class="equation-wrapper">
                 \begin{equation}
                     \langle\Phi|\Psi\rangle = \sum_{\sigma_L} \tilde{A}^{\sigma_L\dagger}\left(...\left(\sum_{\sigma_2}\tilde{A}^{\sigma_2\dagger}\left( \sum_{\sigma_1}\tilde{A}^{\sigma_1\dagger} A^{\sigma_1}\right)A^{\sigma_2}\right)...\right) A^{\sigma_L}
                 \end{equation}
-                </p>
+                </div>
                 Here we hide the $a_i$ indices for simplicity.
             </div>
 
@@ -185,11 +187,11 @@
                 Note that in most of the cases most of the 
                 on-site operators ($O_i$) will be identity operators. Now the expectation value of 
                 the operator can be written as
-                <p>
+                <div class="equation-wrapper">
                 \begin{equation}
                     \langle\Psi|O|\Psi\rangle = \sum_{\sigma_L \sigma_L'} O_L^{\sigma_L \sigma_L'} {A}^{\sigma_L\dagger}~\left(...\left(\sum_{\sigma_2 \sigma_2} O_2^{\sigma_2 \sigma_2'} {A}^{\sigma_2\dagger} \left(\sum_{\sigma_1 \sigma_1'} O_1^{\sigma_1 \sigma_1'} {A}^{\sigma_1\dagger} A^{\sigma_1'}\right){A}^{\sigma_2\dagger}\right)...\right) A^{\sigma_L'}
                 \end{equation}
-                </p>
+                </div>
                 We will use all these machineries discussed in this chapter in the <a href="DMRG.html">DMRG method</a>.
             </div>
             
