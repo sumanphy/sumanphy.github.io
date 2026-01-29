@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numerical Methods - Suman Mondal</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico"> -->
+    <link rel="icon" type="image/png" sizes="192x192" href="images/favicon/favicon-192x192.png">  
+    <!-- Load components -->
+    <script src="components.js"></script>
+ 
+    <!-- impotr script for math equations -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="MathJax-4.1.0/tex-chtml.js"></script>
+    <!--  -->
+
+</head>
+<body>
+    <!-- Header placeholder -->
+    <a id="header-placeholder"></a>
+    
+    <div class="container">
+    <section>
+        <h2>Numerical Methods</h2>
+
+        <p>
+            The complex many-body systems are often intractable 
+            using analytical methods, and hence one has to rely on numerical 
+            techniques. One obvious method is to solve the many-body 
+            Schroedinger's equation using the exact diagonalization (ED) methods. 
+            However, due to the exponential growth of the 
+            Hilbert space dimension with the system size, it is absolutely 
+            impossible to access the physics of a larger system. To circumvent this 
+            problem, several powerful methods have been developed to study the 
+            quantum many-body systems such as Density Matrix Renormalization Group (DMRG) 
+            method and other Matrix Product State (MPS) based methods. In this page, I will 
+            provide an overview of these numerical methods.
+        </p>
+
+        <div class="interest-list">
+            <a href="#ED" class="blue-text-tag">1. Exact Diagonalization</a>
+            <a href="#CMFT" class="blue-text-tag">2. Cluster Mean Field Theory</a>
+            <a href="#MPS" class="blue-text-tag">3. Matrix Product State (MPS)</a>
+            <a href="#DMRG" class="blue-text-tag">4. Drnsity Matrix Renormalization Group (DMRG)</a>
+            <a href="#TEBD" class="blue-text-tag">5. Time-Evolution Block Decimation (TEBD)</a>
+            <p class="red-text-tag">Our Contributions →</p>
+            <a href="#MTETEBD" class="blue-text-tag">6. Semi-classical TEBD</a>
+            <!-- <a href="#FDMRG" class="blue-text-tag">7. Floquet DMRG</a> -->
+        </div>
+        
+        <div class="interest-list">
+        <p style="color: #666; font-style: italic; margin-bottom: 2rem;">
+            Click on a topic to jump to that section.
+        </p>
+        </div>
+
+
+        <!-- <div id="numerical">
+            <h2 style="margin-top: 0.5rem; color: #006212;" id="quantum-phase-transitions">Numerical Methods</h2> -->
+        
+            <div class="research-topic" id="ED">
+                <h3>1. Exact Diagonalization</h3>
+                <div class="research-topic-content">
+                    <div class="research-content">
+                        <p>
+                            In principle, the exact diagonalization (ED) method allows us to calculate the full spectrum 
+                            of the Hamiltonian describing a particular system. The method is 
+                            based on three major steps, namely (a) create appropriate basis 
+                            states, (b) compute the matrix elements of the Hamiltonian using the 
+                            basis states and (c) diagonalize the Hamiltonian matrix to obtain 
+                            the eigenspectrum. With the help of the eigenstates and eigenenergies, 
+                            we can study the physical properties of the system. However, as mentioned above, 
+                            due to the exponential growth of the 
+                            Hilbert space dimension with the system size, it is absolutely 
+                            impossible to access the physics of a larger system.
+                            Lanczos or Arnoldi method makes it little more efficient if we are only interested in 
+                            lowe-lying states, which is often sufficient for qualitative studies.
+                        </p>
+                        <p style="margin-top: 1rem;">
+                            <a href="numerical/ED.html" class="read-more-link">Read more →</a>
+                        </p>
+                    </div>
+                    <img src="numerical/images/ED/1d_2d.png" alt="1D lattice" class="research-image">
+                </div>
+            </div>
+
+            <div class="research-topic" id="CMFT">
+                <h3>2. Cluster Mean Field Theory</h3>
+                <div class="research-topic-content">
+                    <div class="research-content">
+                        <p>
+                            The Cluster Mean-Field Theory (CMFT) approach is one of the simplest 
+                            methods which utilizes the ED method and the mean-field (MF) 
+                            decoupling approximations to simplify a 
+                            many-body problem. In this method, one divides the entire many-body 
+                            system into small small clusters of finite size, as shown in the figure. 
+                            While the Hamiltonian of the individual cluster is treated exactly, 
+                            the couplings between the clusters are treated in a mean-field way.
+                            In this method, the accuracy of the results increases with the cluster size. 
+                            Unlike the MF approach, the CMFT allows for the calculation of 
+                            off-site correlation functions within the cluster. This makes the 
+                            CMFT method more accurate than the simple mean-field theory approach 
+                            and can capture the qualitative picture of the system with less 
+                            computing effort than the powerful Quantum Monte Carlo 
+                            method.
+                        </p>
+                        <p style="margin-top: 1rem;">
+                            <a href="numerical/CMFT.html" class="read-more-link">Read more →</a>
+                        </p>
+                    </div>
+                    <img src="numerical/images/CMFT/CMFT.jpg" alt="2D lattice" class="research-image">
+                </div>
+            </div>
+
+            <div class="research-topic" id="MPS">
+                <h3>3. Matrix Product State</h3>
+                <div class="research-topic-content">
+                    <div class="research-content">
+                        <p>
+                            The matrix product states (MPSs) are the widely used in quantum information 
+                            theory and theoretical physics, especially to study the strongly correlated systems.
+                            These are simple and efficient tensor network representation of the quantum many-body states. An 
+                            example of such state is one-dimensional AKLT 
+                            state that can be converted to MPS exactly. 
+                            A most general wave function for this system can be written as
+                            \begin{equation}\label{eq:genState}
+                                |\Psi\rangle = \sum\limits_{\sigma_1,...,\sigma_L} c_{\sigma_1...\sigma_L} {|\sigma_1,...,\sigma_L\rangle}.
+                            \end{equation}
+                            In MPS form the exponentially many coefficients $c_{\sigma_1...\sigma_L}$ compressed to
+                            \begin{equation}\label{eq:lcMPS}
+                                |\Psi\rangle = \sum\limits_{a_1,...,a_L} A_{a_1}^{\sigma_1} A_{a_1,a_2}^{\sigma_2}...A_{a_{L-2},a_{L-1}}^{\sigma_{L-1}} A_{a_{L-1}}^{\sigma_{L}}{|\sigma_1,...,\sigma_L\rangle}.
+                            \end{equation}
+                            The sungular value decomposition (SVD) is used to perform compression.
+                        </p>
+                        <p style="margin-top: 1rem;">
+                            <a href="numerical/MPS.html" class="read-more-link">Read more →</a>
+                        </p>
+                    </div>
+                    <img src="numerical/images/MPS/mps_creation.pdf" alt="MPS" class="research-image">
+                </div>
+            </div>
+
+            <div class="research-topic" id="DMRG">
+                <h3>4. Density Matrix Renormalization Group</h3>
+                <div class="research-topic-content">
+                    <div class="research-content">
+                        <p>
+                            The Density Matrix renormalization group (DMRG) method is the prescription to prevent the 
+                            exponential growth of the Hilbert space while providing accurate results for low dimensional systems. Steve White 
+                            proposed the method in 1992 as an improvement over the 
+                            numerical renormalization group (NRG). The method finds the ground state of the system 
+                            by variational approximation through local optimization. As a further development, the 
+                            DMRG method was then applied to MPSs that increased the flexibility and power of the DMRG method by 
+                            manyfold. The key idea here is to minimize the bond dimension ($a_i$) of the MPS by 
+                            eliminating a part of the singular value spectrum that is negligible in weight. For 
+                            example, in the low entangled states like the gapped state, the singular 
+                            values ($\lambda_k$) decrease exponentially with its spectral position ($k$),
+                            \begin{equation}
+                                \lambda_k \propto e^{-\alpha k}, ~~~ \alpha > 0.
+                            \end{equation} 
+                        </p>
+                        <p style="margin-top: 1rem;">
+                            <a href="numerical/DMRG.html" class="read-more-link">Read more →</a>
+                        </p>
+                    </div>
+                    <img src="numerical/images/DMRG/dmrg.png" alt="DMRG sweep" class="research-image">
+                </div>
+            </div>
+
+            <div class="research-topic" id="TEBD">
+                <h3>5. Time-Evolution Block Decimation</h3>
+                <div class="research-topic-content">
+                    <div class="research-content">
+                        <p>
+                            The time evolution of a quantum state of a strongly correlated 
+                            many-body system with time-dependent Hamiltonian is a highly 
+                            nontrivial problem. Because of the tremendous success of the DMRG 
+                            method in addressing the equilibrium properties of strongly 
+                            correlated systems, different attempts have been made to study 
+                            non-equilibrium properties using the time-dependent DMRG 
+                            method. G. Vidal 
+                            developed an algorithm to simulate the time evolution of the 
+                            many-body states. In the algorithm, the 
+                            Hilbert space dynamically adapts itself for better accuracy. This 
+                            algorithm is called the time-evolving block decimation (TEBD), which 
+                            fits perfectly with the MPS framework.
+                        </p>
+                        <p style="margin-top: 1rem;">
+                            <a href="numerical/TEBD.html" class="read-more-link">Read more →</a>
+                        </p>
+                    </div>
+                    <img src="numerical/images/TEBD/tebd.pdf" alt="TEBD" class="research-image-medium">
+                </div>
+            </div>
+        
+        <!-- </div> -->
+
+        </section>
+</div>
+
+    <!-- Footer placeholder -->
+    <a id="footer-placeholder"></a>
+
+</body>
+</html>

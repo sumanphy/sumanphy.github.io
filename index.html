@@ -3,380 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suman Mondal</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f4f4f4;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-        
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
-        .profile-photo {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            border: 5px solid white;
-            margin: 0 auto 1.5rem;
-            display: block;
-            object-fit: cover;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-        
-        nav {
-            background: #2a5298;
-            padding: 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-        
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: opacity 0.3s;
-            cursor: pointer;
-        }
-        
-        nav a:hover {
-            opacity: 0.7;
-        }
-        
-        nav a.active {
-            border-bottom: 2px solid white;
-            padding-bottom: 0.3rem;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        
-        section {
-            background: white;
-            margin: 2rem 0;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .page-content {
-            display: none;
-        }
-        
-        .page-content.active {
-            display: block;
-        }
-        
-        h2 {
-            color: #1e3c72;
-            border-bottom: 3px solid #2a5298;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        h3 {
-            color: #2a5298;
-            margin-top: 1.5rem;
-            margin-bottom: 0.8rem;
-        }
-        
-        .home-section {
-            text-align: center;
-            padding: 3rem 2rem;
-        }
-        
-        .home-section h2 {
-            border: none;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .home-section p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-        }
-        
-        .highlight-box {
-            background: #f9f9f9;
-            padding: 2rem;
-            border-left: 4px solid #2a5298;
-            margin: 2rem 0;
-            text-align: left;
-        }
-        
-        .interest-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-top: 1rem;
-            justify-content: center;
-        }
-        
-        .interest-tag {
-            background: #2a5298;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: #666;
-            background: white;
-            margin-top: 2rem;
-        }
-        
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
-            
-            nav ul {
-                gap: 1rem;
-            }
-            
-            .container {
-                padding: 1rem;
-            }
-        }
-    </style>
+    <title>Suman Mondal x Quantum Many-Body Systems</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico"> -->
+    <link rel="icon" type="image/png" sizes="192x192" href="images/favicon/favicon-192x192.png">
+
+    <!-- Load components -->
+    <script src="components.js"></script>
+
 </head>
 <body>
     <header>
-        <img src="images/my_photo.JPG" alt="Suman Mondal" class="profile-photo">
-        <h1>Suman Mondal</h1>
-        <p>Condensed Matter Physicist</p>
-        <p style="margin-top: 0.5rem; font-size: 1rem;">
-            <strong>[Postdoctoral Researcher]</strong><br>
-            [Max Planck Institute for the Physics of Complex Systems, Dresden, Germany]
-        </p>
+    <img src="images/my_photo_400x400.JPG" alt="Suman Mondal" class="profile-photo">
+    <h1>Suman Mondal</h1>
+    <p style="margin-top: 0.5rem; font-size: 1rem;">
+        <strong>Postdoctoral Researcher</strong><br>
+        Max Planck Institute for the Physics of Complex Systems, Dresden, Germany
+    </p>
+
+    <p style="margin-top: 1rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <a href="https://scholar.google.com/citations?user=GygfZgYAAAAJ&hl=en" target="_blank" title="Google Scholar">
+                    <img src="images/Google_Scholar_logo.png" alt="Google Scholar" style="width: 32px; height: 32px;">
+                </a>
+                <a href="https://orcid.org/0000-0002-2512-1533" target="_blank" title="ORCID">
+                    <img src="images/ORCID_logo.png" alt="ORCID" style="width: 32px; height: 32px;">
+                </a>
+                <a href="https://www.researchgate.net/profile/Suman-Mondal-12" target="_blank" title="ResearchGate">
+                    <img src="images/ResearchGate_logo.png" alt="ResearchGate" style="width: 32px; height: 32px;">
+                </a>
+                <a href="https://github.com/sumanphy" target="_blank" title="GitHub">
+                    <img src="images/GitHub_logo.png" alt="GitHub" style="width: 32px; height: 32px;">
+                </a>
+                <a href="https://www.linkedin.com/in/suman-mondal-468904342/" target="_blank" title="LinkedIn">
+                    <img src="images/LinkedIn_logo.png" alt="LinkedIn" style="width: 32px; height: 32px;">
+                </a>
+    </p>
     </header>
-    
+
     <nav>
-        <ul>
-            <li><a onclick="showPage('home')" class="active">Home</a></li>
-            <li><a onclick="showPage('research')">Research</a></li>
-            <li><a onclick="showPage('numerical')">Numerical Methods</a></li>
-            <li><a onclick="showPage('publications')">Publications</a></li>
-            <li><a onclick="showPage('teaching')">Teaching</a></li>
-            <li><a onclick="showPage('about')">About Me</a></li>
-            <li><a onclick="showPage('contact')">Contact</a></li>
-        </ul>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="numerical.html">Numerical Methods</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <!-- <li><a href="teaching.html">Teaching</a></li> -->
+        <!-- <li><a href="news.html">News</a></li> -->
+        <!-- <li><a href="about.html">About Me</a></li> -->
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
     </nav>
     
     <div class="container">
-        <!-- HOME PAGE -->
-        <div id="home" class="page-content active">
-            <section class="home-section">
-                <!-- <h2>Welcome to My Research Page</h2> -->
-            <p>
-            Welcome to my research homepage. 
-            My research spans a diverse array of topics, 
-            including quantum phases in strongly correlated systems, 
-            topological phases and phase transitions, topological Thouless charge pumping, 
-            nonequilibrium physics in closed quantum systems, many-body localization in the presence of disorder, 
-            kinetically constrained systems, and electron-phonon coupled systems. Through a combination of 
-            theoretical modeling and advanced numerical techniques, I have studied several systems to make a contributions to the field.
-            </p>
+        
+        <section>
+            <h2>Study of quantum many-body systems</h2>
 
-            <p>
-
-            I use several numerical techniques to analyze these systems. While small systems are dealt with exact diagonalization (ED) methods, 
-            I use the Matrix Product State (MPS) based Density Matrix Renormalization Group (DMRG) method and time-dependent 
-            versions of MPS methods for larger systems. I also have implemented quantum typically based 
-            methods to study systems in finite temperature. Regarding electron-phonon coupled systems, 
-            I use the multi-trajectory Ehrenfest (MTE) method, which is a semi-classical approach. 
-            For one of our ongoing projects, we have developed a method where we integrate MTE into the time-evolving block decimation (TEBD) method.
-            </p>
-            </section>
-            
-            <!-- <section>
-                <h2>Research Highlights</h2>
-                <div class="highlight-box">
-                    <h3>Recent Discovery in [Research Area]</h3>
-                    <p>[Brief description of a recent important finding or publication]</p>
-                </div>
-                <div class="highlight-box">
-                    <h3>Ongoing Project: [Project Name]</h3>
-                    <p>[Brief description of an exciting ongoing research project]</p>
-                </div>
-            </section> -->
-            
-            <section>
-                <!-- <h2>Quick Links</h2>
-                <div style="text-align: center; margin-top: 1.5rem;">
+                <p>
+                Welcome! I am glad you are here. 
+                My research dives into the equilibrium and non-equilibrium properties of quantum many-body systems. 
+                I explore quantum phases and phase transitions, topological properties, and non-equilibrium physics. 
+                I spend most of my time building numerical models to simulate these systems. 
+                Whether it is using Exact Diagonalization for small systems or MPS-based methods like DMRG, TEBD, etc., for larger, more complex systems, 
+                I am always looking for new ways to probe the quantum world of many-body systems. 
+                <a href="research.html" style="color: #2a5298; font-weight: 500; font-size: 1.05rem;">Click here</a> to know more about my research and 
+                <a href="numerical.html" style="color: #2a5298; font-weight: 500; font-size: 1.05rem;">click here</a> for numerical methods.
+                </p>
                     <div class="interest-list">
-                        <a href="#" onclick="showPage('research'); return false;" style="text-decoration: none;">
-                            <span class="interest-tag">View My Research</span>
-                        </a>
-                        <a href="#" onclick="showPage('publications'); return false;" style="text-decoration: none;">
-                            <span class="interest-tag">Recent Publications</span>
-                        </a>
-                        <a href="#" onclick="showPage('contact'); return false;" style="text-decoration: none;">
-                            <span class="interest-tag">Get in Touch</span>
-                        </a>
+                    <span class="red-text-tag">Topics →</span>
+                    <a href="#exotic-phases" class="blue-text-tag">Exotic quantum phases</a>
+                    <a href="#phase-transitions" class="blue-text-tag">Phase transitions</a>
+
+                    <a href="#topological" class="blue-text-tag">Many-body topological phases</a>
+                    <a href="#thouless" class="blue-text-tag">Thouless pumps</a>
+
+                    <a href="#few-body" class="blue-text-tag">Few body dynamics</a>
+                    <a href="#mbl" class="blue-text-tag">Many-body localization</a>
+                    <a href="#kcms" class="blue-text-tag">Kinetically constrained systems</a>
+                    <a href="#electron-phonon" class="blue-text-tag">Electron-Phonon coupled systems</a>
+                    <a href="#floquet" class="blue-text-tag">Periodically driven systemss</a>
+
+                    <a href="#quntum-computation" class="blue-text-tag">Quantum computation</a>
+                    <a href="#numerical-computation" class="blue-text-tag">Semi-classical TEBD, Floquet DMRG</a>
                     </div>
-                </div> -->
+                <!-- <p style="color: #666; font-style: italic; margin-top: 1rem; margin-bottom: 0rem;">
+                Click on a topic to know more about it.
+                </p> -->
+        </section>
 
-                <strong>Email:</strong>  mondal[a]pks.mpg.de <br>
-                <strong>Office:</strong> [2A13]<br>
-                <strong>Address:</strong> [Nöthnitzer Str. 38, 01187 Dresden, Germany]
+        <section>
+            <h2>Recent works</h2>
+
+            <div class="publication">
+                <div class="publication-content">
+                    <div class="publication-title">
+                        Breakdown of bosonic Thouless pump due to interaction in a quasiperiodic lattice
+                    </div>
+                    <div class="publication-authors">
+                        <strong>Suman Mondal</strong>, Emmanuel Gottlob, Fabian Heidrich-Meisner and Ulrich Schneider
+                    </div>
+                    <div class="publication-venue">
+                        arXiv:2601.18229 (2026)
+                    </div>
+                    <a href="https://arxiv.org/abs/2601.18229" target="_blank">View on arXiv →</a>
+                </div>
+                <img src="images/new_pub/pub1.png" alt="Publication 1" class="publication-image">
+            </div>
+            
+            <div class="publication">
+                <div class="publication-content">
+                    <div class="publication-title">
+                        Hybrid quantum-classical matrix-product state and Lanczos methods for electron-phonon systems with strong electronic correlations
+                    </div>
+                    <div class="publication-authors">
+                        Heiko Georg Menzler*, <strong>Suman Mondal*</strong> and Fabian Heidrich-Meisner
+                    </div>
+                    <div class="publication-venue">
+                        arXiv:2512.10899 (2025)
+                    </div>
+                    <a href="https://arxiv.org/abs/2512.10899" target="_blank">View on arXiv →</a>
+                </div>
+                <img src="images/new_pub/pub2.png" alt="Publication 2" class="publication-image">
+            </div>
+
+            <div class="publication">
+                <div class="publication-content">
+                    <div class="publication-title">
+                        Anomalous slow-down of the bound state dynamics in a non-locally coupled quantum circuit
+                    </div>
+                    <div class="publication-authors">
+                        Biswajit Paul, <strong>Suman Mondal</strong> Tapan Mishra
+                    </div>
+                    <div class="publication-venue">
+                        arXiv:2506.09818 (2025)
+                    </div>
+                    <a href="https://arxiv.org/abs/2506.09818" target="_blank">View on arXiv →</a>
+                </div>
+                <img src="images/new_pub/pub3.png" alt="Publication 3" class="publication-image">
+            </div>
+
+            <p style="text-align: center; margin-top: 2rem;">
+                <a href="publications.html" style="color: #2a5298; font-weight: 500; font-size: 1.05rem;">View All Publications →</a>
+            </p>
+        </section>
 
 
+        <section>
+            <h2>Short CV</h2>
+            
+            <div class="cv-section">
+                <h3>Current Position</h3>
+                <div class="cv-item">
+                    <strong>Guest Scientist</strong><br>
+                    2024 - Present: Max Planck Institute for the Physics of Complex Systems, Dresden, Germany. Supervisor: Dr. Marin Bukov
+                </div>
+            </div>
 
+            <div class="cv-section">
+                <h3>Previous Positions</h3>
+                <div class="cv-item">
+                    <strong>Postdoctoral Researcher</strong><br>
+                    2021 - 2024: University of Göttingen, Germany. Supervisor: Prof. Dr. Fabian Heidrich-Meisner
+                    
+                    
+                </div>
+                <div class="cv-item">
+                    <strong>Research Associate</strong><br>
+                    2021: Indian Institute of Technology Guwahati, India. Supervisors: Prof. Dr. Tapan Mishra and Prof. Dr. Kanhaiya Pandey
+                    
+                    
+                </div>
+            </div>
 
-                <p style="margin-top: 1rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-                    <a href="https://scholar.google.com/citations?user=GygfZgYAAAAJ&hl=en" target="_blank" title="Google Scholar">
-                        <img src="images/Google_Scholar_logo.svg.png" alt="Google Scholar" style="width: 32px; height: 32px;">
-                    </a>
-                    <a href="https://orcid.org/0000-0002-2512-1533" target="_blank" title="ORCID">
-                        <img src="images/ORCID_logo.svg.png" alt="ORCID" style="width: 32px; height: 32px;">
-                    </a>
-                    <a href="https://www.researchgate.net/profile/Suman-Mondal-12" target="_blank" title="ResearchGate">
-                        <img src="images/ResearchGate_logo.png" alt="ResearchGate" style="width: 32px; height: 32px;">
-                    </a>
-                    <a href="https://github.com/sumanphy" target="_blank" title="GitHub">
-                        <img src="images/GitHub_logo.svg" alt="GitHub" style="width: 32px; height: 32px;">
-                    </a>
-                    <a href="https://www.linkedin.com/in/suman-mondal-468904342/" target="_blank" title="LinkedIn">
-                        <img src="images/LinkedIn_logo.svg.png" alt="LinkedIn" style="width: 32px; height: 32px;">
+            <div class="cv-section">
+                <h3>Education</h3>
+                <div class="cv-item">
+                    <strong>Ph.D. in Physics</strong><br>
+                    2016 - 2021: Indian Institute of Technology Guwahati, India. Supervisor: Prof. Dr. Tapan Mishra<br>
+                    Thesis: <em>Equilibrium, Non-equilibrium and Topological Phases of Strongly Correlated Bosons</em><br>
+                    
+                </div>
+                <div class="cv-item">
+                    <strong>M.Sc. in Physics</strong><br>
+                    2013 - 2015: University of Kalyani, West Bengal, India                    
+                </div>
+                <div class="cv-item">
+                    <strong>B.Sc. in Physics</strong><br>
+                    2010 - 2013: University of Kalyani, West Bengal, India                    
+                </div>
+            </div>
+
+            <div class="cv-section">
+                <h3>Awards & Achievements</h3>
+                <ul class="cv-list">
+                    <li><strong>2021:</strong> Best Thesis of the Year Award, Indian Institute of Technology Guwahati</li>
+                    <li><strong>2018:</strong> Senior Research Fellowship, Indian Institute of Technology Guwahati</li>
+                    <li><strong>2016:</strong> Qualified CSIR-NET (National Eligibility Test)</li>
+                    <li><strong>2016:</strong> Qualified IIT-GATE (Graduate Aptitude Test in Engineering)</li>
+                </ul>
+            </div>
+
+            <div class="cv-section">
+                <h3>Selected Publications</h3>
+                <ul class="cv-list">
+                    <li><strong>Suman Mondal</strong>, Emmanuel Gottlob, Fabian Heidrich-Meisner, Ulrich Schneider, <em>Breakdown of bosonic Thouless pump due to interaction in a quasiperiodic lattic</em>, 
+                        <a href="https://doi.org/10.48550/arXiv.2601.18229" target="_blank"> arXiv:2601.18229 (2026)</a> </li>
+                    <li><strong>Suman Mondal</strong>, Fabian Heidrich-Meisner, <em>Delocalization in a partially disordered interacting many-body system</em>, 
+                        <a href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.109.125127" target="_blank">Phys. Rev. B <strong>109</strong>, 125127 (2024)</a> </li>
+                    <li><strong>Suman Mondal</strong>, Adhip Agarwala, Tapan Mishra, Abhishodh Prakash, <em>Symmetry-Enriched Criticality in a Coupled Spin-Ladder</em>, 
+                        <a href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.108.245135" target="_blank">Phys. Rev. B <strong>108</strong>, 245135 (2023)</a> - Editors' Suggestion</li>
+                    <li><strong>Suman Mondal</strong>, Ashirbad Padhan, Tapan Mishra, <em>Realizing symmetry protected topological phase through dimerized interaction</em>, 
+                        <a href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.106.L201106" target="_blank">Phys. Rev. B Lett. <strong>106</strong>, L201106 (2022)</a> </li>
+                    <li><strong>Suman Mondal</strong>, Sebastian Greschner, Luis Santos, Tapan Mishra, <em>Topological inheritance in two-component Hubbard models with single-component Su-Schrieffer-Heeger dimerization</em>, 
+                        <a href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.104.013315" target="_blank">Phys. Rev. A <strong>104</strong>, 013315 (2021)</a> </li>
+                </ul>
+                <p style="margin-top: 1rem;"><a href="publications.html" style="color: #2a5298; font-weight: 500;">View all publications →</a></p>
+            </div>
+
+            <div class="cv-section">
+                <p style="text-align: center; margin-top: 2rem;">
+                    <a href="files/suman_mondal_cv.pdf" target="_blank" style="display: inline-block; background: #2a5298; color: white; padding: 0.75rem 1.5rem; border-radius: 4px; text-decoration: none; font-weight: 500;">
+                        Download Full CV (PDF)
                     </a>
                 </p>
-                </p>
-            </section>
-        </div>
+            </div>
+        </section>
         
-        <!-- RESEARCH PAGE -->
-        <!-- <div id="research" class="page-content">
-            <div id="research-content">
-                <p>Loading research content...</p>
-            </div>
-        </div> -->
-        
-        <!-- NUMERICAL METHODS PAGE -->
-        <!-- <div id="numerical" class="page-content">
-            <div id="numerical-content">
-                <p>Loading numerical methods content...</p>
-            </div>
-        </div> -->
-        
-        <!-- PUBLICATIONS PAGE -->
-        <!-- <div id="publications" class="page-content">
-            <div id="publications-content">
-                <p>Loading publications content...</p>
-            </div>
-        </div> -->
-                
-        <!-- TEACHING PAGE -->
-        <!-- <div id="teaching" class="page-content">
-            <div id="teaching-content">
-                <p>Loading teaching content...</p>
-            </div>
-        </div> -->
-
-        <!-- ABOUT PAGE -->
-        <!-- <div id="about" class="page-content">
-            <div id="about-content">
-                <p>Loading about content...</p>
-            </div>
-        </div> -->
-        
-        <!-- CONTACT PAGE -->
-        <!-- <div id="contact" class="page-content">
-            <div id="contact-content">
-                <p>Loading contact content...</p>
-            </div> -->
-        </div>
+        <section>
+            <h2>Contact Information</h2>
+            <p>
+                <strong>Email:</strong> mondal[at]pks[dot]mpg[dot]de<br>
+                <strong>Office:</strong> 2A13<br>
+                <strong>Address:</strong> Nöthnitzer Str. 38, 01187 Dresden, Germany
+            </p>
+        </section>
     </div>
 
-    <footer>
-        <p>&copy; 2026 [Suman Mondal]. Last updated: January 2026</p>
-    </footer>
-    
-    <script>
-        // Function to load external HTML content
-        async function loadContent(page) {
-            try {
-                const response = await fetch(`${page}.html`);
-                if (response.ok) {
-                    const html = await response.text();
-                    document.getElementById(`${page}-content`).innerHTML = html;
-                } else {
-                    document.getElementById(`${page}-content`).innerHTML = 
-                        `<section><h2>Content Not Found</h2><p>The ${page}.html file could not be loaded. Please create it in the same directory as index.html</p></section>`;
-                }
-            } catch (error) {
-                document.getElementById(`${page}-content`).innerHTML = 
-                    `<section><h2>Error Loading Content</h2><p>Please make sure ${page}.html exists in the same directory.</p></section>`;
-            }
-        }
-        
-        // Function to show the selected page
-        function showPage(page) {
-            // Hide all page contents
-            const pages = document.querySelectorAll('.page-content');
-            pages.forEach(p => p.classList.remove('active'));
-            
-            // Remove active class from all nav links
-            const navLinks = document.querySelectorAll('nav a');
-            navLinks.forEach(link => link.classList.remove('active'));
-            
-            // Show selected page
-            document.getElementById(page).classList.add('active');
-            
-            // Add active class to clicked nav link
-            event.target.classList.add('active');
-            
-            // Load content if not home page and not already loaded
-            if (page !== 'home') {
-                const contentDiv = document.getElementById(`${page}-content`);
-                if (contentDiv && contentDiv.innerHTML.includes('Loading')) {
-                    loadContent(page);
-                }
-            }
-            
-            // Scroll to top
-            window.scrollTo(0, 0);
-        }
-    </script>
+    <!-- Footer placeholder -->
+    <div id="footer-placeholder"></div>
 </body>
 </html>

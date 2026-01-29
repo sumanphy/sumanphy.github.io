@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMRG - Suman Mondal</title>
+    <link rel="stylesheet" href="../style.css">
+    <!-- <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico"> -->
+    <link rel="icon" type="image/png" sizes="192x192" href="../images/favicon/favicon-192x192.png">
+    <!-- impotr script for math equations -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                tags: 'ams'  // This enables automatic numbering
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="../MathJax-4.1.0/tex-chtml.js"></script>
+    <!--  -->
+</head>
+<body>
+
+    <a id="header-placeholder"></a>
+    
+    <div class="container">
+        <!-- Breadcrumb navigation -->
+        <div style="margin-bottom: 1.5rem; padding: 0.8rem; background: #f0f4f8; border-radius: 4px;">
+            <a href="../index.html" style="color: #2a5298; text-decoration: none;">Home</a> / 
+            <a href="../numerical.html" style="color: #2a5298; text-decoration: none;">Mumerical Methods</a> / 
+            <span style="color: #666;">Density Matrix Renormalization Group</span>
+        </div>
+        
+        <section>
+            <h2>Density Matrix Renormalization Group</h2>
+            
+            <div style="text-align: center; margin: 2rem 0;" id="dmrg">
+                <img src="images/DMRG/dmrg_wormup_sweep.pdf" alt="DMRG" class="research-image-large">
+                <p style="color: #666; font-style: italic; margin-top: 1rem; margin-bottom: 0rem; text-align: center;">
+                    The graphical representation of the algorithm for finding the 
+                    ground state in the DMRG process is shown for a system of length 
+                    $L=8$ with open boundary conditions. (a-d) Show the creation of an 
+                    arbitrary MPS using an infinite DMRG process. (e-l) Show one 
+                    complete sweep of finite size algorithm of variational search. If 
+                    we repeat (e-l) several times, the initial state (d) converges to 
+                    the ground state of the Hamiltonian.
+                </p>
+            </div>
+
+            <div style="margin-top: 1rem; ">
+                The Density Matrix renormalization group (DMRG) method is the prescription to prevent the 
+                exponential growth of the Hilbert space while providing accurate results for low dimensional systems. Steve White 
+                proposed the method in 1992 as an improvement over the 
+                numerical renormalization group (NRG). The method finds the ground state of the system 
+                by variational approximation through local optimization. As a further development, the 
+                DMRG method was then applied to MPSs that increased the flexibility and power of the DMRG method by 
+                manyfold. The key idea here is to minimize the bond dimension ($a_i$) of the MPS by 
+                eliminating a part of the singular value spectrum that is negligible in weight. For 
+                example, in the low entangled states like the gapped state, the singular 
+                values ($\lambda_k$) decrease exponentially with its spectral position ($k$),
+                \begin{equation}
+                    \lambda_k \propto e^{-\alpha k}, ~~~ \alpha > 0.
+                \end{equation}
+            <div> 
+
+            <div style="margin-top: 1rem; ">
+                In a variational process of ground state search, the aim is to minimize the energy 
+                functional defined by,
+                \begin{equation}
+                    E_g  = \frac{\langle \Psi_g | H | \Psi_g \rangle}{\langle \Psi_g | \Psi_g \rangle} \leq \frac{\langle \Psi| H |\Psi \rangle}{\langle \Psi| \Psi \rangle} 
+                \end{equation}
+                However, in the MPS description, this is a high dimensional non-linear problem to solve. 
+                In this case, the local update using the DMRG sweep helps to optimize the local tensors. 
+                In a so-called two site DMRG process we write the Hamiltonian in the following form
+                \begin{equation}
+                    H = \sum_k H^k_L \otimes H^k_{i,j} \otimes H^k_R.
+                \end{equation}
+                Here, the Hamiltonian is divided into the left and the right part which are called the system parts. In this 
+                case, the local minimization becomes an eigenvalue problem
+                \begin{equation}\label{eq:mps_eig}
+                    \tilde{H}^{a'\sigma_i'\sigma_j'b'}_{a\sigma_i\sigma_jb} X_{a'\sigma_i'\sigma_j'b'} = E X_{a'\sigma_i'\sigma_j'b'}
+                \end{equation}
+                where
+                \begin{equation}
+                    \tilde{H}^{a'\sigma_i'\sigma_j'b'}_{a\sigma_i\sigma_jb} = \sum_k (\tilde{H}_R^k)_a^{a'} (\tilde{H}_L^k)_b^{b'} (H_{i,j}^k)_{\sigma_i\sigma_j}^{\sigma_i'\sigma_j'}
+                \end{equation}
+                Here $\tilde{H}_R^k$ and $\tilde{H}_L^k$ may be obtained from the previous step and 
+                $X_{a'\sigma_i'\sigma_j'b'}$ describes the local wavefunction. The eigenvalue problem 
+                shown in Eq. \ref{eq:mps_eig} can be solved using the Lanczos algorithm. Using an initial guess 
+                that can be extracted from the previous iteration, the process can be made faster, 
+                especially when it is close to the convergence. As a next step, the updated MPS is computed from  
+                $X_{a\sigma_i\sigma_jb}$ after truncating it to the desired bond dimension in the SVD 
+                process.
+            </div>
+
+            <div style="margin-top: 1rem; ">
+                To get the ground state of a Hamiltonian, the algorithm starts with an arbitrary MPS formed by 
+                an infinite DMRG process with a given bond dimension. A graphical representation is 
+                shown in  <a href="#dmrg"> figure (a-d) above</a> for convenience. The dotted line shows the connection between the left and the  
+                right parts of the system, and the tensors with the empty circles are the resulting tensor 
+                we create in that step.
+                The variational optimization of the local tensor is done 
+                by sweeping from left to right and vice-versa through the system length. This process is recognized as the 
+                finite size DMRG process. A <em>two-site DMRG</em> sweeping 
+                process is graphically presented in <a href="#dmrg"> figure (e-l) above</a> for one complete sweep. 
+                Here also the dashed line connects the two parts of the system and the local tensors 
+                marked with open circles are optimized in the process mentioned above in that step.
+            </div>  
+
+            <div style="margin-top: 1rem; ">
+                There are different sources of error in this process of finding the 
+                eigenstates. Most important of 
+                them is the <em>truncation error</em>,
+                \begin{equation}
+                    p = \sum_{a=M+1}^D S^2_\alpha = 1 - \sum_{\alpha = 1}^{M} S_{\alpha}^2.
+                \end{equation}
+                which arises due to the discarded part of the singular 
+                value spectrum during the DMRG process.
+                It has been shown that the error in the ground-state energy is proportional to 
+                $p$. 
+                Other than the truncation error, there are two more sources of error. One arises from the iterative process 
+                of the numerical diagonalization and the other from the lack of convergence 
+                within the class of the MPS states. In this thesis, we have implemented the DMRG method for one-dimensional 
+                open boundary systems where it works 
+                the best. In general, it can be utilized for systems with periodic boundary conditions, infinite 
+                systems and two-dimensional lattices.
+            </div>
+            
+            
+            
+            <h3 id="references">Related References</h3>
+            
+            <ol class="publication-list">
+                <li class="publication-list-item">
+                    <div class="publication-text">
+                        Ulrich Schollwöck, 
+                        <em>The density-matrix renormalization group in the age of matrix product states,</em> 
+                        <span class="journal-info">Annals of Physics 326, 96 (2012)</span>.
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://doi.org/10.1016/j.aop.2010.09.012" target="_blank">Journal</a>
+                        <a href="https://doi.org/10.48550/arXiv.1008.3477" target="_blank">arXiv</a>
+                        <a href="references/MPS/MPS_DMRG.pdf" target="_blank">PDF</a>
+                    </div>
+                </li>
+
+                <li class="publication-list-item">
+                    <div class="publication-text">
+                        G. De Chiara, M. Rizzi, D. Rossini, S. Montangero, 
+                        <em>Density Matrix Renormalization Group for Dummies,</em> 
+                        <span class="journal-info">arXiv:cond-mat/0603842 (2006)</span>.
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://doi.org/10.48550/arXiv.cond-mat/0603842" target="_blank">arXiv</a>
+                        <a href="references/DMRG/DMRG_Dummies.pdf" target="_blank">PDF</a>
+                    </div>
+                </li>
+
+                <li class="publication-list-item">
+                    <div class="publication-text">
+                        H. Fehske, R. Schneider and A. Weiße (Eds.), 
+                        <em>Computational Many-Particle Physics,</em> 
+                        <span class="journal-info">Lect. Notes Phys. 739 (2008)</span>.
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://doi.org/10.1007/978-3-540-74686-7" target="_blank">Journal</a>
+                        <a href="references/DMRG/Computational_Many_Particle_Physics_2008.pdf" target="_blank">PDF</a>
+                    </div>
+                </li>
+
+                <li class="publication-list-item">
+                    <div class="publication-text">
+                        <em></em> 
+                        <span class="journal-info">www.tensors.net</span>
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://www.tensors.net" target="_blank">Visit the website</a>
+                    </div>
+                </li>
+
+                <li class="publication-list-item">
+                    <div class="publication-text">
+                        Pioneer: Steven R. White, 
+                        <em>Density matrix formulation for quantum renormalization groups,</em> 
+                        <span class="journal-info">Phys. Rev. Lett. 69, 2863 (1992)</span>.
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://doi.org/10.1103/PhysRevLett.69.2863" target="_blank">Journal</a>
+                    </div>
+                </li>
+            </ol>
+            
+            <h3 id="packeges">Free Online Packages</h3>
+            <ol class="publication-list">
+                <li class="publication-list-item">
+                    <div class="publication-text">
+                        <span class="journal-info">iTensors</span>,
+                        developed by Steve White, Miles Stoudenmire, et al.,
+                        <em>High-Performance Tensor Software Inspired By Tensor Diagrams</em>
+                    </div>
+                    <div class="publication-links">
+                        <a href="http://itensor.org" target="_blank">Visit the website</a>
+                    </div>
+                </li>
+
+                <li class="publication-list-item">
+                    <div class="publication-text">
+                        <span class="journal-info">TeNPy</span>,
+                        developed by the group of Frank Pollmann,
+                        <em>Tensor Network Python</em>
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://github.com/tenpy/tenpy" target="_blank">Visit the website</a>
+                    </div>
+                </li>
+            </ol>
+            
+            <!-- Navigation to other research areas -->
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #e0e0e0;">
+                <h3>Explore other numerical methods</h3>
+                <div style="display: grid; gap: 1rem; margin-top: 1rem;">
+                    <a href="ED.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Exact Diagonalization →</strong>
+                    </a>
+                    <a href="CMFT.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Cluster Mean Field Theory →</strong>
+                    </a>
+                    <a href="MPS.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Matrix Product States →</strong>
+                    </a>
+                    <a href="TEBD.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Time-Evolution Block Decimation →</strong>
+                    </a>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <a href="../numerical.html" style="color: #2a5298; text-decoration: none; font-weight: 500; font-size: 1.1rem;">
+                    ← Back to Numerical Methods
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer placeholder -->
+    <a id="footer-placeholder"></a>
+    
+    <!-- Load components -->
+    <script src="components.js"></script>
+
+</body>
+</html>

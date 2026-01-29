@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEBD - Suman Mondal</title>
+    <link rel="stylesheet" href="../style.css">
+    <!-- <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico"> -->
+    <link rel="icon" type="image/png" sizes="192x192" href="../images/favicon/favicon-192x192.png">
+    <!-- impotr script for math equations -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                tags: 'ams'  // This enables automatic numbering
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="../MathJax-4.1.0/tex-chtml.js"></script>
+    <!--  -->
+</head>
+<body>
+
+    <a id="header-placeholder"></a>
+    
+    <div class="container">
+        <!-- Breadcrumb navigation -->
+        <div style="margin-bottom: 1.5rem; padding: 0.8rem; background: #f0f4f8; border-radius: 4px;">
+            <a href="../index.html" style="color: #2a5298; text-decoration: none;">Home</a> / 
+            <a href="../numerical.html" style="color: #2a5298; text-decoration: none;">Mumerical Methods</a> / 
+            <span style="color: #666;">Time-Evolution Block Decimation</span>
+        </div>
+        
+        <section>
+            <h2>Time-Evolution Block Decimation method</h2>
+            
+            <div style="text-align: center; margin: 2rem 0;" id="tebd">
+                <img src="images/TEBD/tebd.pdf" alt="TEBD" class="research-image-large">
+                <p style="color: #666; font-style: italic; margin-top: 1rem; margin-bottom: 0rem; text-align: center;">
+                    The graphical representation of the TEBD algorithm is 
+                    shown. Here the Suzuki-Trotter decomposed (first-order) evolution 
+                    operator operates on the initial MPS for a system of $L=8$. Here 
+                    the initial state is evolved by $2\delta t$ time. 
+                </p>
+            </div>
+
+            <div style="margin-top: 1rem; ">
+                The time evolution of a quantum state of a strongly correlated 
+                many-body system with time-dependent Hamiltonian is a highly 
+                nontrivial problem. Because of the tremendous success of the DMRG 
+                method in addressing the equilibrium properties of strongly 
+                correlated systems, different attempts have been made to study 
+                non-equilibrium properties using the time-dependent DMRG 
+                method. G. Vidal 
+                developed an algorithm to simulate the time evolution of the 
+                many-body states. In the algorithm, the 
+                Hilbert space dynamically adapts itself for better accuracy. This 
+                algorithm is called the time-evolving block decimation (TEBD), which 
+                fits perfectly with the MPS framework.
+            <div> 
+
+            <div style="margin-top: 1rem; ">
+                The essential technique of TEBD is to write the time evolution operator 
+                $U(\delta t) = e^{-iH\delta t}$ (where $\hbar$ is considered to be 
+                $1$), for a small time 
+                $\delta t$ using Suzuki-Trotter (ST) decomposition. If 
+                the Hamiltonian of interest contains only the nearest-neighbor 
+                interactions, then the Hamiltonian can be re-written in terms of 
+                local two site terms as
+                \begin{equation}
+                    H = \sum_i h_{(2i-1), 2i} + \sum_i h_{2i, (2i+1)} = H_{odd} + H_{even}.
+                \end{equation}
+                Here all $H_{odd}$ or $H_{even}$ terms commute among themselves but, 
+                $h_{(2i-1), 2i}$ and $ h_{2i, (2i+1)}$ do not commute in general since they share a 
+                common site $2i$. This non-commutative nature gives rise to an error in the ST 
+                decomposed time evolution operator. The first order Suzuki-Trotter (ST(1)) decomposed 
+                $U(\delta t)$ can be written as
+                \begin{equation}
+                    e^{-iH\delta t} = e^{-iH_{odd}\delta t} + e^{-iH_{even}\delta t}+ O(\delta t ^2).
+                \end{equation}
+                So, the time evolved wavefunction becomes
+                \begin{equation}\label{eq:tebd}
+                    |\Psi(t+\delta t)\rangle = e^{-iH_{odd}\delta t} e^{-iH_{even}\delta t} |\Psi(t)\rangle
+                \end{equation}
+                In the MPS description of the wavefunction, the two site operators in $H_{odd}$ 
+                or $H_{even}$ can be operated independently since they commute with each other. 
+                After operating a two-site 
+                operator, the local dimension increases by $d^2$ times and the MPS description vanishes 
+                on those two sites. This tells us that at every time step, the dimension increases 
+                exponentially. However, applying the SVD technique, one can reduce the dimension by truncating the 
+                singular value spectrum as before and also restore the MPS description after each time 
+                step. Now, discretizing the total time of evolution $t = N\delta t$,  
+                the repeated operation of the Eq. \ref{eq:tebd} on the initial state can evolve the state to time $t$. 
+                An example of this method of time evolution is depicted in 
+                <a href="#tebd"> figure </a> for $N=2$. The ST decomposition described above works if the 
+                Hamiltonian only has the nearest-neighbor terms. 
+                In general, if the Hamiltonian has the 
+                next-nearest-neighbor terms, the ST decomposition of the evolution operator is done with 
+                three-site local operators instead of two.
+            </div>
+
+            <div style="margin-top: 1rem; ">
+                Note that during every step of time evolution, entanglement builds 
+                up in the system. In the process of truncation in SVD, the error 
+                also builds up in the wave-function. Apart from this, errors also arise from the ST 
+                decomposition, which is of the order of $\delta t^2$. This error can 
+                be reduced by considering a very short time step $\delta t$. The 
+                error in ST decomposition can be further reduced by considering 
+                higher-order ST decomposition since in ST($n$), the error comes of 
+                the order of $\delta t^{n+1}$. In the following, an ST($2$) 
+                decomposition is shown.
+                \begin{equation}
+                    e^{-iH\delta t} = e^{-iH_{odd}\delta t/2} e^{-iH_{even}\delta t} e^{-iH_{odd}\delta t/2}+ O(\delta t ^3).
+                \end{equation}
+                Using small time steps and higher-order ST decomposition, this error can also be 
+                significantly minimized. Nevertheless, considering all these sources of errors, the 
+                accessible time scale allows us to study the system of interest efficiently. There is also a TEBD algorithm for infinite 
+                systems (iTEBD).
+            </div> 
+            
+            
+            
+            <h3 id="references">Related References</h3>
+            
+            <ol class="publication-list">
+                <li class="publication-list-item">
+                    <div class="publication-text">
+                        Ulrich Schollwöck, 
+                        <em>The density-matrix renormalization group in the age of matrix product states,</em> 
+                        <span class="journal-info">Annals of Physics 326, 96 (2012)</span>.
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://doi.org/10.1016/j.aop.2010.09.012" target="_blank">Journal</a>
+                        <a href="https://doi.org/10.48550/arXiv.1008.3477" target="_blank">arXiv</a>
+                        <a href="references/MPS/MPS_DMRG.pdf" target="_blank">PDF</a>
+                    </div>
+                </li>
+
+                <li class="publication-list-item">
+                    <div class="publication-text">
+                        Sebastian Paeckel, Thomas Köhler, Andreas Swoboda, Salvatore R. Manmana, Ulrich Schollwöck, Claudius Hubig, 
+                        <em>Time-evolution methods for matrix-product states,</em> 
+                        <span class="journal-info">Annals of Physics 411, 167998 (2019)</span>.
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://doi.org/10.1016/j.aop.2019.167998" target="_blank">Journal</a>
+                        <a href="https://doi.org/10.48550/arXiv.1901.05824" target="_blank">arXiv</a>
+                        <a href="references/TEBD/time_evolution_of_MPS_Salvatore_Manmana.pdf" target="_blank">PDF</a>
+                    </div>
+                </li>
+
+                <li class="publication-list-item">
+                    <div class="publication-text">
+                        Guifré Vidal, 
+                        <em>Efficient Simulation of One-Dimensional Quantum Many-Body Systems,</em> 
+                        <span class="journal-info">Phys. Rev. Lett. 93, 040502 (2004)</span>.
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://doi.org/10.1103/PhysRevLett.93.040502" target="_blank">Journal</a>
+                        <a href="https://doi.org/10.48550/arXiv.quant-ph/0310089" target="_blank">arXiv</a>
+                    </div>
+                </li>
+
+                <li class="publication-list-item">
+                    <div class="publication-text">
+                        <em></em> 
+                        <span class="journal-info">www.tensors.net</span>
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://www.tensors.net" target="_blank">Visit the website</a>
+                    </div>
+                </li>
+            </ol>
+            
+            <h3 id="packeges">Free Online Packages</h3>
+            <ol class="publication-list">
+                <li class="publication-list-item">
+                    <div class="publication-text">
+                        <span class="journal-info">iTensors</span>,
+                        developed by Steve White, Miles Stoudenmire, et al.,
+                        <em>High-Performance Tensor Software Inspired By Tensor Diagrams</em>
+                    </div>
+                    <div class="publication-links">
+                        <a href="http://itensor.org" target="_blank">Visit the website</a>
+                    </div>
+                </li>
+
+                <li class="publication-list-item">
+                    <div class="publication-text">
+                        <span class="journal-info">TeNPy</span>,
+                        developed by the group of Frank Pollmann,
+                        <em>Tensor Network Python</em>
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://github.com/tenpy/tenpy" target="_blank">Visit the website</a>
+                    </div>
+                </li>
+            </ol>
+            
+            <!-- Navigation to other research areas -->
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #e0e0e0;">
+                <h3>Explore other numerical methods</h3>
+                <div style="display: grid; gap: 1rem; margin-top: 1rem;">
+                    <a href="ED.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Exact Diagonalization →</strong>
+                    </a>
+                    <a href="CMFT.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Cluster Mean Field Theory →</strong>
+                    </a>
+                    <a href="MPS.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Matrix Product States →</strong>
+                    </a>
+                    <a href="DMRG.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Density Matrix Renormalization Group →</strong>
+                    </a>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <a href="../numerical.html" style="color: #2a5298; text-decoration: none; font-weight: 500; font-size: 1.1rem;">
+                    ← Back to Numerical Methods
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer placeholder -->
+    <a id="footer-placeholder"></a>
+    
+    <!-- Load components -->
+    <script src="components.js"></script>
+
+</body>
+</html>

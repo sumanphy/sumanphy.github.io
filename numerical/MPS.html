@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPS - Suman Mondal</title>
+    <link rel="stylesheet" href="../style.css">
+    <!-- <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico"> -->
+    <link rel="icon" type="image/png" sizes="192x192" href="../images/favicon/favicon-192x192.png">
+    <!-- impotr script for math equations -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                tags: 'ams'  // This enables automatic numbering
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="../MathJax-4.1.0/tex-chtml.js"></script>
+    <!--  -->
+</head>
+<body>
+
+    <a id="header-placeholder"></a>
+    
+    <div class="container">
+        <!-- Breadcrumb navigation -->
+        <div style="margin-bottom: 1.5rem; padding: 0.8rem; background: #f0f4f8; border-radius: 4px;">
+            <a href="../index.html" style="color: #2a5298; text-decoration: none;">Home</a> / 
+            <a href="../numerical.html" style="color: #2a5298; text-decoration: none;">Mumerical Methods</a> / 
+            <span style="color: #666;">Matrix Product States</span>
+        </div>
+        
+        <section>
+            <h2>Matrix Product States</h2>
+
+            <div style="margin-top: 1rem; ">
+                The matrix product states (MPS) are the widely used in quantum information 
+                theory and theoretical physics, especially to study the strongly correlated matter.
+                These are simple tensor network representations of the quantum many-body states. An 
+                example of such state is one-dimensional AKLT 
+                state that can be converted to MPS exactly. This powerful way of representing many-body states gives 
+                us a perfect variational class to incorporate in the density matrix renormalization 
+                group (DMRG) method. We briefly explain the salient features of this method in the following.
+            <div> 
+
+
+            <div style="text-align: center; margin: 2rem 0;" id="MPSgraph">
+                <img src="images/MPS/mps_comp.pdf" alt="MPS" class="research-image-large">
+                <p style="color: #666; font-style: italic; margin-top: 1rem; margin-bottom: 0rem; text-align: center;">
+                    Figure portrays the graphical representation of a general state and matrix 
+                    product state as defined in Eqs. \ref{eq:genState} and \ref{eq:lcMPS} respectively 
+                    for a system of length $L=8$. The top row of the figure shows the elements of the 
+                    matrix product state.
+                </p>
+            </div>
+
+
+            <div style="margin-top: 1rem; ">
+                The transformation of a many-body state to an MPS relies on the well known singular value decomposition (SVD). 
+                Consider a one-dimensional system with open boundary condition consists of $L$ number of sites and a $d$-dimensional 
+                local state spaces $\{\sigma_i\}$ where $i$ is the lattice index. A most general wave 
+                function for this system can be written as
+                \begin{equation}\label{eq:genState}
+                    |\Psi\rangle = \sum\limits_{\sigma_1,...,\sigma_L} c_{\sigma_1...\sigma_L} {|\sigma_1,...,\sigma_L\rangle}.
+                \end{equation}
+                The number of coefficients $c_{\sigma_1...\sigma_L}$ is equal to the dimension of the 
+                Hilbert space of the system which increases exponentially with $L$. Now, a matrix can 
+                represent the coefficient vector as
+                \begin{equation}
+                    c_{\sigma_1...\sigma_L} = c_{\sigma_1,(\sigma_2...\sigma_L)}. 
+                \end{equation}
+                An SVD performed on this matrix  leads to ,
+                \begin{equation}
+                    c_{\sigma_1...\sigma_L} = c_{\sigma_1,(\sigma_2...\sigma_L)} = \sum\limits_{a_1}U_{\sigma_1,a_1} S_{a_1,a_1} (V^\dagger)_{a_1,(\sigma_2...\sigma_L)}. 
+                \end{equation}
+                Here $U$ and $V$ are unitary matrices and $S$ is a diagonal matrix containing the singular values. 
+                Now the $a_1$ index of the $S_{a_1,a_1} $ and 
+                $ (V^\dagger)_{a_1,(\sigma_2...\sigma_L)}$ can be contructed and transformed into 
+                $c_{a_1,(\sigma_2...\sigma_L)}$. By renaming $U_{\sigma_1,a_1}$ with 
+                $A_{a_1}^{\sigma_1}$, the above equation becomes
+                \begin{equation}
+                    c_{\sigma_1...\sigma_L} = \sum\limits_{a_1} A_{a_1}^{\sigma_1} c_{a_1,(\sigma_2...\sigma_L)}
+                \end{equation}
+                Note the we have not discurded anythig to compress in this SVD process. We will discuss the compression in the <a href="DMRG.html">DMRG chapter</a>.
+                Then, by transforming $c_{a_1,(\sigma_2...\sigma_L)}$ to 
+                $c_{(a_1\sigma_2),(\sigma_3...\sigma_L)}$, and after an SVD we have
+                \begin{equation}
+                    c_{\sigma_1...\sigma_L} = \sum\limits_{a_1} \sum\limits_{a_2} A_{a_1}^{\sigma_1} U_{(a_1\sigma_2),a_2} S_{a_1,a_2}(V^\dagger)_{a_2,(\sigma_3...\sigma_L)}.
+                \end{equation}
+                Contracting $a_2$ in $S$ and $V$, the above equation can be modified as
+                \begin{equation}
+                    c_{\sigma_1...\sigma_L} = \sum\limits_{a_1} \sum\limits_{a_2} A_{a_1}^{\sigma_1} A_{a_1,a_2}^{\sigma_2} c_{(a_2\sigma_3),(\sigma_4...\sigma_L)}.
+                \end{equation}
+                This process is repeated until the other end of the lattice is reached. Finally, the 
+                wave function transforms into an MPS which is given by
+                \begin{equation}\label{eq:lcMPS}
+                    |\Psi\rangle = \sum\limits_{a_1,...,a_L} A_{a_1}^{\sigma_1} A_{a_1,a_2}^{\sigma_2}...A_{a_{L-2},a_{L-1}}^{\sigma_{L-1}} A_{a_{L-1}}^{\sigma_{L}}{|\sigma_1,...,\sigma_L\rangle}.
+                \end{equation}
+                In the above equation, $a_i$ are called bond indices, whereas $\sigma_i$ are the 
+                physical indices.
+                The MPS can be conveniently represented in a graphical way. In <a href="#MPSgraph">figure above</a>, we depict an 
+                MPS and different elements of an MPS in graphical form for a system of length $L=8$. 
+                We also represent the above formalism to create the MPS graphically in <a href="#lcMPS">figure below</a>. 
+            </div>
+
+
+            <div style="text-align: center; margin: 2rem 0;" id="lcMPS">
+                <img src="images/MPS/mps_creation.pdf" alt="MPS" class="research-image-medium">
+                <p style="color: #666; font-style: italic; margin-top: 1rem; margin-bottom: 0rem; text-align: center;">
+                    The graphical representation of the left canonical MPS formation using SVD process for a system of length $L=8$.
+                </p>
+            </div>
+
+            <div style="margin-top: 1rem; ">
+                The MPS representation of states is categorized into three types. The one shown in Eq. \ref{eq:lcMPS} is called Left-canonical MPS.
+                There are two other representations of the MPS called the right-canonical MPS and 
+                the mixed-canonical MPS. The procedure of creating right-canonical MPS is similar to that of the  
+                Left-canonical MPS. However, the right-canonical MPS is developed 
+                by contracting from right to left instead of left to right. 
+                The Right-canonical MPS of $|\Psi\rangle$ can be written as 
+                \begin{equation}\label{eq:rcMPS}
+                    |\Psi\rangle = \sum\limits_{a_1,...,a_L} B_{a_1}^{\sigma_1} B_{a_1,a_2}^{\sigma_2}...B_{a_{L-2},a_{L-1}}^{\sigma_{L-1}} B_{a_{L-1}}^{\sigma_{L}}{|\sigma_1,...,\sigma_L\rangle}.
+                \end{equation}
+                where $B_{a_{i-1},a_i}^{\sigma_i}$ are created from the corresponding $(V^\dagger)$ matrices.
+                The last variant that we are going to use in the DMRG method is called the Mixed-canonical 
+                MPS. In this scenario, we create an MPS of a state from both left ($1^{st}$ to the $l^{th}$ sites) and 
+                right ($L^{th}$ to $(L-l)^{th}$ sites) ways. A typical Mixed-canonical MPS can be written as
+                \begin{equation}\label{eq:mcMPS}
+                    |\Psi\rangle = \sum\limits_{a_1,...,a_L} A_{a_1}^{\sigma_1} ... A_{a_{l-1},a_l}^{\sigma_l} S_{a_l,a_{l}} B_{a_{l},a_{l+1}}^{\sigma_{l+1}} ... B_{a_{L-1}}^{\sigma_{L}}{|\sigma_1,...,\sigma_L\rangle}.
+                \end{equation}
+                A graphical representation of a Mixed-canonical MPS for $L=8$ is shown in 
+                <a href="#mcMPS">figure below</a> where we consider $l=4$. Since the representations discussed above 
+                are exact, the total dimension would scale exponentially with $L$.
+            </div>
+
+            <div style="text-align: center; margin: 2rem 0;" id="mcMPS">
+                <img src="images/MPS/mps_mc.pdf" alt="MPS" class="research-image-huge">
+                <p style="color: #666; font-style: italic; margin-top: 1rem; margin-bottom: 0rem; text-align: center;">
+                    The graphical representation of a 
+                    mixed canonical MPS for a system of length $L = 8$ following 
+                    Eq. \ref{eq:mcMPS}.
+                </p>
+            </div>
+
+
+            <div style="margin-top: 1rem; ">
+                Once we have an MPS, the expectation value of an operator or the overlap with 
+                other MPS is very easy to calculate. 
+                For example, consider two left-canonical MPSs $|\Psi\rangle$ and $|\Phi\rangle$ 
+                described by the networks of $A^{\sigma_l}$ and $\tilde{A}^{\sigma_l}$ ($a_i$ indices are hidden) matrices respectively. 
+                The overlap between them can be 
+                calculated efficiently by contracting the common indices from one boundary to another (say, $1$ to $ L $):
+                \begin{equation}
+                    \langle\Phi|\Psi\rangle = \sum_{\sigma_L} \tilde{A}^{\sigma_L\dagger}\left(...\left(\sum_{\sigma_2}\tilde{A}^{\sigma_2\dagger}\left( \sum_{\sigma_1}\tilde{A}^{\sigma_1\dagger} A^{\sigma_1}\right)A^{\sigma_2}\right)...\right) A^{\sigma_L}
+                \end{equation}
+                Here we hide the $a_i$ indices for simplicity.
+            </div>
+
+            <div style="margin-top: 1rem; ">
+                By using a similar prescription, the expectation value of an operator can also be 
+                calculated. As an example consider an $L$ point operator $O = O_1 \otimes O_2 \otimes ... \otimes O_L$. 
+                Note that in most of the cases most of the 
+                on-site operators ($O_i$) will be identity operators. Now the expectation value of 
+                the operator can be written as
+                \begin{equation}
+                    \langle\Psi|O|\Psi\rangle = \sum_{\sigma_L \sigma_L'} O_L^{\sigma_L \sigma_L'} {A}^{\sigma_L\dagger}~\left(...\left(\sum_{\sigma_2 \sigma_2} O_2^{\sigma_2 \sigma_2'} {A}^{\sigma_2\dagger} \left(\sum_{\sigma_1 \sigma_1'} O_1^{\sigma_1 \sigma_1'} {A}^{\sigma_1\dagger} A^{\sigma_1'}\right){A}^{\sigma_2\dagger}\right)...\right) A^{\sigma_L'}
+                \end{equation}
+                We will use all these machineries discussed in this chapter in the <a href="DMRG.html">DMRG method</a>.
+            </div>
+            
+            
+            
+            <h3 id="references">Related References</h3>
+            
+            <ol class="publication-list">
+
+                <li class="publication-list-item">
+                    <div class="publication-text">
+                        Ulrich Schollwöck, 
+                        <em>The density-matrix renormalization group in the age of matrix product states,</em> 
+                        <span class="journal-info">Annals of Physics 326, 96 (2012)</span>.
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://doi.org/10.1016/j.aop.2010.09.012" target="_blank">Journal</a>
+                        <a href="https://doi.org/10.48550/arXiv.1008.3477" target="_blank">arXiv</a>
+                        <a href="references/MPS/MPS_DMRG.pdf" target="_blank">PDF</a>
+                    </div>
+                </li>
+
+                <li class="publication-list-item">
+                    <div class="publication-text">
+                        <em></em> 
+                        <span class="journal-info">www.tensors.net</span>
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://www.tensors.net" target="_blank">Visit the website</a>
+                    </div>
+                </li>
+            </ol>
+            
+            <!-- Navigation to other research areas -->
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #e0e0e0;">
+                <h3>Explore other numerical methods</h3>
+                <div style="display: grid; gap: 1rem; margin-top: 1rem;">
+                    <a href="ED.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Exact Diagonalization →</strong>
+                    </a>
+                    <a href="CMFT.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Cluster Mean Field Theory →</strong>
+                    </a>
+                    <a href="DMRG.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Density Matrix Renormalization Group method →</strong>
+                    </a>
+                    <a href="TEBD.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Time-Evolution Block Decimation →</strong>
+                    </a>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <a href="../numerical.html" style="color: #2a5298; text-decoration: none; font-weight: 500; font-size: 1.1rem;">
+                    ← Back to Numerical Methods
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer placeholder -->
+    <a id="footer-placeholder"></a>
+    
+    <!-- Load components -->
+    <script src="components.js"></script>
+
+</body>
+</html>

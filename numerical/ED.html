@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exact Diagonalization - Suman Mondal</title>
+    <link rel="stylesheet" href="../style.css">
+    <!-- <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico"> -->
+    <link rel="icon" type="image/png" sizes="192x192" href="../images/favicon/favicon-192x192.png">
+    <!-- impotr script for math equations -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="../MathJax-4.1.0/tex-chtml.js"></script>
+    <!--  -->
+</head>
+<body>
+
+    <a id="header-placeholder"></a>
+    
+    <div class="container">
+        <!-- Breadcrumb navigation -->
+        <div style="margin-bottom: 1.5rem; padding: 0.8rem; background: #f0f4f8; border-radius: 4px;">
+            <a href="../index.html" style="color: #2a5298; text-decoration: none;">Home</a> / 
+            <a href="../numerical.html" style="color: #2a5298; text-decoration: none;">Mumerical Methods</a> / 
+            <span style="color: #666;">Exact Diagonalization</span>
+        </div>
+        
+        <section>
+            <h2>Exact Diagonalization</h2>
+            
+            <div style="text-align: center; margin: 2rem 0;">
+                <img src="images/ED/ED.png" alt="1D lattice" class="research-image-large">
+                <p style="color: #666; font-style: italic; margin-top: 1rem; margin-bottom: 0rem; text-align: center;">
+                    A small 1D lattice with number of sites $L=8$.
+                </p>
+            </div>
+
+
+            In principle, the ED method allows us to calculate the full spectrum 
+            of the Hamiltonian describing a particular system. The method is 
+            based on three major steps, namely (a) create appropriate basis 
+            states, (b) compute the matrix elements of the Hamiltonian using the 
+            basis states and (c) diagonalize the Hamiltonian matrix to obtain 
+            the eigenspectrum. We use the Fock state basis to span the Hilbert 
+            space of the system. For example, for the one-dimensional bosonic 
+            system with $L$ number of sites, the basis vectors can be written as 
+            $$ \{|n_1,~n_2,~n_3,~.~.~.~n_L\rangle\} \equiv |n_1\rangle \otimes |n_2\rangle \otimes |n_3\rangle \otimes~.~.~.~|n_L\rangle $$
+            where $n_i$ is the number of particles at $i^{th}$ site. Assuming the on-site dimension to be $m$, 
+            the full Hilbert space dimension $D = m^L$ without considering any 
+            symmetry in the system. Because of this exponential growth of $D$, it becomes impossible to store a 
+            single vector for a large system. For example, if we consider 
+            hard-core bosons ($m = 2$) and small system of length $L=30$ it takes $8$GB of memory to 
+            store a single $2^{30}$ dimensional vector with "double" precision. 
+            On the other hand, the computational complexity to get all the eigenstate cranks up to $\mathcal{O} (D^3)$. 
+
+            However, one can exploit the use of good quantum numbers of the system to reduce the basis dimension substantially. To get the essence, in the model
+            \begin{equation}\label{eq:bhham}
+            {H} = -\sum\limits_{\langle i,j \rangle}t_{i,j}(a^\dagger_{i}a_{j}+ H.c.) + \frac{U}{2}\sum\limits_i{n}_{i}({n}_{i} - 1) - \sum\limits_i\mu_i n_{i}
+            \end{equation}
+            for example, known as the Hubbard model, 
+            the total number of particles $N=\sum_j n_j$ is a conserved quantity.
+            This assumption ensures that the Hamiltonian is block diagonal, and each block can be solved 
+            separately. This substantially reduces the effective computational cost and memory needed for the calculations. 
+            Note that this process makes the Hamiltonian matrix less sparse, which consumes more 
+            time to diagonalize.
+
+            Lanczos or Arnoldi method makes it more efficient if we are only interested in 
+            lowe-lying states, which is often sufficient for essential studies. In this process, 
+            we approximate a Hamiltonian ($H$) 
+            in a $p$-dimensional orthonormal basis space generated from Krylov space: a vector 
+            space created by an arbitrary vector $v$ and the $H$, given by
+            \begin{equation}
+            \{ v,~Hv,~H^2v,~H^3v,~.~.~.~H^{p-1}v \}.
+            \end{equation}
+            In this orthonormal basis, the $H$ becomes $\tilde H$, whose largest eigenvalue 
+            converges rapidly to that of $H$ with increasing $p$. In general, with $p\ll D$, the 
+            first eigenstate is achieved with high accuracy and to improve the accuracy of excited 
+            states, one can increase $p$ further.
+
+            The ED method can also be used to study the dynamics of systems. As mentioned in the 
+            beginning, we can have access to the system's dynamical property by solving the  
+            corresponding time-dependent Schrödinger-equation. In other words, we need to calculate the time-evolution 
+            operator ${\mathcal{U}}(t) = e^{-iH(t)t/\hbar}$ and a given state 
+            $|\Psi(t=0)\rangle$ can be 
+            evolved in time $t$ as
+            \begin{equation}\label{eq:tSchr}
+               |\Psi(t)\rangle = {\mathcal{U}}(t) |\Psi(t)\rangle.
+            \end{equation}
+            Note that the exponentiation is a computationally demanding task, which again 
+            restricts us to small system sizes.
+
+            
+            
+            
+            <h3>Related References</h3>
+            
+            <ol class="publication-list">
+
+                <li class="publication-list-item">
+                    <div class="publication-text">
+                        <span class="author-name">Anders W. Sandvik</span>, 
+                        <em>Computational Studies of Quantum Spin Systems,</em> 
+                        <span class="journal-info">arXiv:1101.3281 (2011)</span>.
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://doi.org/10.48550/arXiv.1101.3281" target="_blank">arXiv</a>
+                        <a href="references/ED/Anders_W._Sandvik_Computational_Studies_of_Quantum_Spin_Systems.pdf" target="_blank">PDF</a>
+                    </div>
+                </li>
+            </ol>
+            
+            <!-- Navigation to other research areas -->
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #e0e0e0;">
+                <h3>Explore other numerical methods</h3>
+                <div style="display: grid; gap: 1rem; margin-top: 1rem;">
+                    <a href="CMFT.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Cluster Mean Field Theory →</strong>
+                    </a>
+                    <a href="MPS.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Matrix Product States →</strong>
+                    </a>
+                    <a href="DMRG.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Density Matrix Renormalization Group method →</strong>
+                    </a>
+                    <a href="TEBD.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Time-Evolution Block Decimation →</strong>
+                    </a>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <a href="../numerical.html" style="color: #2a5298; text-decoration: none; font-weight: 500; font-size: 1.1rem;">
+                    ← Back to Numerical Methods
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer placeholder -->
+    <a id="footer-placeholder"></a>
+    
+    <!-- Load components -->
+    <script src="components.js"></script>
+
+</body>
+</html>

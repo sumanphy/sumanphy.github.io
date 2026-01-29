@@ -1,0 +1,604 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #f4f4f4;
+}
+
+header {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.profile-photo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 5px solid white;
+    margin: 0 auto 1.5rem;
+    display: block;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+nav {
+    background: #2a5298;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+
+nav a:hover {
+    opacity: 0.7;
+}
+
+nav a.active {
+    border-bottom: 2px solid white;
+    padding-bottom: 0.3rem;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+section {
+    background: white;
+    margin: 2rem 0;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #1e3c72;
+    border-bottom: 3px solid #2a5298;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+h3 {
+    color: #2a5298;
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+}
+
+h4 {
+    color: #1e3c72;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.home-section {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.home-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+}
+
+/* CV Section Styles */
+.cv-section {
+    margin-bottom: 2rem;
+}
+
+.cv-section h3 {
+    margin-top: 0;
+    font-size: 1.3rem;
+    color: #2a5298;
+    margin-bottom: 1rem;
+}
+
+.cv-item {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f9f9f9;
+    border-left: 3px solid #2a5298;
+    border-radius: 4px;
+    line-height: 1.8;
+}
+
+.cv-item strong {
+    color: #1e3c72;
+    font-size: 1.05rem;
+}
+
+.cv-list {
+    margin-left: 1.5rem;
+    line-height: 1.9;
+}
+
+.cv-list li {
+    margin-bottom: 0.5rem;
+}
+
+/* Publication list with automatic numbering */
+.publication-list {
+    counter-reset: publication-counter;
+    list-style: none;
+    padding: 0;
+}
+
+.publication-list-item {
+    counter-increment: publication-counter;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f9f9f9;
+    border-radius: 4px;
+    position: relative;
+    padding-left: 3.5rem;
+}
+
+.publication-list-item::before {
+    content: counter(publication-counter) ".";
+    position: absolute;
+    left: 1rem;
+    font-weight: bold;
+    color: #1e3c72;
+    font-size: 1rem;
+}
+
+.publication-text {
+    line-height: 1.8;
+}
+
+.author-name {
+    font-weight: bold;
+}
+
+.journal-info {
+    font-weight: bold;
+    color: #1e3c72;
+}
+
+.publication-links {
+    margin-top: 0.5rem;
+}
+
+.publication-links a {
+    color: #2a5298;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 1rem;
+}
+
+.publication-links a:hover {
+    text-decoration: underline;
+}
+
+.research-topic {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #f9f9f9;
+    border-left: 4px solid #2a5298;
+    border-radius: 4px;
+}
+
+.research-topic h3 {
+    margin-top: 0;
+    color: #2a5298;
+    margin-bottom: 1rem;
+}
+
+.research-topic-content {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.research-content {
+    flex: 1;
+}
+
+.research-content ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.research-content li {
+    margin-bottom: 0.3rem;
+}
+
+.research-image {
+    width: 250px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    flex-shrink: 0;
+}
+
+.research-image-medium {
+    width: 400px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    flex-shrink: 0;
+}
+
+.research-image-large {
+    width: 600px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    flex-shrink: 0;
+}
+
+.research-image-huge {
+    width: 900px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    flex-shrink: 0;
+}
+
+.publication {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f9f9f9;
+    border-radius: 4px;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.publication-content {
+    flex: 1;
+}
+
+.publication-image {
+    width: 200px;
+    height: 100%;
+    /* object-fit: cover; */
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    flex-shrink: 0;
+}
+
+.publication-title {
+    font-weight: bold;
+    color: #1e3c72;
+    margin-bottom: 0.3rem;
+}
+
+.publication-authors {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 0.3rem;
+}
+
+.publication-venue {
+    color: #666;
+}
+
+.publication a {
+    color: #2a5298;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.publication a:hover {
+    text-decoration: underline;
+}
+
+.citation-compact {
+    margin-top: 1rem;
+}
+
+.citation-layout {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    justify-content: center;
+    overflow-x: auto;
+}
+
+
+.chart-container-compact {
+    width: 400px;
+    height: 320px;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.citation-metrics-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: space-between;
+    min-width: 180px;
+}
+
+.metric-card-compact {
+    background: linear-gradient(135deg, #1e3c72 0%, #2961c1 100%);
+    color: white;
+    padding: 0.4rem 0.6rem;
+    border-radius: 10px;
+    text-align: center;
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+}
+
+
+.metric-value-compact {
+    font-size: 1.0rem;
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+}
+
+.metric-label-compact {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    /* text-transform: uppercase; */
+    letter-spacing: 0.5px;
+}
+
+.last-updated-compact {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
+.affiliation-item {
+    margin-bottom: 1rem;
+}
+
+.interest-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+.blue-text-tag {
+    background: #2a5298;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+}
+
+.red-text-tag {
+    background: #a01809;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+}
+
+.green-text-tag {
+    background: #006212;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+}
+
+
+
+/* Enable smooth scrolling when clicking anchor links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Adjust the tags to look like buttons and indicate they are clickable */
+.interest-list a.blue-text-tag {
+    text-decoration: none;
+    transition: transform 0.2s, background-color 0.2s;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.interest-list a.blue-text-tag:hover {
+    background-color: #487cdb;
+    /* transform: translateY(-2px); */
+}
+
+.interest-list a.red-text-tag {
+    text-decoration: none;
+    transition: transform 0.2s, background-color 0.2s;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.interest-list a.red-text-tag:hover {
+    background-color: #d13625;
+    /* transform: translateY(-2px); */
+}
+
+.interest-list a.green-text-tag {
+    text-decoration: none;
+    transition: transform 0.2s, background-color 0.2s;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.interest-list a.green-text-tag:hover {
+    background-color: #018d1f;
+    /* transform: translateY(-2px); */
+}
+
+
+
+/* Styling for the link that leads to the detail pages */
+.read-more-link {
+    color: #2a5298;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.read-more-link:hover {
+    border-bottom: 1px solid #2a5298;
+}
+
+/* Optional: Offset for fixed navigation bars */
+/* If your nav is sticky, this prevents the section title from being hidden under it */
+.research-topic {
+    scroll-margin-top: 80px; 
+}
+
+
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    background: white;
+    margin-top: 2rem;
+}
+
+@media (max-width: 1050px) {
+    .research-image-huge {
+        height: 100%;
+        width: 600px;
+    }
+}
+
+@media (max-width: 720px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    nav ul {
+        gap: 1rem;
+    }
+    
+    .container {
+        padding: 1rem;
+    }
+    
+    .cv-section h3 {
+        font-size: 1.2rem;
+    }
+    
+    .cv-item {
+        padding: 0.75rem;
+    }
+    
+    .interest-list {
+        gap: 0.5rem;
+    }
+    
+    .interest-tag {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .research-topic-content {
+        flex-direction: column;
+    }
+    
+    .research-image {
+        width: 240px;
+        height: 100%;
+    }
+
+    .research-image-medium {
+        height: 100%;
+        width: 240px;
+    }
+
+    .research-image-large {
+        height: 100%;
+        width: 240px;
+    }
+
+    .research-image-huge {
+        height: 100%;
+        width: 240px;
+    }
+    
+    .publication {
+        flex-direction: column;
+    }
+    
+    .publication-image {
+        width: 200px;
+        height: 100%;
+    }
+    
+    /* Compact citation stats responsive - stack vertically on mobile */
+    .citation-layout {
+        flex-direction: column;
+    }
+    
+    .citation-metrics-compact {
+        flex-direction: row;
+        min-width: 100%;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+    
+    .metric-card-compact {
+        padding: 0.3rem 0.5rem; 
+        flex: 0 1 100px; /* Limits how much they can grow */
+    }
+    
+    .metric-value-compact {
+        font-size: 1.1rem; 
+    }
+
+    .metric-label-compact {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 450px) {
+    .chart-container-compact {
+        height: 270px;
+        width: 310px;
+    }
+}

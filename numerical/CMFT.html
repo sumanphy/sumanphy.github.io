@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMFT - Suman Mondal</title>
+    <link rel="stylesheet" href="../style.css">
+    <!-- <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico"> -->
+    <link rel="icon" type="image/png" sizes="192x192" href="../images/favicon/favicon-192x192.png">
+    <!-- impotr script for math equations -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                tags: 'ams'  // This enables automatic numbering
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="../MathJax-4.1.0/tex-chtml.js"></script>
+    <!--  -->
+</head>
+<body>
+
+    <a id="header-placeholder"></a>
+    
+    <div class="container">
+        <!-- Breadcrumb navigation -->
+        <div style="margin-bottom: 1.5rem; padding: 0.8rem; background: #f0f4f8; border-radius: 4px;">
+            <a href="../index.html" style="color: #2a5298; text-decoration: none;">Home</a> / 
+            <a href="../numerical.html" style="color: #2a5298; text-decoration: none;">Mumerical Methods</a> / 
+            <span style="color: #666;">Cluster Mean Field Theory</span>
+        </div>
+        
+        <section>
+            <h2>Cluster Mean Field Theory</h2>
+            
+            <div style="text-align: center; margin: 2rem 0;" id="cmft">
+                <img src="images/CMFT/CMFT.jpg" alt="2D lattice" class="research-image">
+                <p style="color: #666; font-style: italic; margin-top: 1rem; margin-bottom: 0rem; text-align: center;">
+                    A two-dimensional square lattice is partitioned with the 
+                    $2\times 2$ clusters. The dotted box represents a unit cluster by 
+                    the repetition of which the entire lattice is made.  In the CMFT 
+                    approach, the solid lines are treated exactly and the dashed lines 
+                    connecting clusters are treated in a mean-field way.
+                </p>
+            </div>
+
+            <div style="margin-top: 1rem; ">
+            The Cluster Mean-Field Theory (CMFT) approach is one of the simplest 
+            methods which utilizes the ED method and the mean-field (MF) 
+            decoupling approximations to simplify a 
+            many-body problem. In this method, one divides the entire many-body 
+            system into small small clusters of finite size, as shown in the <a href="#cmft">figure above</a>. 
+            While the Hamiltonian of the individual cluster is treated exactly, 
+            the couplings between the clusters are treated in a mean-field way. 
+            Please read the <a href="#references">related references</a> for more details and examples.
+            <div> 
+
+            <div style="margin-top: 1rem; ">
+            Let's consider an example of the Bose Hubbard model of interacting bosons as 
+            \begin{equation}\label{eq:bhham2}
+            {H} = -\sum\limits_{\langle i,j \rangle}t_{i,j}(a^\dagger_{i}a_{j}+ H.c.) + \frac{U}{2}\sum\limits_i{n}_{i}({n}_{i} - 1) - \sum\limits_i\mu_i n_{i}
+            \end{equation}
+            Using the MF approximation, one can write the annihilation operator as 
+            \begin{equation}
+                a_i = \psi_i + \delta a_i
+            \end{equation}
+            where $\psi=\langle a\rangle$ and $\delta a_i$ is a small fluctuation around the mean value.
+            This approximation transforms the hopping term as 
+            \begin{equation}\label{eq:mfhop}
+                a_i^\dagger a_j = a_i^\dagger\psi_j + a_j\psi_i^* - \psi_i^*\psi_j
+            \end{equation}
+            by neglecting the terms quadratic in $\delta a_i$, which we consider to be infinitesimal. 
+            Using Eq. \ref{eq:mfhop} the Hamiltonian (\ref{eq:bhham2}) becomes 
+            $H \approx \sum\limits_iH_{MF}$ where
+            \begin{equation}\label{eq:mftham}
+            H_{MF} = -\mu n + \frac{U}{2}{n}({n} - 1) -zt(a^\dagger\psi + a\psi^* - \psi^*\psi)
+            \end{equation}
+T           his is a single site Hamiltonian. The ${z}$ is the lattice 
+            co-ordination number. The above Hamiltonian breaks the $U(1)$ 
+            symmetry for all the $\psi\neq0$ reflecting the appearance of the SF 
+            phase where $\psi$ represents the superfluid order parameter. The 
+            $\psi$ can be obtained self-consistently through an iterative 
+            process to get the ground state of the system. The $H_{MF}$ 
+            estimates the critical point for the SF-MI transition corresponding 
+            to the BH model to be $(U/zt)_c = 5.83$. Note that in the simple MF 
+            approach, the entire Hamiltonian is decomposed into single site 
+            Hamiltonian and the accuracy of the results increases with the 
+            dimension of the system. Being a single site method, this method 
+            does not demand computational complexity. However, for the same 
+            reason, it ignores the off-site correlations, which are essential to 
+            capture useful insights about the system. 
+            </div>
+
+            <div style="margin-top: 1rem; ">
+            The CMFT approach circumvents this problem as one considers a 
+            cluster of sites instead of a single site as opposed to the simple 
+            MF approach. As shown in the <a href="#cmft">figure above</a>, the cluster of sites 
+            connected by solid lines is treated exactly, whereas the edges 
+            connecting two clusters marked by dashed lines are treated in a 
+            mean-field way. Using this 
+            approximation the resulting Bose Hubbard Hamiltonian can be written as
+            \begin{equation}
+                 H \approx \sum_c H_{CMF}
+            \end{equation}
+            where $c$ represents the cluster index. Here $H_{CMF}$ 
+            is cluster mean-field Hamiltonian that consists of two parts i.e. 
+            \begin{equation}\label{eq:bhcmf}
+                 H_{CMF} = H_e + H_{mf}.
+            \end{equation}
+            Here, $H_e$ represents the exact part which is given as 
+            \begin{equation}
+                \hat{H}_e = -t\sum\limits_{\langle i,j \rangle} a^\dagger_{i}a_{j} + \frac{U}{2}\sum\limits_i{n}_{i}({n}_{i} - 1) -\mu\sum\limits_i n_i,
+            \end{equation}
+            where $i,j$ are sites within the cluster. $H_{mf}$ represents the mean-field part 
+            of the Hamiltonian and is given as 
+            \begin{equation}
+                H_{mf} = -t\sum\limits_{\langle i,j' \rangle}(a_i^\dagger\phi_{j'}  + \phi_i^* a_{j'} -\phi_i^* \phi_{j'})
+            \end{equation}
+            where $i$ ($j'$) are site indices of the edges of the cluster (neighboring clusters).
+            </div>  
+
+            <div style="margin-top: 1rem; ">
+            Similar to the simple MF approach, the values of $\psi_i$ are 
+            obtained self-consistently in the CMFT approach as well. In this 
+            method, the accuracy of the results increases with the cluster size. 
+            Unlike the MF approach, the CMFT allows for the calculation of 
+            off-site correlation functions within the cluster. This makes the 
+            CMFT method more accurate than the simple mean-field theory approach 
+            and can capture the qualitative picture of the system with less 
+            computing effort than the powerful Quantum Monte Carlo 
+            method. A comparison of CMFT with other methods is shown in <a href="#references">reference 1</a>.
+            </div>
+            
+            
+            
+            <h3 id="references">Related References</h3>
+            
+            <ol class="publication-list">
+
+                <li class="publication-list-item">
+                    <div class="publication-text">
+                        T. McIntosh, P. Pisarski, R. J. Gooding, E. Zaremba, 
+                        <em>Multi-site mean-field theory for cold bosonic atoms in optical lattices,</em> 
+                        <span class="journal-info">Phys. Rev. A 86, 013623 (2012)</span>.
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://doi.org/10.1103/PhysRevA.86.013623" target="_blank">Journal</a>
+                        <a href="https://doi.org/10.48550/arXiv.1111.4102" target="_blank">arXiv</a>
+                        <a href="references/CMFT/CMFT.pdf" target="_blank">PDF</a>
+                    </div>
+                </li>
+
+                <li class="publication-list-item">
+                    <div class="publication-text">
+                        <span class="author-name">Suman Mondal</span>, Augustine Kshetrimayum, Tapan Mishra, 
+                        <em>Two-body repulsive bound pairs in a multibody interacting Bose-Hubbard model,</em> 
+                        <span class="journal-info">Phys. Rev. A 102, 023312 (2020)</span>.
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.102.023312" target="_blank">Journal</a>
+                        <a href="https://doi.org/10.48550/arXiv.2002.11317" target="_blank">arXiv</a>
+                    </div>
+                </li>
+
+                <li class="publication-list-item">
+                    <div class="publication-text">
+                        Manpreet Singh, <span class="author-name">Suman Mondal</span>, B. K. Sahoo, Tapan Mishra, 
+                        <em>Quantum phases of constrained dipolar bosons in coupled one-dimensional optical lattices,</em> 
+                        <span class="journal-info">Phys. Rev. A 96, 053604 (2017)</span>.
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.96.053604" target="_blank">Journal</a>
+                        <a href="https://doi.org/10.48550/arXiv.1706.07304" target="_blank">arXiv</a>
+                    </div>
+                </li>
+            </ol>
+            
+            <!-- Navigation to other research areas -->
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #e0e0e0;">
+                <h3>Explore other numerical methods</h3>
+                <div style="display: grid; gap: 1rem; margin-top: 1rem;">
+                    <a href="ED.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Exact Diagonalization →</strong>
+                    </a>
+                    <a href="MPS.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Matrix Product States →</strong>
+                    </a>
+                    <a href="DMRG.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Density Matrix Renormalization Group method →</strong>
+                    </a>
+                    <a href="TEBD.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                        <strong>Time-Evolution Block Decimation →</strong>
+                    </a>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <a href="../numerical.html" style="color: #2a5298; text-decoration: none; font-weight: 500; font-size: 1.1rem;">
+                    ← Back to Numerical Methods
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer placeholder -->
+    <a id="footer-placeholder"></a>
+    
+    <!-- Load components -->
+    <script src="components.js"></script>
+
+</body>
+</html>
