@@ -492,6 +492,36 @@ html {
 
 
 
+/* MathJax equation overflow handling */
+.MJXc-display, 
+.MathJax_Display,
+mjx-container[display="true"] {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    padding: 0.5rem 0;
+}
+
+/* For inline math */
+mjx-container[display="false"] {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: inline-block;
+}
+
+/* Ensure the parent containers don't cause overflow */
+section p,
+section div {
+    overflow-x: auto;
+}
+
+/* Make equation containers scrollable on small screens */
+.research-topic-content,
+.research-content {
+    overflow-x: auto;
+}
+
 footer {
     text-align: center;
     padding: 2rem;
