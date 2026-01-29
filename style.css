@@ -642,7 +642,7 @@ footer {
 
 @media (max-width: 450px) {
     .chart-container-compact {
-        height: 270px;
-        width: 310px;
+        height: 260px;
+        width: 300px;
     }
 }
