@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://sumanphy.github.io/</loc>
+  <lastmod>2026-01-29T20:31:37+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://sumanphy.github.io/index.html</loc>
+  <lastmod>2026-01-29T20:31:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sumanphy.github.io/research.html</loc>
+  <lastmod>2026-01-29T20:31:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sumanphy.github.io/numerical.html</loc>
+  <lastmod>2026-01-29T20:31:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sumanphy.github.io/publications.html</loc>
+  <lastmod>2026-01-29T20:31:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sumanphy.github.io/contact.html</loc>
+  <lastmod>2026-01-29T20:31:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sumanphy.github.io/files/thesis_suman.pdf</loc>
+  <lastmod>2026-01-29T20:31:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sumanphy.github.io/files/suman_cv.pdf</loc>
+  <lastmod>2026-01-29T20:31:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sumanphy.github.io/numerical/ED.html</loc>
+  <lastmod>2026-01-29T20:31:37+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sumanphy.github.io/numerical/CMFT.html</loc>
+  <lastmod>2026-01-29T20:31:37+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sumanphy.github.io/numerical/MPS.html</loc>
+  <lastmod>2026-01-29T20:31:37+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sumanphy.github.io/numerical/DMRG.html</loc>
+  <lastmod>2026-01-29T20:31:37+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sumanphy.github.io/numerical/TEBD.html</loc>
+  <lastmod>2026-01-29T20:31:37+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sumanphy.github.io/numerical/references/ED/Anders_W._Sandvik_Computational_Studies_of_Quantum_Spin_Systems.pdf</loc>
+  <lastmod>2026-01-29T20:31:37+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sumanphy.github.io/numerical/references/CMFT/CMFT.pdf</loc>
+  <lastmod>2026-01-29T20:31:37+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sumanphy.github.io/numerical/references/MPS/MPS_DMRG.pdf</loc>
+  <lastmod>2026-01-29T20:31:37+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sumanphy.github.io/numerical/references/DMRG/DMRG_Dummies.pdf</loc>
+  <lastmod>2026-01-29T20:31:37+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sumanphy.github.io/numerical/references/DMRG/Computational_Many_Particle_Physics_2008.pdf</loc>
+  <lastmod>2026-01-29T20:31:37+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sumanphy.github.io/numerical/references/TEBD/time_evolution_of_MPS_Salvatore_Manmana.pdf</loc>
+  <lastmod>2026-01-29T20:31:37+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+
+
+</urlset>
