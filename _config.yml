@@ -1,7 +1,0 @@
-plugins:
-  - jekyll-optional-front-matter
-  - jekyll-readme-index
-  - jekyll-default-layout
-  - jekyll-relative-links
-  - jekyll-seo-tag
-  - jekyll-sitemap
