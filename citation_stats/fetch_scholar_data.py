@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# need to test.
 """
 Script to fetch citation data from Google Scholar
 Run this script periodically to update your citation statistics
