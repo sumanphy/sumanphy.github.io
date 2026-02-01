@@ -16,7 +16,7 @@ const structuredData = {
     "name": "Max Planck Institute for the Physics of Complex Systems",
     "url": "https://www.pks.mpg.de"
   },
-  "description": "I am a theoretical condensed matter physicist. My research dives into the equilibrium and non-equilibrium properties of quantum many-body systems. I explore quantum phases and phase transitions, topological properties, and non-equilibrium physics.",
+  "description": "As a theoretical condensed matter physicist, I explore the equilibrium and non-equilibrium properties of quantum many-body systems. Currently, I’m a postdoctoral researcher at MPI-PKS. Swing by my website to see what I’ve been up to.",
   "image": "https://sumanphy.github.io/images/my_photo_400x400.JPG",
   "address": {
     "@type": "PostalAddress",
