@@ -12,10 +12,6 @@
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://sumanphy.github.io/index.html</loc>
-  <priority>0.80</priority>
-</url>
-<url>
   <loc>https://sumanphy.github.io/research.html</loc>
   <priority>0.80</priority>
 </url>
@@ -31,25 +27,4 @@
   <loc>https://sumanphy.github.io/contact.html</loc>
   <priority>0.80</priority>
 </url>
-<url>
-  <loc>https://sumanphy.github.io/numerical/ED.html</loc>
-  <priority>0.8</priority>
-</url>
-<url>
-  <loc>https://sumanphy.github.io/numerical/CMFT.html</loc>
-  <priority>0.8</priority>
-</url>
-<url>
-  <loc>https://sumanphy.github.io/numerical/MPS.html</loc>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://sumanphy.github.io/numerical/DMRG.html</loc>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://sumanphy.github.io/numerical/TEBD.html</loc>
-  <priority>0.80</priority>
-</url>
-
 </urlset>
