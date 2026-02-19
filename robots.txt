@@ -1,4 +1,1 @@
-User-agent: *
-Disallow: 
-
-Sitemap: https://sumanphy.github.io/my_sitemap.xml
+Sitemap: /sitemap.xml
