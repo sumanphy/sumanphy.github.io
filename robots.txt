@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: sumanphy.github.io/sitemap.xml
+Sitemap: https://sumanphy.github.io/sitemap.xml
