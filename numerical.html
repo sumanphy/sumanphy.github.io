@@ -54,7 +54,7 @@
             <a href="#DMRG" class="blue-text-tag">4. Drnsity Matrix Renormalization Group (DMRG)</a>
             <a href="#TEBD" class="blue-text-tag">5. Time-Evolution Block Decimation (TEBD)</a>
             <p class="red-text-tag">Our contributions →</p>
-            <p class="blue-text-tag">6. Semi-classical TEBD</p>
+            <a href="#semiclassical-tebd" class="blue-text-tag">6. Semi-classical TEBD</a>
             <!-- <a href="#FDMRG" class="blue-text-tag">7. Floquet DMRG</a> -->
         </div>
         
@@ -71,6 +71,7 @@
             <div class="research-topic" id="ED">
                 <h3>1. Exact Diagonalization</h3>
                 <div class="research-topic-content">
+                    <img src="numerical/images/ED/1d_2d.png" alt="1D lattice" class="research-image">
                     <div class="research-content">
                         <p>
                             The exact diagonalization (ED) method allows us to calculate the full spectrum 
@@ -90,13 +91,13 @@
                             <a href="numerical/ED.html" class="read-more-link">Read more →</a>
                         </p>
                     </div>
-                    <img src="numerical/images/ED/1d_2d.png" alt="1D lattice" class="research-image">
                 </div>
             </div>
 
             <div class="research-topic" id="CMFT">
                 <h3>2. Cluster Mean Field Theory</h3>
                 <div class="research-topic-content">
+                    <img src="numerical/images/CMFT/CMFT.jpg" alt="2D lattice" class="research-image">
                     <div class="research-content">
                         <p>
                             The Cluster Mean-Field Theory (CMFT) approach is one of the simplest 
@@ -118,13 +119,13 @@
                             <a href="numerical/CMFT.html" class="read-more-link">Read more →</a>
                         </p>
                     </div>
-                    <img src="numerical/images/CMFT/CMFT.jpg" alt="2D lattice" class="research-image">
                 </div>
             </div>
 
             <div class="research-topic" id="MPS">
                 <h3>3. Matrix Product State</h3>
                 <div class="research-topic-content">
+                    <img src="numerical/images/MPS/mps_creation.svg" alt="MPS" class="research-image">
                     <div class="research-content">
                         <p>
                             The matrix product states (MPSs) are the widely used in quantum information 
@@ -143,13 +144,13 @@
                             <a href="numerical/MPS.html" class="read-more-link">Read more →</a>
                         </p>
                     </div>
-                    <img src="numerical/images/MPS/mps_creation.svg" alt="MPS" class="research-image">
                 </div>
             </div>
 
             <div class="research-topic" id="DMRG">
                 <h3>4. Density Matrix Renormalization Group</h3>
                 <div class="research-topic-content">
+                    <img src="numerical/images/DMRG/dmrg.png" alt="DMRG sweep" class="research-image">
                     <div class="research-content">
                         <p>
                             The Density Matrix renormalization group (DMRG) method is the prescription to prevent the 
@@ -170,13 +171,13 @@
                             <a href="numerical/DMRG.html" class="read-more-link">Read more →</a>
                         </p>
                     </div>
-                    <img src="numerical/images/DMRG/dmrg.png" alt="DMRG sweep" class="research-image">
                 </div>
             </div>
 
             <div class="research-topic" id="TEBD">
                 <h3>5. Time-Evolution Block Decimation</h3>
                 <div class="research-topic-content">
+                    <img src="numerical/images/TEBD/tebd.svg" alt="TEBD" class="research-image-medium">
                     <div class="research-content">
                         <p>
                             The time evolution of a quantum state of a strongly correlated 
@@ -196,7 +197,39 @@
                             <a href="numerical/TEBD.html" class="read-more-link">Read more →</a>
                         </p>
                     </div>
-                    <img src="numerical/images/TEBD/tebd.svg" alt="TEBD" class="research-image-medium">
+                </div>
+            </div>
+
+            <div class="research-topic" id="semiclassical-tebd">
+                <h3>4.2. Semi-classical TEBD</h3>
+                <div class="research-topic-content">
+                    <img src="numerical/images/MTETEBD/MTETEBD.png" alt="Semi-classical TEBD" class="research-image">
+                    <div class="research-content">
+                        <p>
+                            Simulating electron-phonon systems numerically is particularly demanding because the
+                            quantum phonon Hilbert space grows rapidly with the number of phonon modes.
+                            To address this, we developed a hybrid semi-classical time-evolving block decimation
+                            (TEBD) approach combining the multi-trajectory Ehrenfest (MTE) method for the phonons
+                            with the full quantum TEBD for the electronic (or bosonic) degrees of freedom.
+                        </p>
+                        <p style="margin-top: 0.8rem;">
+                            This hybrid MTE+TEBD method treats phonons semi-classically via stochastic trajectories
+                            while retaining the full quantum description of the strongly correlated electrons through
+                            the MPS framework. It allows access to much larger system sizes than
+                            exact diagonalization methods, while capturing the key effects of strong electron-phonon
+                            coupling. We have applied this method to study disordered systems coupled
+                            to Einstein phonons, benchmarking it against Lanczos and full exact diagonalization methods.
+                        </p>
+                        <p style="margin-top: 0.8rem;"><strong>Read more from the reference →</strong></p>
+                        <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                            <li>
+                                H. G. Menzler<sup>*</sup>, S. M.<sup>*</sup>, and F. Heidrich-Meisner,
+                                <em>Hybrid quantum-classical matrix-product state and Lanczos methods for electron-phonon systems
+                                with strong electronic correlations</em>,
+                                <a href="https://arxiv.org/abs/2512.10899" target="_blank">arXiv:2512.10899 (2025)</a> (<sup>*</sup>equal contribution).
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         
