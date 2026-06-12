@@ -24,12 +24,47 @@
     --red: #9c2b1f;
     --red-tint: #fdeeec;
     --red-border: #f3d4cf;
+    --accent-tint-hover: #dce9f9;
+    --red-tint-hover: #fadfdb;
+    --green-tint-hover: #d9efe1;
+    --nav-bg: rgba(255, 255, 255, 0.88);
+    --on-accent: #ffffff;
     --shadow-sm: 0 1px 3px rgba(25, 30, 45, 0.05);
     --shadow-md: 0 4px 16px rgba(25, 30, 45, 0.08);
     --radius: 14px;
     --radius-sm: 10px;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    color-scheme: light;
+}
+
+[data-theme="dark"] {
+    --bg: #14161b;
+    --surface: #1c1f26;
+    --surface-2: #262a33;
+    --ink: #e9ebf1;
+    --text: #c9cdd6;
+    --muted: #9098a5;
+    --border: #343945;
+    --border-soft: #2b2f3a;
+    --accent: #7caee8;
+    --accent-dark: #a3c7f1;
+    --accent-tint: #1e2c42;
+    --accent-border: #31486b;
+    --accent-green: #6cc28b;
+    --green-tint: #18271d;
+    --green-border: #2b4734;
+    --red: #e08a80;
+    --red-tint: #32201d;
+    --red-border: #4f2f2a;
+    --accent-tint-hover: #25395a;
+    --red-tint-hover: #442b26;
+    --green-tint-hover: #20351f;
+    --nav-bg: rgba(22, 24, 30, 0.88);
+    --on-accent: #10141a;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45);
+    color-scheme: dark;
 }
 
 * {
@@ -123,7 +158,7 @@ header a:hover img {
    -------------------------------------------------------------------------- */
 
 nav {
-    background: rgba(255, 255, 255, 0.88);
+    background: var(--nav-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 0.9rem 1rem;
@@ -561,18 +596,95 @@ h4 {
 }
 
 .interest-list a.blue-text-tag:hover {
-    background-color: #dce9f9;
+    background-color: var(--accent-tint-hover);
     border-color: var(--accent);
 }
 
 .interest-list a.red-text-tag:hover {
-    background-color: #fadfdb;
+    background-color: var(--red-tint-hover);
     border-color: var(--red);
 }
 
 .interest-list a.green-text-tag:hover {
-    background-color: #d9efe1;
+    background-color: var(--green-tint-hover);
     border-color: var(--accent-green);
+}
+
+/* --------------------------------------------------------------------------
+   Theme toggle & buttons
+   -------------------------------------------------------------------------- */
+
+.theme-toggle {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--ink);
+    padding: 0;
+    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Pin the toggle to the right side of the sticky nav bar, vertically
+   centered, independent of the centered menu links. On wide monitors it
+   aligns with the content column (max-width 1200px incl. 2rem padding)
+   instead of drifting to the viewport edge. */
+nav .theme-toggle {
+    position: absolute;
+    right: max(1.25rem, calc((100% - 1200px) / 2 + 2rem));
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.theme-toggle:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-tint);
+}
+
+.theme-toggle svg {
+    width: 17px;
+    height: 17px;
+    display: block;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--on-accent);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: var(--accent-dark);
+    color: var(--on-accent);
+}
+
+/* Dim bright figure images slightly in dark mode */
+[data-theme="dark"] .research-image,
+[data-theme="dark"] .research-image-medium,
+[data-theme="dark"] .research-image-large,
+[data-theme="dark"] .research-image-huge,
+[data-theme="dark"] .publication-image,
+[data-theme="dark"] .research-content img,
+[data-theme="dark"] .equation-wrapper img {
+    filter: brightness(0.9);
+}
+
+/* Keep logo icons visible on dark backgrounds */
+[data-theme="dark"] header p a img,
+[data-theme="dark"] footer p a img {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 2px;
 }
 
 /* --------------------------------------------------------------------------
@@ -669,7 +781,20 @@ footer a:hover img {
     }
 
     nav ul {
-        gap: 1.25rem;
+        gap: 1rem;
+        /* keep centered links clear of the pinned theme toggle */
+        padding: 0 2.4rem;
+    }
+
+    nav .theme-toggle {
+        width: 30px;
+        height: 30px;
+        right: 0.6rem;
+    }
+
+    nav .theme-toggle svg {
+        width: 15px;
+        height: 15px;
     }
 
     .container {
