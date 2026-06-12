@@ -51,8 +51,26 @@ function createCitationChart(citationsPerYear) {
     const ctx = canvas.getContext('2d');
     const theme = chartTheme();
 
+    // Keep the metric cards aligned with the chart's plot area (the region
+    // right of the y-axis labels) on larger screens
+    const syncMetricsPlugin = {
+        id: 'syncMetrics',
+        afterLayout(chart) {
+            const metrics = document.querySelector('.citation-metrics-compact');
+            if (!metrics) return;
+            if (window.matchMedia('(min-width: 721px)').matches) {
+                metrics.style.paddingLeft = chart.chartArea.left + 'px';
+                metrics.style.paddingRight = (chart.width - chart.chartArea.right) + 'px';
+            } else {
+                metrics.style.paddingLeft = '';
+                metrics.style.paddingRight = '';
+            }
+        }
+    };
+
     citationChart = new Chart(ctx, {
         type: 'bar',
+        plugins: [syncMetricsPlugin],
         data: {
             labels: years,
             datasets: [{
