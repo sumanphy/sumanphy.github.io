@@ -561,6 +561,14 @@ h4 {
     width: 100%;
     height: 300px;
     border-radius: var(--radius-sm);
+    margin: 0 auto;
+}
+
+/* On larger screens the chart only needs half the card's width */
+@media (min-width: 721px) {
+    .chart-container-compact {
+        width: 50%;
+    }
 }
 
 .citation-metrics-compact {
