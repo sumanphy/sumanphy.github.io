@@ -564,10 +564,25 @@ h4 {
     margin: 0 auto;
 }
 
-/* On larger screens the chart only needs half the card's width */
+/* On larger screens the chart only needs half the card's width,
+   and the metric cards match the chart's width */
 @media (min-width: 721px) {
     .chart-container-compact {
         width: 50%;
+    }
+
+    .citation-metrics-compact {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .metric-card-compact {
+        flex: 1 1 0;
+        padding: 0.7rem 0.5rem;
+    }
+
+    .metric-value-compact {
+        font-size: 1.45rem;
     }
 }
 
