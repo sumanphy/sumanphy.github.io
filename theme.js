@@ -62,10 +62,27 @@
         return true;
     }
 
+    // --- Keep --nav-height in sync with the sticky nav's real height ---
+    // (it grows when the menu wraps to multiple lines on narrow screens,
+    // and anchor jumps must scroll past it)
+    function updateNavHeight() {
+        var nav = document.querySelector('nav');
+        if (nav) {
+            document.documentElement.style.setProperty(
+                '--nav-height', nav.offsetHeight + 'px');
+        }
+    }
+
+    window.addEventListener('resize', updateNavHeight);
+    window.addEventListener('load', updateNavHeight);
+
     document.addEventListener('DOMContentLoaded', function () {
-        if (placeToggle()) return;
+        if (placeToggle()) { updateNavHeight(); return; }
         var observer = new MutationObserver(function () {
-            if (placeToggle()) observer.disconnect();
+            if (placeToggle()) {
+                observer.disconnect();
+                updateNavHeight();
+            }
         });
         observer.observe(document.body, { childList: true, subtree: true });
     });
