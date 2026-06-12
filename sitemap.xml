@@ -5,19 +5,19 @@
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://sumanphy.github.io/research.html</loc>
+  <loc>https://sumanphy.github.io/research</loc>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://sumanphy.github.io/numerical.html</loc>
+  <loc>https://sumanphy.github.io/numerical</loc>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://sumanphy.github.io/publications.html</loc>
+  <loc>https://sumanphy.github.io/publications</loc>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://sumanphy.github.io/contact.html</loc>
+  <loc>https://sumanphy.github.io/contact</loc>
   <priority>0.80</priority>
 </url>
 </urlset>

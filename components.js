@@ -24,12 +24,16 @@ async function loadFooter() {
 }
 
 // Function to set active navigation based on current page
+// Normalizes paths so /research, /research.html and /research/ all match href="/research"
 function setActiveNav() {
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const norm = p => p.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+    const current = norm(window.location.pathname);
     const navLinks = document.querySelectorAll('nav a');
-    
+
     navLinks.forEach(link => {
-        if (link.getAttribute('href') === currentPage) {
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('http')) return;
+        if (norm(href) === current) {
             link.classList.add('active');
         }
     });

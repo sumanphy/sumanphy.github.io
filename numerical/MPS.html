@@ -28,10 +28,10 @@
     
     <div class="container">
         <!-- Breadcrumb navigation -->
-        <div style="margin-bottom: 1.5rem; padding: 0.8rem; background: #f0f4f8; border-radius: 4px;">
-            <a href="https://sumanphy.github.io/" style="color: #2a5298; text-decoration: none;">Home</a> / 
-            <a href="../numerical.html" style="color: #2a5298; text-decoration: none;">Mumerical Methods</a> / 
-            <span style="color: #666;">Matrix Product States</span>
+        <div style="margin-bottom: 1.5rem; padding: 0.8rem; background: var(--accent-tint); border-radius: 4px;">
+            <a href="https://sumanphy.github.io/" style="color: var(--accent); text-decoration: none;">Home</a> / 
+            <a href="/numerical" style="color: var(--accent); text-decoration: none;">Numerical Methods</a> / 
+            <span style="color: var(--muted);">Matrix Product States</span>
         </div>
         
         <section>
@@ -50,7 +50,7 @@
 
             <div style="text-align: center; margin: 2rem 0;" id="MPSgraph">
                 <img src="images/MPS/mps_comp.svg" alt="MPS" class="research-image-large">
-                <p style="color: #666; font-style: italic; margin-top: 1rem; margin-bottom: 0rem; text-align: center;">
+                <p style="color: var(--muted); font-style: italic; margin-top: 1rem; margin-bottom: 0rem; text-align: center;">
                     Figure portrays the graphical representation of a general state and matrix 
                     product state as defined in Eqs. \ref{eq:genState} and \ref{eq:lcMPS} respectively 
                     for a system of length $L=8$. The top row of the figure shows the elements of the 
@@ -95,7 +95,7 @@
                     c_{\sigma_1...\sigma_L} = \sum\limits_{a_1} A_{a_1}^{\sigma_1} c_{a_1,(\sigma_2...\sigma_L)}
                 \end{equation}
                 </div>
-                Note that, we have not discurded anythig to compress in this SVD process. We will discuss the compression in the <a href="DMRG.html">DMRG chapter</a>.
+                Note that, we have not discurded anythig to compress in this SVD process. We will discuss the compression in the <a href="/numerical/DMRG">DMRG chapter</a>.
                 Then, by transforming $c_{a_1,(\sigma_2...\sigma_L)}$ to 
                 $c_{(a_1\sigma_2),(\sigma_3...\sigma_L)}$, and after an SVD we have
                 <div class="equation-wrapper">
@@ -126,7 +126,7 @@
 
             <div style="text-align: center; margin: 2rem 0;" id="lcMPS">
                 <img src="images/MPS/mps_creation.svg" alt="MPS" class="research-image-medium">
-                <p style="color: #666; font-style: italic; margin-top: 1rem; margin-bottom: 0rem; text-align: center;">
+                <p style="color: var(--muted); font-style: italic; margin-top: 1rem; margin-bottom: 0rem; text-align: center;">
                     The graphical representation of the left canonical MPS formation using SVD process for a system of length $L=8$.
                 </p>
             </div>
@@ -159,7 +159,7 @@
 
             <div style="text-align: center; margin: 2rem 0;" id="mcMPS">
                 <img src="images/MPS/mps_mc.svg" alt="MPS" class="research-image-huge">
-                <p style="color: #666; font-style: italic; margin-top: 1rem; margin-bottom: 0rem; text-align: center;">
+                <p style="color: var(--muted); font-style: italic; margin-top: 1rem; margin-bottom: 0rem; text-align: center;">
                     The graphical representation of a 
                     mixed canonical MPS for a system of length $L = 8$ following 
                     Eq. \ref{eq:mcMPS}.
@@ -193,7 +193,7 @@
                     \langle\Psi|O|\Psi\rangle = \sum_{\sigma_L \sigma_L'} O_L^{\sigma_L \sigma_L'} {A}^{\sigma_L\dagger}~\left(...\left(\sum_{\sigma_2 \sigma_2} O_2^{\sigma_2 \sigma_2'} {A}^{\sigma_2\dagger} \left(\sum_{\sigma_1 \sigma_1'} O_1^{\sigma_1 \sigma_1'} {A}^{\sigma_1\dagger} A^{\sigma_1'}\right){A}^{\sigma_2\dagger}\right)...\right) A^{\sigma_L'}
                 \end{equation}
                 </div>
-                We will use all these machineries discussed in this chapter in the <a href="DMRG.html">DMRG method</a>.
+                We will use all these machineries discussed in this chapter in the <a href="/numerical/DMRG">DMRG method</a>.
             </div>
             
             
@@ -252,26 +252,26 @@
             </ol>
             
             <!-- Navigation to other research areas -->
-            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #e0e0e0;">
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border);">
                 <h3>Explore other numerical methods</h3>
                 <div style="display: grid; gap: 1rem; margin-top: 1rem;">
-                    <a href="ED.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                    <a href="/numerical/ED" style="padding: 1rem; background: var(--surface-2); border-radius: 4px; text-decoration: none; color: var(--accent); border-left: 4px solid var(--accent);">
                         <strong>Exact Diagonalization →</strong>
                     </a>
-                    <a href="CMFT.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                    <a href="/numerical/CMFT" style="padding: 1rem; background: var(--surface-2); border-radius: 4px; text-decoration: none; color: var(--accent); border-left: 4px solid var(--accent);">
                         <strong>Cluster Mean Field Theory →</strong>
                     </a>
-                    <a href="DMRG.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                    <a href="/numerical/DMRG" style="padding: 1rem; background: var(--surface-2); border-radius: 4px; text-decoration: none; color: var(--accent); border-left: 4px solid var(--accent);">
                         <strong>Density Matrix Renormalization Group method →</strong>
                     </a>
-                    <a href="TEBD.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                    <a href="/numerical/TEBD" style="padding: 1rem; background: var(--surface-2); border-radius: 4px; text-decoration: none; color: var(--accent); border-left: 4px solid var(--accent);">
                         <strong>Time-Evolution Block Decimation →</strong>
                     </a>
                 </div>
             </div>
             
             <div style="margin-top: 2rem;">
-                <a href="../numerical.html" style="color: #2a5298; text-decoration: none; font-weight: 500; font-size: 1.1rem;">
+                <a href="/numerical" style="color: var(--accent); text-decoration: none; font-weight: 500; font-size: 1.1rem;">
                     ← Back to Numerical Methods
                 </a>
             </div>

@@ -1,106 +1,208 @@
+/* ==========================================================================
+   Suman Mondal — personal website
+   Clean, minimal academic theme
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,500&display=swap');
+
+:root {
+    --bg: #faf9f7;
+    --surface: #ffffff;
+    --surface-2: #f4f3f0;
+    --ink: #1d2433;
+    --text: #2c3441;
+    --muted: #67707d;
+    --border: #e6e3dd;
+    --border-soft: #eeece7;
+    --accent: #1a5dab;
+    --accent-dark: #11447f;
+    --accent-tint: #edf3fb;
+    --accent-border: #d4e2f4;
+    --accent-green: #176a33;
+    --green-tint: #eaf6ee;
+    --green-border: #cfe8d7;
+    --red: #9c2b1f;
+    --red-tint: #fdeeec;
+    --red-border: #f3d4cf;
+    --shadow-sm: 0 1px 3px rgba(25, 30, 45, 0.05);
+    --shadow-md: 0 4px 16px rgba(25, 30, 45, 0.08);
+    --radius: 14px;
+    --radius-sm: 10px;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background: #f4f4f4;
+html {
+    scroll-behavior: smooth;
 }
 
+body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+::selection {
+    background: var(--accent-tint);
+    color: var(--accent-dark);
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent-dark);
+}
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+
 header {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    color: white;
-    padding: 3rem 2rem;
+    background: var(--surface);
+    color: var(--ink);
+    padding: 3.5rem 2rem 2.5rem;
     text-align: center;
+    border-bottom: 1px solid var(--border-soft);
 }
 
 header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    font-family: var(--font-serif);
+    font-size: 2.6rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+    color: var(--ink);
 }
 
 header p {
-    font-size: 1.2rem;
-    opacity: 0.9;
+    font-size: 1.05rem;
+    color: var(--muted);
+}
+
+header p strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
+header img[alt] {
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+header a:hover img {
+    opacity: 0.75;
+    transform: translateY(-2px);
 }
 
 .profile-photo {
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    border: 5px solid white;
+    border: 4px solid var(--surface);
     margin: 0 auto 1.5rem;
     display: block;
     object-fit: cover;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 0 0 1px var(--border), var(--shadow-md);
 }
 
+/* --------------------------------------------------------------------------
+   Navigation
+   -------------------------------------------------------------------------- */
+
 nav {
-    background: #2a5298;
-    padding: 1rem;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 0.9rem 1rem;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-bottom: 1px solid var(--border);
 }
 
 nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 2.25rem;
 }
 
 nav a {
-    color: white;
+    color: var(--ink);
     text-decoration: none;
     font-weight: 500;
-    transition: opacity 0.3s;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    transition: color 0.2s ease;
 }
 
 nav a:hover {
-    opacity: 0.7;
+    color: var(--accent);
 }
 
 nav a.active {
-    border-bottom: 2px solid white;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
     padding-bottom: 0.3rem;
 }
 
+/* --------------------------------------------------------------------------
+   Layout
+   -------------------------------------------------------------------------- */
+
 .container {
-    max-width: 1300px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
 }
 
 section {
-    background: white;
+    background: var(--surface);
     margin: 2rem 0;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 2.5rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-soft);
+    box-shadow: var(--shadow-sm);
 }
 
 h2 {
-    color: #1e3c72;
-    border-bottom: 3px solid #2a5298;
-    padding-bottom: 0.5rem;
+    font-family: var(--font-serif);
+    font-size: 1.65rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.6rem;
     margin-bottom: 1.5rem;
 }
 
 h3 {
-    color: #2a5298;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
     margin-top: 1.5rem;
     margin-bottom: 0.8rem;
 }
 
 h4 {
-    color: #1e3c72;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
     margin-top: 1rem;
     margin-bottom: 0.5rem;
 }
@@ -117,42 +219,50 @@ h4 {
     margin: 0 auto 2rem;
 }
 
-/* CV Section Styles */
+/* --------------------------------------------------------------------------
+   CV
+   -------------------------------------------------------------------------- */
+
 .cv-section {
-    margin-bottom: 2rem;
+    margin-bottom: 2.25rem;
 }
 
 .cv-section h3 {
     margin-top: 0;
-    font-size: 1.3rem;
-    color: #2a5298;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
     margin-bottom: 1rem;
 }
 
 .cv-item {
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    background: #f9f9f9;
-    border-left: 3px solid #2a5298;
-    border-radius: 4px;
-    line-height: 1.8;
+    margin-bottom: 1.25rem;
+    padding: 0.35rem 0 0.35rem 1.25rem;
+    border-left: 3px solid var(--accent-border);
+    line-height: 1.75;
 }
 
 .cv-item strong {
-    color: #1e3c72;
-    font-size: 1.05rem;
+    color: var(--ink);
+    font-size: 1.02rem;
+    font-weight: 600;
 }
 
 .cv-list {
-    margin-left: 1.5rem;
-    line-height: 1.9;
+    margin-left: 1.25rem;
+    line-height: 1.85;
 }
 
 .cv-list li {
     margin-bottom: 0.5rem;
 }
 
-/* Publication list with automatic numbering */
+/* --------------------------------------------------------------------------
+   Publications
+   -------------------------------------------------------------------------- */
+
 .publication-list {
     counter-reset: publication-counter;
     list-style: none;
@@ -161,34 +271,41 @@ h4 {
 
 .publication-list-item {
     counter-increment: publication-counter;
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    background: #f9f9f9;
-    border-radius: 4px;
+    margin-bottom: 1.25rem;
+    padding: 1.25rem 1.25rem 1.25rem 3.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
     position: relative;
-    padding-left: 3.5rem;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.publication-list-item:hover {
+    border-color: var(--accent-border);
+    box-shadow: var(--shadow-md);
 }
 
 .publication-list-item::before {
     content: counter(publication-counter) ".";
     position: absolute;
-    left: 1rem;
-    font-weight: bold;
-    color: #1e3c72;
-    font-size: 1rem;
+    left: 1.25rem;
+    font-weight: 600;
+    color: var(--muted);
+    font-size: 0.95rem;
 }
 
 .publication-text {
-    line-height: 1.8;
+    line-height: 1.75;
 }
 
 .author-name {
-    font-weight: bold;
+    font-weight: 600;
+    color: var(--ink);
 }
 
 .journal-info {
-    font-weight: bold;
-    color: #1e3c72;
+    font-weight: 600;
+    color: var(--ink);
 }
 
 .publication-links {
@@ -196,28 +313,97 @@ h4 {
 }
 
 .publication-links a {
-    color: #2a5298;
+    color: var(--accent);
     text-decoration: none;
     font-weight: 500;
+    font-size: 0.92rem;
     margin-right: 1rem;
 }
 
 .publication-links a:hover {
     text-decoration: underline;
+    text-underline-offset: 3px;
 }
+
+.publication {
+    margin-bottom: 1.25rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.publication:hover {
+    border-color: var(--accent-border);
+    box-shadow: var(--shadow-md);
+}
+
+.publication-content {
+    flex: 1;
+}
+
+.publication-image {
+    width: 200px;
+    height: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--border-soft);
+    flex-shrink: 0;
+}
+
+.publication-title {
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+    line-height: 1.5;
+}
+
+.publication-authors {
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+    font-size: 0.95rem;
+}
+
+.publication-venue {
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+.publication a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.92rem;
+}
+
+.publication a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   Research topics
+   -------------------------------------------------------------------------- */
 
 .research-topic {
     margin-bottom: 2rem;
-    padding: 1.5rem;
-    background: #f9f9f9;
-    border-left: 4px solid #2a5298;
-    border-radius: 4px;
+    padding: 1.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius-sm);
+    scroll-margin-top: 80px;
 }
 
 .research-topic h3 {
     margin-top: 0;
-    color: #2a5298;
+    color: var(--ink);
     margin-bottom: 1rem;
+    font-size: 1.2rem;
 }
 
 .research-topic-content {
@@ -239,90 +425,26 @@ h4 {
     margin-bottom: 0.3rem;
 }
 
-.research-image {
-    width: 250px;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    flex-shrink: 0;
-}
-
-.research-image-medium {
-    width: 400px;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    flex-shrink: 0;
-}
-
-.research-image-large {
-    width: 600px;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    flex-shrink: 0;
-}
-
+.research-image,
+.research-image-medium,
+.research-image-large,
 .research-image-huge {
-    width: 900px;
     height: 100%;
     object-fit: cover;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    border: 1px solid var(--border-soft);
+    box-shadow: var(--shadow-sm);
     flex-shrink: 0;
 }
 
-.publication {
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    background: #f9f9f9;
-    border-radius: 4px;
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-}
+.research-image { width: 250px; }
+.research-image-medium { width: 400px; }
+.research-image-large { width: 600px; }
+.research-image-huge { width: 900px; }
 
-.publication-content {
-    flex: 1;
-}
-
-.publication-image {
-    width: 200px;
-    height: 100%;
-    /* object-fit: cover; */
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    flex-shrink: 0;
-}
-
-.publication-title {
-    font-weight: bold;
-    color: #1e3c72;
-    margin-bottom: 0.3rem;
-}
-
-.publication-authors {
-    font-style: italic;
-    color: #555;
-    margin-bottom: 0.3rem;
-}
-
-.publication-venue {
-    color: #666;
-}
-
-.publication a {
-    color: #2a5298;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.publication a:hover {
-    text-decoration: underline;
-}
+/* --------------------------------------------------------------------------
+   Citation stats
+   -------------------------------------------------------------------------- */
 
 .citation-compact {
     margin-top: 1rem;
@@ -337,11 +459,10 @@ h4 {
     overflow-x: auto;
 }
 
-
 .chart-container-compact {
     width: 400px;
     height: 320px;
-    border-radius: 10px;
+    border-radius: var(--radius-sm);
     flex-shrink: 0;
 }
 
@@ -354,37 +475,34 @@ h4 {
 }
 
 .metric-card-compact {
-    background: linear-gradient(135deg, #1e3c72 0%, #2961c1 100%);
-    color: white;
-    padding: 0.4rem 0.6rem;
-    border-radius: 10px;
+    background: var(--accent-tint);
+    color: var(--accent-dark);
+    border: 1px solid var(--accent-border);
+    padding: 0.5rem 0.7rem;
+    border-radius: var(--radius-sm);
     text-align: center;
     flex: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-    transition: transform 0.3s ease;
 }
 
-
 .metric-value-compact {
-    font-size: 1.0rem;
-    font-weight: bold;
-    margin-bottom: 0.2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.15rem;
 }
 
 .metric-label-compact {
-    font-size: 0.85rem;
-    opacity: 0.9;
-    /* text-transform: uppercase; */
-    letter-spacing: 0.5px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    letter-spacing: 0.02em;
 }
 
 .last-updated-compact {
     text-align: center;
     font-size: 0.85rem;
-    color: #666;
+    color: var(--muted);
     font-style: italic;
     margin-top: 0.5rem;
 }
@@ -393,104 +511,88 @@ h4 {
     margin-bottom: 1rem;
 }
 
+/* --------------------------------------------------------------------------
+   Topic tags
+   -------------------------------------------------------------------------- */
+
 .interest-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.8rem;
+    gap: 0.6rem;
     margin-top: 1rem;
+    align-items: center;
+}
+
+.blue-text-tag,
+.red-text-tag,
+.green-text-tag {
+    padding: 0.4rem 0.95rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.4;
 }
 
 .blue-text-tag {
-    background: #2a5298;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    font-size: 0.8rem;
+    background: var(--accent-tint);
+    color: var(--accent-dark);
+    border: 1px solid var(--accent-border);
 }
 
 .red-text-tag {
-    background: #a01809;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    font-size: 0.8rem;
+    background: var(--red-tint);
+    color: var(--red);
+    border: 1px solid var(--red-border);
 }
 
 .green-text-tag {
-    background: #006212;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    font-size: 0.8rem;
+    background: var(--green-tint);
+    color: var(--accent-green);
+    border: 1px solid var(--green-border);
 }
 
-
-
-/* Enable smooth scrolling when clicking anchor links */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Adjust the tags to look like buttons and indicate they are clickable */
-.interest-list a.blue-text-tag {
+.interest-list a.blue-text-tag,
+.interest-list a.red-text-tag,
+.interest-list a.green-text-tag {
     text-decoration: none;
-    transition: transform 0.2s, background-color 0.2s;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
     cursor: pointer;
     display: inline-block;
 }
 
 .interest-list a.blue-text-tag:hover {
-    background-color: #487cdb;
-    /* transform: translateY(-2px); */
-}
-
-.interest-list a.red-text-tag {
-    text-decoration: none;
-    transition: transform 0.2s, background-color 0.2s;
-    cursor: pointer;
-    display: inline-block;
+    background-color: #dce9f9;
+    border-color: var(--accent);
 }
 
 .interest-list a.red-text-tag:hover {
-    background-color: #d13625;
-    /* transform: translateY(-2px); */
-}
-
-.interest-list a.green-text-tag {
-    text-decoration: none;
-    transition: transform 0.2s, background-color 0.2s;
-    cursor: pointer;
-    display: inline-block;
+    background-color: #fadfdb;
+    border-color: var(--red);
 }
 
 .interest-list a.green-text-tag:hover {
-    background-color: #018d1f;
-    /* transform: translateY(-2px); */
+    background-color: #d9efe1;
+    border-color: var(--accent-green);
 }
 
+/* --------------------------------------------------------------------------
+   Misc
+   -------------------------------------------------------------------------- */
 
-
-/* Styling for the link that leads to the detail pages */
 .read-more-link {
-    color: #2a5298;
+    color: var(--accent);
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 0.95rem;
     border-bottom: 1px solid transparent;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s ease;
 }
 
 .read-more-link:hover {
-    border-bottom: 1px solid #2a5298;
+    border-bottom: 1px solid var(--accent);
 }
 
-/* Optional: Offset for fixed navigation bars */
-/* If your nav is sticky, this prevents the section title from being hidden under it */
-.research-topic {
-    scroll-margin-top: 80px; 
-}
-
-/* Equation wrapper - the ONLY container that should scroll */
+/* Equation wrapper — the ONLY container that should scroll */
 .equation-wrapper {
     overflow-x: auto;
     overflow-y: hidden;
@@ -499,7 +601,6 @@ html {
     padding: 0.5rem 0;
 }
 
-/* MathJax containers inside wrapper should NOT scroll */
 .equation-wrapper mjx-container[display="true"],
 .equation-wrapper mjx-container[display="false"],
 .equation-wrapper .MJXc-display,
@@ -508,7 +609,6 @@ html {
     display: block;
 }
 
-/* Standalone MathJax (if any exist outside wrappers) */
 mjx-container[display="true"] {
     overflow-x: auto;
     overflow-y: hidden;
@@ -523,14 +623,12 @@ mjx-container[display="false"] {
     display: inline-block;
 }
 
-/* Prevent ALL other containers from scrolling */
 section,
 section > div:not(.equation-wrapper),
 section p {
     overflow: visible !important;
 }
 
-/* Make research topic containers scrollable (these are intentional) */
 .research-topic-content,
 .research-content {
     overflow-x: auto !important;
@@ -538,11 +636,21 @@ section p {
 
 footer {
     text-align: center;
-    padding: 2rem;
-    color: #666;
-    background: white;
-    margin-top: 2rem;
+    padding: 2.5rem 2rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+    background: transparent;
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
 }
+
+footer a:hover img {
+    opacity: 0.75;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
 
 @media (max-width: 1050px) {
     .research-image-huge {
@@ -552,87 +660,81 @@ footer {
 }
 
 @media (max-width: 720px) {
+    header {
+        padding: 2.5rem 1.5rem 2rem;
+    }
+
     header h1 {
         font-size: 2rem;
     }
-    
+
     nav ul {
-        gap: 1rem;
+        gap: 1.25rem;
     }
-    
+
     .container {
         padding: 1rem;
     }
-    
-    .cv-section h3 {
-        font-size: 1.2rem;
+
+    section {
+        padding: 1.5rem;
     }
-    
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
     .cv-item {
-        padding: 0.75rem;
+        padding-left: 1rem;
     }
-    
+
     .interest-list {
         gap: 0.5rem;
     }
-    
-    .interest-tag {
-        font-size: 0.85rem;
-        padding: 0.4rem 0.8rem;
+
+    .research-topic {
+        padding: 1.25rem;
     }
-    
+
     .research-topic-content {
         flex-direction: column;
     }
-    
-    .research-image {
-        width: 240px;
-        height: 100%;
-    }
 
-    .research-image-medium {
-        height: 100%;
-        width: 240px;
-    }
-
-    .research-image-large {
-        height: 100%;
-        width: 240px;
-    }
-
+    .research-image,
+    .research-image-medium,
+    .research-image-large,
     .research-image-huge {
         height: 100%;
         width: 240px;
     }
-    
+
     .publication {
         flex-direction: column;
     }
-    
+
     .publication-image {
         width: 200px;
         height: 100%;
     }
-    
-    /* Compact citation stats responsive - stack vertically on mobile */
+
     .citation-layout {
         flex-direction: column;
     }
-    
+
     .citation-metrics-compact {
         flex-direction: row;
         min-width: 100%;
         gap: 0.5rem;
         justify-content: center;
     }
-    
+
     .metric-card-compact {
-        padding: 0.3rem 0.5rem; 
-        flex: 0 1 100px; /* Limits how much they can grow */
+        padding: 0.3rem 0.5rem;
+        flex: 0 1 100px;
     }
-    
+
     .metric-value-compact {
-        font-size: 1.1rem; 
+        font-size: 1.05rem;
     }
 
     .metric-label-compact {

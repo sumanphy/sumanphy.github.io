@@ -23,7 +23,7 @@ function setActiveNav() {
     // For subpages, mark Numerical as active
     const navLinks = document.querySelectorAll('nav a');
     navLinks.forEach(link => {
-        if (link.getAttribute('href') === '../numerical.html') {
+        if (link.getAttribute('href') === '/numerical') {
             link.classList.add('active');
         }
     });

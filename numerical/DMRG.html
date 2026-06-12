@@ -28,10 +28,10 @@
     
     <div class="container">
         <!-- Breadcrumb navigation -->
-        <div style="margin-bottom: 1.5rem; padding: 0.8rem; background: #f0f4f8; border-radius: 4px;">
-            <a href="https://sumanphy.github.io/" style="color: #2a5298; text-decoration: none;">Home</a> / 
-            <a href="../numerical.html" style="color: #2a5298; text-decoration: none;">Mumerical Methods</a> / 
-            <span style="color: #666;">Density Matrix Renormalization Group</span>
+        <div style="margin-bottom: 1.5rem; padding: 0.8rem; background: var(--accent-tint); border-radius: 4px;">
+            <a href="https://sumanphy.github.io/" style="color: var(--accent); text-decoration: none;">Home</a> / 
+            <a href="/numerical" style="color: var(--accent); text-decoration: none;">Numerical Methods</a> / 
+            <span style="color: var(--muted);">Density Matrix Renormalization Group</span>
         </div>
         
         <section>
@@ -39,7 +39,7 @@
             
             <div style="text-align: center; margin: 2rem 0;" id="dmrg">
                 <img src="images/DMRG/dmrg_wormup_sweep.svg" alt="DMRG" class="research-image-large">
-                <p style="color: #666; font-style: italic; margin-top: 1rem; margin-bottom: 0rem; text-align: center;">
+                <p style="color: var(--muted); font-style: italic; margin-top: 1rem; margin-bottom: 0rem; text-align: center;">
                     The graphical representation of the algorithm for finding the 
                     ground state in the DMRG process is shown for a system of length 
                     $L=8$ with open boundary conditions. (a-d) Show the creation of an 
@@ -133,14 +133,14 @@
                 systems and two-dimensional lattices. In this chapter, we have implemented the DMRG method for one-dimensional 
                 open boundary systems where it works 
                 the best. To compare the DMRG method with other methods, mean-field (SDMFT in the figure), CMFT and ED, I have shown the first Mott lobe of the 
-                one-dimensional Bose Hubbard model (the model is presented in the <a href="ED.html"> ED chapter</a>) in the 
+                one-dimensional Bose Hubbard model (the model is presented in the <a href="/numerical/ED"> ED chapter</a>) in the 
                 <a href="#mott">figure below</a>. Note that, I have considered three-body constraint for this calculation and the 
                 DMRG result is extrapolated to $L=\infty$.
             </div>
 
             <div style="text-align: center; margin: 2rem 0;" id="mott">
                 <img src="images/allmethod1d.jpg" alt="DMRG" class="research-image-medium">
-                <p style="color: #666; font-style: italic; margin-top: 1rem; margin-bottom: 0rem; text-align: center;">
+                <p style="color: var(--muted); font-style: italic; margin-top: 1rem; margin-bottom: 0rem; text-align: center;">
                     A comparison of different methods. The first Mott lobe of the one-dimensional Bose Hubbard model is shown. 
                     Three body constraint is considered to get the results. The legends: SDMFT = site-decoupled mean-field theory, Exact= Eexact diagonalization, 
                     DMRG= density matrix renormalization group.  
@@ -236,26 +236,26 @@
             </ol>
             
             <!-- Navigation to other research areas -->
-            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #e0e0e0;">
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border);">
                 <h3>Explore other numerical methods</h3>
                 <div style="display: grid; gap: 1rem; margin-top: 1rem;">
-                    <a href="ED.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                    <a href="/numerical/ED" style="padding: 1rem; background: var(--surface-2); border-radius: 4px; text-decoration: none; color: var(--accent); border-left: 4px solid var(--accent);">
                         <strong>Exact Diagonalization →</strong>
                     </a>
-                    <a href="CMFT.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                    <a href="/numerical/CMFT" style="padding: 1rem; background: var(--surface-2); border-radius: 4px; text-decoration: none; color: var(--accent); border-left: 4px solid var(--accent);">
                         <strong>Cluster Mean Field Theory →</strong>
                     </a>
-                    <a href="MPS.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                    <a href="/numerical/MPS" style="padding: 1rem; background: var(--surface-2); border-radius: 4px; text-decoration: none; color: var(--accent); border-left: 4px solid var(--accent);">
                         <strong>Matrix Product States →</strong>
                     </a>
-                    <a href="TEBD.html" style="padding: 1rem; background: #f9f9f9; border-radius: 4px; text-decoration: none; color: #2a5298; border-left: 4px solid #2a5298;">
+                    <a href="/numerical/TEBD" style="padding: 1rem; background: var(--surface-2); border-radius: 4px; text-decoration: none; color: var(--accent); border-left: 4px solid var(--accent);">
                         <strong>Time-Evolution Block Decimation →</strong>
                     </a>
                 </div>
             </div>
             
             <div style="margin-top: 2rem;">
-                <a href="../numerical.html" style="color: #2a5298; text-decoration: none; font-weight: 500; font-size: 1.1rem;">
+                <a href="/numerical" style="color: var(--accent); text-decoration: none; font-weight: 500; font-size: 1.1rem;">
                     ← Back to Numerical Methods
                 </a>
             </div>
