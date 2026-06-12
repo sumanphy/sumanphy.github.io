@@ -702,12 +702,9 @@ h4 {
    Theme toggle & buttons
    -------------------------------------------------------------------------- */
 
+/* Theme switcher: pinned in the nav bar on desktop,
+   floating bottom-right button on phones */
 .theme-toggle {
-    background: var(--glass-inner);
-    border: 1px solid var(--glass-border);
-    border-radius: 9px;
-    width: 34px;
-    height: 34px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -717,17 +714,6 @@ h4 {
     transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
 
-/* Pin the toggle to the right side of the sticky nav bar, vertically
-   centered, independent of the centered menu links. On wide monitors it
-   aligns with the content column (max-width 1200px incl. 2rem padding)
-   instead of drifting to the viewport edge. */
-nav .theme-toggle {
-    position: absolute;
-    right: max(1.25rem, calc((100% - 1200px) / 2 + 2rem));
-    top: 50%;
-    transform: translateY(-50%);
-}
-
 .theme-toggle:hover {
     color: var(--accent);
     border-color: var(--accent);
@@ -735,9 +721,59 @@ nav .theme-toggle {
 }
 
 .theme-toggle svg {
+    display: block;
+}
+
+/* Desktop: inside the sticky nav, aligned with the content column
+   (max-width 1200px incl. 2rem padding) on wide monitors */
+.theme-toggle--nav {
+    position: absolute;
+    right: max(1.25rem, calc((100% - 1200px) / 2 + 2rem));
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--glass-inner);
+    border: 1px solid var(--glass-border);
+    border-radius: 9px;
+    width: 34px;
+    height: 34px;
+}
+
+.theme-toggle--nav svg {
     width: 17px;
     height: 17px;
-    display: block;
+}
+
+/* Phone: floating glass button in the bottom-right corner */
+.theme-toggle--float {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 200;
+    background: var(--glass-bg);
+    backdrop-filter: blur(14px) saturate(1.5);
+    -webkit-backdrop-filter: blur(14px) saturate(1.5);
+    border: 1px solid var(--glass-inner-border);
+    border-radius: 12px;
+    width: 44px;
+    height: 44px;
+    box-shadow: var(--shadow-md);
+}
+
+.theme-toggle--float svg {
+    width: 19px;
+    height: 19px;
+}
+
+@media (min-width: 721px) {
+    .theme-toggle--float {
+        display: none;
+    }
+}
+
+@media (max-width: 720px) {
+    .theme-toggle--nav {
+        display: none;
+    }
 }
 
 .btn-primary {
@@ -871,24 +907,11 @@ footer a:hover img {
 
     nav ul {
         gap: 0.45rem;
-        /* keep centered links clear of the pinned theme toggle */
-        padding: 0 2.4rem;
     }
 
     nav a {
         padding: 0.3rem 0.85rem;
         font-size: 0.88rem;
-    }
-
-    nav .theme-toggle {
-        width: 30px;
-        height: 30px;
-        right: 0.6rem;
-    }
-
-    nav .theme-toggle svg {
-        width: 15px;
-        height: 15px;
     }
 
     /* Use the narrow screen efficiently: collapse the stacked paddings

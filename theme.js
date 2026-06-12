@@ -16,13 +16,12 @@
 
     function applyTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
-        var btn = document.querySelector('.theme-toggle');
-        if (btn) {
+        document.querySelectorAll('.theme-toggle').forEach(function (btn) {
             btn.innerHTML = theme === 'dark' ? ICON_SUN : ICON_MOON;
             btn.setAttribute('aria-label',
                 theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
             btn.title = btn.getAttribute('aria-label');
-        }
+        });
     }
 
     var ICON_MOON =
@@ -46,18 +45,27 @@
         applyTheme(next);
     }
 
-    // --- Inject the toggle button into the nav once it exists ---
-    // (On most pages the nav is fetched asynchronously by components.js.)
-    // The button is appended to <nav> itself and pinned to the right edge
-    // via CSS, so the centered menu links are unaffected.
-    function placeToggle() {
-        var nav = document.querySelector('nav');
-        if (!nav || nav.querySelector('.theme-toggle')) return !!nav;
+    // --- Toggle buttons: one in the nav (desktop), one floating (phone).
+    // CSS media queries show exactly one of them at a time.
+    function makeToggle(modifier) {
         var btn = document.createElement('button');
-        btn.className = 'theme-toggle';
+        btn.className = 'theme-toggle ' + modifier;
         btn.type = 'button';
         btn.addEventListener('click', toggleTheme);
-        nav.appendChild(btn);
+        return btn;
+    }
+
+    function placeFloatToggle() {
+        if (document.querySelector('.theme-toggle--float')) return;
+        document.body.appendChild(makeToggle('theme-toggle--float'));
+        applyTheme(document.documentElement.getAttribute('data-theme'));
+    }
+
+    // The nav is fetched asynchronously on most pages
+    function placeNavToggle() {
+        var nav = document.querySelector('nav');
+        if (!nav || nav.querySelector('.theme-toggle--nav')) return !!nav;
+        nav.appendChild(makeToggle('theme-toggle--nav'));
         applyTheme(document.documentElement.getAttribute('data-theme'));
         return true;
     }
@@ -77,9 +85,10 @@
     window.addEventListener('load', updateNavHeight);
 
     document.addEventListener('DOMContentLoaded', function () {
-        if (placeToggle()) { updateNavHeight(); return; }
+        placeFloatToggle();
+        if (placeNavToggle()) { updateNavHeight(); return; }
         var observer = new MutationObserver(function () {
-            if (placeToggle()) {
+            if (placeNavToggle()) {
                 observer.disconnect();
                 updateNavHeight();
             }
