@@ -860,12 +860,16 @@ footer a:hover img {
         height: 15px;
     }
 
+    /* Use the narrow screen efficiently: collapse the stacked paddings
+       (container + section + inner card) that squeeze the content */
     .container {
-        padding: 1rem;
+        padding: 0.6rem;
     }
 
     section {
-        padding: 1.5rem;
+        padding: 1.25rem 1rem;
+        margin: 1.25rem 0;
+        border-radius: 12px;
     }
 
     h2 {
@@ -873,7 +877,7 @@ footer a:hover img {
     }
 
     .cv-item {
-        padding-left: 1rem;
+        padding-left: 0.9rem;
     }
 
     .interest-list {
@@ -881,7 +885,7 @@ footer a:hover img {
     }
 
     .research-topic {
-        padding: 1.25rem;
+        padding: 1.1rem 0.9rem;
     }
 
     .research-topic-content {
@@ -893,16 +897,27 @@ footer a:hover img {
     .research-image-large,
     .research-image-huge {
         height: 100%;
-        width: 240px;
+        width: 100%;
+        max-width: 440px;
     }
 
     .publication {
         flex-direction: column;
+        padding: 1rem;
     }
 
     .publication-image {
-        width: 200px;
+        width: 100%;
+        max-width: 280px;
         height: 100%;
+    }
+
+    .publication-list-item {
+        padding: 1rem 0.9rem 1rem 2.4rem;
+    }
+
+    .publication-list-item::before {
+        left: 0.85rem;
     }
 
     .citation-layout {
