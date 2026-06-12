@@ -485,7 +485,6 @@ h4 {
     padding: 1.75rem;
     background: var(--glass-inner);
     border: 1px solid var(--glass-inner-border);
-    border-left: 3px solid var(--accent);
     box-shadow: var(--shadow-sm);
     border-radius: var(--radius-sm);
 }
