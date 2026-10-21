@@ -234,6 +234,13 @@ nav a:hover {
     border-color: var(--accent-border);
 }
 
+/* Home icon: same pill height as the text links */
+nav a.nav-home svg {
+    width: 1.15em;
+    height: 1.15em;
+    vertical-align: -0.2em;
+}
+
 nav a.active {
     color: var(--accent);
     background: var(--accent-tint-hover);
