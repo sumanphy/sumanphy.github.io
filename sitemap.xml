@@ -20,4 +20,8 @@
   <loc>https://sumanphy.github.io/contact</loc>
   <priority>0.80</priority>
 </url>
+<url>
+  <loc>https://sumanphy.github.io/timecrystal</loc>
+  <priority>0.60</priority>
+</url>
 </urlset>

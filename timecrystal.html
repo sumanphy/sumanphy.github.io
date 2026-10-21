@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Crystal — Suman Mondal</title>
+    <meta name="description" content="Time Crystal: a daily work timer with a ring that closes when you reach your goal, and a calendar of the hours you worked each day. Your data is stored only in your browser and never leaves your device.">
+    <meta name="author" content="Suman Mondal">
+    <link rel="canonical" href="https://sumanphy.github.io/timecrystal">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="timecrystal.css">
+    <script src="theme.js"></script>
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon/favicon-192.png">
+    <script src="components.js"></script>
+
+</head>
+<body>
+    <nav>
+    <ul>
+        <li><a href="https://sumanphy.github.io/" title="Home" style="font-weight: bold;">Suman Mondal</a></li>
+        <li><a href="/research" title="Research">Research</a></li>
+        <li><a href="/numerical" title="Numerical Methods">Numerical Methods</a></li>
+        <li><a href="/publications" title="Publications">Publications</a></li>
+        <li><a href="/timecrystal" title="Time Crystal" class="active">Time Crystal</a></li>
+        <li><a href="/contact" title="Contact">Contact</a></li>
+    </ul>
+    </nav>
+
+    <div class="container">
+
+        <section aria-labelledby="today-heading">
+            <h2 id="today-heading">Today’s work</h2>
+            <p class="wt-intro">Start the timer when you sit down to work and pause it when you take a break. The ring closes when you reach your daily goal.</p>
+            <div class="wt-privacy">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                <p><strong>Your data stays on your computer.</strong> Everything you log is saved only in this browser on your own device. Nothing is sent to a server or stored online, and no one else, including me, can see or access it.</p>
+            </div>
+
+            <div class="wt-timer">
+                <div class="wt-ring-wrap" id="ringWrap">
+                    <svg class="wt-ring" viewBox="0 0 200 200" aria-hidden="true">
+                        <circle class="track" cx="100" cy="100" r="86" stroke-width="18"/>
+                        <circle class="base" id="ringBase" cx="100" cy="100" r="86" stroke-width="18"/>
+                        <circle class="head" id="ringHead" cx="186" cy="100" r="9"/>
+                        <circle class="arc" id="ringArc" cx="100" cy="100" r="86" stroke-width="18"/>
+                    </svg>
+                    <div class="wt-ring-center">
+                        <div class="wt-elapsed" id="elapsed" role="timer" aria-live="off">0:00:00</div>
+                        <div class="wt-goal-line" id="goalLine">of 6 h goal</div>
+                        <div class="wt-loops" id="loopLabel"></div>
+                        <div class="wt-state" id="stateLabel">Not started</div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="wt-controls">
+                        <button class="wt-btn primary" id="startBtn" type="button">Start</button>
+                        <button class="wt-btn" id="pauseBtn" type="button">Pause</button>
+                        <button class="wt-btn" id="endBtn" type="button">End day</button>
+                    </div>
+
+                    <div class="wt-message" id="message" role="status" hidden></div>
+
+                    <label class="wt-goal">
+                        Daily goal
+                        <input type="number" id="goalInput" min="0.5" max="24" step="0.5" value="6">
+                        hours
+                    </label>
+
+                    <h3 style="margin-top: 0.5rem;">Sessions today</h3>
+                    <ul class="wt-sessions" id="todaySessions"></ul>
+                </div>
+            </div>
+        </section>
+
+        <section aria-labelledby="cal-heading">
+            <h2 id="cal-heading">Your calendar</h2>
+
+            <div class="wt-cal-head">
+                <button class="wt-icon-btn" id="prevMonth" type="button" aria-label="Previous month">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <h3 id="monthLabel" aria-live="polite">Month</h3>
+                <button class="wt-icon-btn" id="nextMonth" type="button" aria-label="Next month">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+            </div>
+
+            <div class="wt-stats" id="stats"></div>
+
+            <div class="wt-grid" id="calGrid"></div>
+
+            <div class="wt-detail" id="detail"></div>
+        </section>
+
+        <section aria-labelledby="data-heading">
+            <h2 id="data-heading">Your data</h2>
+            <div class="wt-data">
+                <p>Your work log is stored only in this browser on your device and is never uploaded anywhere. Because of that, it won’t appear on another device, and clearing your browser data erases it. A backup file is saved to your own computer. Download a backup now and then, and load it here to restore your log or move it to another browser. Forgot to start the timer? Add the session yourself.</p>
+                <div class="wt-data-actions">
+                    <button class="wt-btn primary" id="manualBtn" type="button" aria-expanded="false" aria-controls="manualForm">Add a session</button>
+                    <button class="wt-btn" id="exportBtn" type="button">Download backup</button>
+                    <button class="wt-btn" id="importBtn" type="button">Load backup</button>
+                </div>
+                <input type="file" id="importFile" accept="application/json,.json" hidden>
+
+                <div class="wt-manual" id="manualForm" hidden>
+                    <h3>Add a session</h3>
+                    <div class="wt-manual-fields">
+                        <label>Date <input type="date" id="mDate" required></label>
+                        <label>Start time <input type="time" id="mStart" required></label>
+                        <label>End time <input type="time" id="mEnd" required></label>
+                    </div>
+                    <div class="wt-data-actions">
+                        <button class="wt-btn primary" id="mSave" type="button">Save session</button>
+                        <button class="wt-btn" id="mCancel" type="button">Cancel</button>
+                    </div>
+                    <div class="wt-form-status" id="mStatus" role="status" aria-live="polite"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+<script>
+(function () {
+    'use strict';
+
+    var KEY = 'worktimer:v1';
+    var HOUR = 3600000;
+    var R_BIG = 86, C_BIG = 2 * Math.PI * R_BIG;
+    var R_MINI = 15, C_MINI = 2 * Math.PI * R_MINI;
+
+    /* ---------------- Storage ----------------
+       state = {
+         goalHours: 6,
+         running: null | startTimestamp,
+         days: { 'YYYY-MM-DD': { goal: 6, sessions: [[start, end], ...], ended: false } }
+       }
+    */
+    function freshState() { return { goalHours: 6, running: null, days: {} }; }
+
+    function load() {
+        try {
+            var raw = localStorage.getItem(KEY);
+            if (!raw) return freshState();
+            var s = JSON.parse(raw);
+            if (!s || typeof s !== 'object' || typeof s.days !== 'object') return freshState();
+            if (!(s.goalHours > 0)) s.goalHours = 6;
+            if (typeof s.running !== 'number') s.running = null;
+            return s;
+        } catch (e) { return freshState(); }
+    }
+
+    var storageOK = true;
+    function save() {
+        try { localStorage.setItem(KEY, JSON.stringify(state)); storageOK = true; }
+        catch (e) { storageOK = false; }
+    }
+
+    var state = load();
+
+    /* ---------------- Dates ---------------- */
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function keyOf(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+    function dateOfKey(k) { var p = k.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
+    function dayStart(ts) { var d = new Date(ts); return new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime(); }
+    function nextMidnight(ts) { var d = new Date(ts); return new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1).getTime(); }
+    function todayKey() { return keyOf(new Date()); }
+
+    function ensureDay(k) {
+        if (!state.days[k]) state.days[k] = { goal: state.goalHours, sessions: [], ended: false };
+        return state.days[k];
+    }
+
+    // Record a session, splitting it at midnight so each day gets its own share
+    function addSession(start, end) {
+        var s = start;
+        while (s < end) {
+            var cut = Math.min(end, nextMidnight(s));
+            if (cut - s >= 1000) ensureDay(keyOf(new Date(s))).sessions.push([s, cut]);
+            s = cut;
+        }
+    }
+
+    function sortDay(k) { if (state.days[k]) state.days[k].sessions.sort(function (a, b) { return a[0] - b[0]; }); }
+
+    function committedMs(k) {
+        var d = state.days[k];
+        if (!d) return 0;
+        return d.sessions.reduce(function (a, x) { return a + (x[1] - x[0]); }, 0);
+    }
+
+    // Part of the running session that falls on day k
+    function liveMs(k, now) {
+        if (!state.running) return 0;
+        var from = dateOfKey(k).getTime(), to = nextMidnight(from);
+        return Math.max(0, Math.min(now, to) - Math.max(state.running, from));
+    }
+
+    function totalMs(k, now) { return committedMs(k) + liveMs(k, now); }
+    function goalOf(k) { return state.days[k] ? state.days[k].goal : state.goalHours; }
+
+    /* ---------------- Formatting ---------------- */
+    function clock(ms) {
+        var t = Math.floor(ms / 1000);
+        return Math.floor(t / 3600) + ':' + pad(Math.floor(t / 60) % 60) + ':' + pad(t % 60);
+    }
+    function hm(ms) {
+        var m = Math.round(ms / 60000), h = Math.floor(m / 60);
+        m = m % 60;
+        if (h && m) return h + ' h ' + m + ' min';
+        if (h) return h + ' h';
+        return m + ' min';
+    }
+    function shortH(ms) {
+        if (ms < 60000) return '';
+        var h = ms / HOUR;
+        return (h < 10 ? h.toFixed(1) : Math.round(h)) + 'h';
+    }
+    function hhmm(ts) { var d = new Date(ts); return pad(d.getHours()) + ':' + pad(d.getMinutes()); }
+    function goalText(g) { return (g % 1 ? g.toFixed(1) : g) + ' h'; }
+
+    /* ---------------- Elements ---------------- */
+    var $ = function (id) { return document.getElementById(id); };
+    var ringWrap = $('ringWrap'), ringBase = $('ringBase'), ringArc = $('ringArc'), ringHead = $('ringHead'), loopLabel = $('loopLabel');
+    var elapsedEl = $('elapsed'), goalLine = $('goalLine'), stateLabel = $('stateLabel');
+    var startBtn = $('startBtn'), pauseBtn = $('pauseBtn'), endBtn = $('endBtn');
+    var message = $('message'), goalInput = $('goalInput'), todaySessions = $('todaySessions');
+
+    ringArc.style.strokeDasharray = C_BIG; ringArc.style.strokeDashoffset = C_BIG;
+
+    /* Loops: progress beyond the goal keeps going around the same ring.
+       frac 0.4 -> loop 1 at 40%; frac 1.25 -> loop 1 full underneath, loop 2 at 25% on top. */
+    function lapColor(n) {
+        if (n < 1) return 'none';
+        if (n > 4) n = n % 2 ? 3 : 4;   // beyond four loops, alternate the two deepest shades
+        return 'var(--tc-lap' + n + ')';
+    }
+    function ringParts(frac) {
+        var closed = Math.floor(Math.max(frac, 0));          // loops completed
+        var f = frac - closed;                                // progress of the current loop
+        return {
+            closed: closed,
+            f: f,
+            base: closed >= 1 ? lapColor(closed) : 'none',    // last completed loop, drawn full
+            arc: closed === 0 ? 'var(--accent)' : lapColor(closed + 1)
+        };
+    }
+
+    var viewYear, viewMonth, selectedKey = todayKey();
+    (function () { var n = new Date(); viewYear = n.getFullYear(); viewMonth = n.getMonth(); })();
+
+    var lastLoops = null;   // to celebrate only when a loop is actually completed
+    var lastToday = todayKey();
+
+    /* ---------------- Timer view ---------------- */
+    function renderTimer() {
+        var now = Date.now(), k = todayKey();
+        var ms = totalMs(k, now), goalMs = goalOf(k) * HOUR;
+        var frac = goalMs ? ms / goalMs : 0;
+
+        var r = ringParts(frac);
+        ringBase.style.stroke = r.base;
+        ringArc.style.stroke = r.arc;
+        ringArc.style.strokeDashoffset = C_BIG * (1 - r.f);
+        ringArc.style.opacity = r.f > 0 ? 1 : 0;
+
+        // Shadow at the tip of the arc shows it lying on top of the previous loop
+        var a = 2 * Math.PI * r.f;
+        ringHead.setAttribute('cx', 100 + R_BIG * Math.cos(a));
+        ringHead.setAttribute('cy', 100 + R_BIG * Math.sin(a));
+        ringHead.style.fill = r.arc;
+        ringHead.style.opacity = r.closed >= 1 && r.f > 0 ? 1 : 0;
+
+        ringWrap.classList.toggle('closed', r.closed >= 1);
+        ringWrap.classList.toggle('running', !!state.running);
+        loopLabel.textContent = r.closed === 0 ? '' : r.closed === 1 ? 'Ring closed' : r.closed + ' loops closed';
+
+        if (lastLoops !== null && r.closed > lastLoops && state.running) {
+            ringWrap.classList.remove('celebrate'); void ringWrap.offsetWidth; ringWrap.classList.add('celebrate');
+            showMessage(r.closed === 1
+                ? 'You closed your ring. ' + goalText(goalOf(k)) + ' of work done today.'
+                : 'Loop ' + r.closed + ' closed. That’s ' + hm(ms) + ' of work today.');
+        }
+        lastLoops = r.closed;
+
+        elapsedEl.textContent = clock(ms);
+        goalLine.textContent = 'of ' + goalText(goalOf(k)) + ' goal';
+
+        var day = state.days[k];
+        if (state.running) { stateLabel.textContent = 'Running'; stateLabel.className = 'wt-state on'; }
+        else if (day && day.ended) { stateLabel.textContent = 'Day ended'; stateLabel.className = 'wt-state'; }
+        else if (ms > 0) { stateLabel.textContent = 'Paused'; stateLabel.className = 'wt-state'; }
+        else { stateLabel.textContent = 'Not started'; stateLabel.className = 'wt-state'; }
+
+        startBtn.disabled = !!state.running;
+        startBtn.textContent = ms > 0 ? 'Resume' : 'Start';
+        pauseBtn.disabled = !state.running;
+        endBtn.disabled = !state.running && (ms === 0 || (day && day.ended));
+
+        document.title = (state.running ? clock(ms) + ' · ' : '') + 'Time Crystal — Suman Mondal';
+    }
+
+    function renderTodaySessions() {
+        var k = todayKey(), day = state.days[k], items = [];
+        if (day) day.sessions.forEach(function (s) { items.push('<li>' + hhmm(s[0]) + '–' + hhmm(s[1]) + '</li>'); });
+        if (state.running) {
+            var from = Math.max(state.running, dayStart(Date.now()));
+            items.push('<li class="live">' + hhmm(from) + '–now</li>');
+        }
+        todaySessions.innerHTML = items.length ? items.join('') : '<li class="wt-empty" style="background:none;border:0;padding:0;">No sessions yet. Press Start to begin.</li>';
+    }
+
+    function showMessage(text) { message.textContent = text; message.hidden = false; }
+    function hideMessage() { message.hidden = true; }
+
+    /* ---------------- Calendar view ---------------- */
+    var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var DOW = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+    function miniRing(frac) {
+        var r = ringParts(frac);
+        return '<svg class="wt-mini' + (r.closed >= 1 ? ' closed' : '') + '" viewBox="0 0 40 40" aria-hidden="true">' +
+            '<circle class="track" cx="20" cy="20" r="' + R_MINI + '" stroke-width="5"/>' +
+            (r.closed >= 1 ? '<circle cx="20" cy="20" r="' + R_MINI + '" stroke-width="5" style="stroke:' + r.base + '"/>' : '') +
+            (r.f > 0 ? '<circle cx="20" cy="20" r="' + R_MINI + '" stroke-width="5" style="stroke:' + r.arc + '" stroke-dasharray="' +
+                C_MINI + '" stroke-dashoffset="' + (C_MINI * (1 - r.f)) + '"/>' : '') +
+            '</svg>';
+    }
+
+    function streak(now) {
+        var d = new Date(), count = 0;
+        var k = keyOf(d);
+        if (totalMs(k, now) < goalOf(k) * HOUR) d.setDate(d.getDate() - 1); // today still in progress
+        for (;;) {
+            k = keyOf(d);
+            if (!state.days[k] || totalMs(k, now) < goalOf(k) * HOUR) break;
+            count++; d.setDate(d.getDate() - 1);
+        }
+        return count;
+    }
+
+    function renderCalendar() {
+        var now = Date.now(), tk = todayKey();
+        $('monthLabel').textContent = MONTHS[viewMonth] + ' ' + viewYear;
+
+        var first = new Date(viewYear, viewMonth, 1);
+        var lead = (first.getDay() + 6) % 7;            // weeks start on Monday
+        var days = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+        var html = DOW.map(function (d) { return '<div class="wt-dow" aria-hidden="true">' + d + '</div>'; }).join('');
+        for (var i = 0; i < lead; i++) html += '<div class="wt-day blank" aria-hidden="true"></div>';
+
+        var monthMs = 0, goalDays = 0, workedDays = 0;
+        for (var d = 1; d <= days; d++) {
+            var date = new Date(viewYear, viewMonth, d), k = keyOf(date);
+            var future = date.getTime() > now;
+            var ms = future ? 0 : totalMs(k, now), g = goalOf(k);
+            var frac = g ? ms / (g * HOUR) : 0;
+            monthMs += ms;
+            if (ms > 0) workedDays++;
+            if (frac >= 1) goalDays++;
+
+            var cls = 'wt-day' + (k === tk ? ' today' : '') + (future ? ' future' : '') + (k === selectedKey ? ' selected' : '');
+            var label = date.toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long' }) +
+                (future ? '' : ', ' + (ms ? hm(ms) : 'no work') + (frac >= 1 ? ', goal reached' : ''));
+            html += '<button type="button" class="' + cls + '" data-key="' + k + '"' + (future ? ' disabled' : '') +
+                ' aria-label="' + label + '"' + (k === selectedKey ? ' aria-pressed="true"' : ' aria-pressed="false"') + '>' +
+                '<span class="wt-day-num">' + d + '</span>' + miniRing(frac) +
+                '<span class="wt-day-hrs">' + shortH(ms) + '</span></button>';
+        }
+        $('calGrid').innerHTML = html;
+
+        var s = streak(now);
+        $('stats').innerHTML =
+            '<span><strong>' + hm(monthMs) + '</strong> this month</span>' +
+            '<span><strong>' + goalDays + '</strong> of ' + workedDays + ' work days met the goal</span>' +
+            '<span>Current streak: <strong>' + s + ' ' + (s === 1 ? 'day' : 'days') + '</strong></span>';
+
+        renderDetail();
+    }
+
+    function renderDetail() {
+        var now = Date.now(), k = selectedKey, day = state.days[k];
+        var date = dateOfKey(k), ms = totalMs(k, now), g = goalOf(k);
+        var pct = Math.round(ms / (g * HOUR) * 100);
+        var title = date.toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+
+        var html = '<h4>' + title + '</h4>';
+        if (!ms) {
+            html += '<p class="wt-empty">No work recorded on this day.</p>';
+        } else {
+            html += '<p><strong>' + hm(ms) + '</strong> worked, ' + pct + '% of the ' + goalText(g) + ' goal.</p><ul>';
+            if (day) day.sessions.forEach(function (s, i) {
+                html += '<li><span>' + hhmm(s[0]) + '–' + hhmm(s[1]) + ' (' + hm(s[1] - s[0]) + ')</span>' +
+                    '<button type="button" class="wt-link-btn" data-del="' + i + '">Delete</button></li>';
+            });
+            if (liveMs(k, now)) html += '<li><span>' + hhmm(Math.max(state.running, date.getTime())) + '–now (running)</span></li>';
+            html += '</ul>';
+        }
+        $('detail').innerHTML = html;
+    }
+
+    /* ---------------- Actions ---------------- */
+    function start() {
+        if (state.running) return;
+        var day = ensureDay(todayKey());
+        day.ended = false;
+        state.running = Date.now();
+        hideMessage();
+        save(); renderAll();
+        if (!storageOK) showMessage('This browser isn’t letting the page save data (private browsing can do this). The timer works, but your log will be lost when you close the tab.');
+    }
+
+    function pause() {
+        if (!state.running) return;
+        addSession(state.running, Date.now());
+        state.running = null;
+        sortDay(todayKey());
+        save(); renderAll();
+    }
+
+    function endDay() {
+        if (state.running) { addSession(state.running, Date.now()); state.running = null; }
+        var k = todayKey(), day = ensureDay(k), ms = committedMs(k);
+        day.ended = true;
+        save(); renderAll();
+        var g = day.goal, pct = Math.round(ms / (g * HOUR) * 100);
+        showMessage(ms >= g * HOUR
+            ? 'Day ended. You worked ' + hm(ms) + ' today and closed your ring (' + pct + '% of your goal).'
+            : 'Day ended. You worked ' + hm(ms) + ' today, ' + pct + '% of your ' + goalText(g) + ' goal.');
+    }
+
+    function setGoal() {
+        var v = parseFloat(goalInput.value);
+        if (!(v >= 0.5 && v <= 24)) { goalInput.value = state.goalHours; return; }
+        v = Math.round(v * 2) / 2;
+        goalInput.value = v;
+        state.goalHours = v;
+        var k = todayKey();
+        if (state.days[k]) state.days[k].goal = v;  // past days keep the goal they had
+        lastLoops = null;
+        save(); renderAll();
+    }
+
+    function renderAll() { renderTimer(); renderTodaySessions(); renderCalendar(); }
+
+    startBtn.addEventListener('click', start);
+    pauseBtn.addEventListener('click', pause);
+    endBtn.addEventListener('click', endDay);
+    goalInput.addEventListener('change', setGoal);
+
+    $('prevMonth').addEventListener('click', function () {
+        viewMonth--; if (viewMonth < 0) { viewMonth = 11; viewYear--; } renderCalendar();
+    });
+    $('nextMonth').addEventListener('click', function () {
+        viewMonth++; if (viewMonth > 11) { viewMonth = 0; viewYear++; } renderCalendar();
+    });
+
+    $('calGrid').addEventListener('click', function (e) {
+        var b = e.target.closest('.wt-day[data-key]');
+        if (!b || b.disabled) return;
+        selectedKey = b.getAttribute('data-key');
+        renderCalendar();
+    });
+
+    $('detail').addEventListener('click', function (e) {
+        var b = e.target.closest('[data-del]');
+        if (!b) return;
+        var day = state.days[selectedKey];
+        if (!day) return;
+        var s = day.sessions[+b.getAttribute('data-del')];
+        if (!s || !confirm('Delete the session ' + hhmm(s[0]) + '–' + hhmm(s[1]) + '?')) return;
+        day.sessions.splice(+b.getAttribute('data-del'), 1);
+        save(); renderAll();
+    });
+
+    /* ---------------- Manual sessions ---------------- */
+    var manualForm = $('manualForm'), manualBtn = $('manualBtn');
+    var mDate = $('mDate'), mStart = $('mStart'), mEnd = $('mEnd'), mStatus = $('mStatus');
+
+    function formStatus(text, kind) { mStatus.textContent = text; mStatus.className = 'wt-form-status' + (kind ? ' ' + kind : ''); }
+
+    function openManual() {
+        manualForm.hidden = false;
+        manualBtn.setAttribute('aria-expanded', 'true');
+        mDate.max = todayKey();
+        if (!mDate.value) mDate.value = selectedKey <= todayKey() ? selectedKey : todayKey();
+        formStatus('');
+        mDate.focus();
+    }
+    function closeManual() {
+        manualForm.hidden = true;
+        manualBtn.setAttribute('aria-expanded', 'false');
+        manualBtn.focus();
+    }
+
+    manualBtn.addEventListener('click', function () { manualForm.hidden ? openManual() : closeManual(); });
+    $('mCancel').addEventListener('click', closeManual);
+
+    function atTime(dateKey, hhmmStr) {
+        var d = dateOfKey(dateKey), t = hhmmStr.split(':');
+        return new Date(d.getFullYear(), d.getMonth(), d.getDate(), +t[0], +t[1]).getTime();
+    }
+
+    $('mSave').addEventListener('click', function () {
+        if (!mDate.value || !mStart.value || !mEnd.value) { formStatus('Fill in the date, start time and end time.', 'error'); return; }
+        var k = mDate.value;
+        var start = atTime(k, mStart.value), end = atTime(k, mEnd.value), now = Date.now();
+
+        if (end <= start) { formStatus('The end time must be after the start time. For work past midnight, add one session for each day.', 'error'); return; }
+        if (end > now) { formStatus('This session ends in the future. Choose an end time that has already passed.', 'error'); return; }
+
+        var day = state.days[k], clash = null;
+        if (day) day.sessions.forEach(function (x) { if (!clash && start < x[1] && end > x[0]) clash = x; });
+        if (clash) { formStatus('This overlaps the session ' + hhmm(clash[0]) + '–' + hhmm(clash[1]) + ' on that day. Adjust the times or delete that session in the calendar first.', 'error'); return; }
+        if (state.running && end > state.running) { formStatus('This overlaps the timer that is running now (started ' + hhmm(state.running) + ').', 'error'); return; }
+
+        addSession(start, end);
+        state.days[k].sessions.sort(function (a, b) { return a[0] - b[0]; });
+        save();
+
+        var d = dateOfKey(k);
+        selectedKey = k; viewYear = d.getFullYear(); viewMonth = d.getMonth();
+        lastLoops = null;
+        renderAll();
+        formStatus('Saved ' + hhmm(start) + '–' + hhmm(end) + ' (' + hm(end - start) + ') on ' +
+            d.toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long' }) + '.', 'ok');
+        mStart.value = ''; mEnd.value = '';
+    });
+
+    /* ---------------- Backup ---------------- */
+    $('exportBtn').addEventListener('click', function () {
+        var blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'timecrystal-backup-' + todayKey() + '.json';
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+    });
+
+    $('importBtn').addEventListener('click', function () { $('importFile').click(); });
+    $('importFile').addEventListener('change', function (e) {
+        var file = e.target.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function () {
+            try {
+                var data = JSON.parse(reader.result);
+                if (!data || typeof data.days !== 'object') throw new Error('bad');
+                if (!confirm('Load this backup? Days in the backup will replace the same days in your current log.')) return;
+                Object.keys(data.days).forEach(function (k) {
+                    var d = data.days[k];
+                    if (/^\d{4}-\d{2}-\d{2}$/.test(k) && d && Array.isArray(d.sessions)) {
+                        state.days[k] = { goal: d.goal > 0 ? d.goal : state.goalHours, sessions: d.sessions.filter(function (s) {
+                            return Array.isArray(s) && typeof s[0] === 'number' && typeof s[1] === 'number' && s[1] > s[0];
+                        }), ended: !!d.ended };
+                    }
+                });
+                if (data.goalHours > 0) { state.goalHours = data.goalHours; goalInput.value = data.goalHours; }
+                save(); renderAll();
+                showMessage('Backup loaded.');
+            } catch (err) {
+                showMessage('That file isn’t a Time Crystal backup. Choose a file saved with “Download backup”.');
+            }
+            e.target.value = '';
+        };
+        reader.readAsText(file);
+    });
+
+    /* ---------------- Keep in sync ---------------- */
+    // Other tabs with this page open
+    window.addEventListener('storage', function (e) {
+        if (e.key !== KEY) return;
+        state = load(); goalInput.value = state.goalHours; renderAll();
+    });
+
+    // Timestamps keep the time correct even if the tab sleeps; this just repaints
+    setInterval(function () {
+        renderTimer();
+        var tk = todayKey();
+        if (tk !== lastToday) { lastToday = tk; selectedKey = tk; lastLoops = null; renderAll(); }
+        else if (state.running) { renderTodaySessions(); }
+    }, 1000);
+    setInterval(function () { if (state.running) renderCalendar(); }, 60000);
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) renderAll(); });
+
+    goalInput.value = state.goalHours;
+    renderAll();
+})();
+</script>
+</body>
+</html>
