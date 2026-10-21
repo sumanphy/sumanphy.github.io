@@ -53,10 +53,10 @@
             <a href="#CMFT" class="blue-text-tag">2. Cluster Mean Field Theory</a>
             <a href="#MPS" class="blue-text-tag">3. Matrix Product State (MPS)</a>
             <a href="#DMRG" class="blue-text-tag">4. Drnsity Matrix Renormalization Group (DMRG)</a>
-            <a href="#TEBD" class="blue-text-tag">5. Time-Evolution Block Decimation (TEBD)</a>
+            <a href="#FDMRG" class="blue-text-tag">5. Floquet DMRG</a>
+            <a href="#TEBD" class="blue-text-tag">6. Time-Evolution Block Decimation (TEBD)</a>
             <p class="red-text-tag">Our contributions →</p>
-            <a href="#semiclassical-tebd" class="blue-text-tag">6. Semi-classical TEBD</a>
-            <!-- <a href="#FDMRG" class="blue-text-tag">7. Floquet DMRG</a> -->
+            <a href="#semiclassical-tebd" class="blue-text-tag">7. Semi-classical TEBD</a>
         </div>
         
         <div class="interest-list">
@@ -175,8 +175,50 @@
                 </div>
             </div>
 
+            <div class="research-topic" id="FDMRG">
+                <h3>5. Floquet DMRG</h3>
+                <div class="research-topic-content">
+                    <img src="numerical/images/FDMRG/fdmrg.png" alt="Floquet DMRG" class="research-image">
+                    <div class="research-content">
+                        <p>
+                            The DMRG framework can be extended to investigate periodically driven (Floquet) quantum many-body systems. 
+                            Unlike static systems, periodically driven systems lack a conventional energy ground state, and traditional 
+                            Floquet approaches often suffer from arbitrary quasienergy folding ambiguities within the first Brillouin zone. 
+                            To resolve this, the Floquet DMRG method relies on the geometric Floquet theory framework and 
+                            operates through the following key steps:  
+                        </p>
+
+                        <p style="margin-top: 1rem;">
+                            (i) The Average Energy Operator and Floquet Ground State: 
+                            Within geometric Floquet theory, the Average Energy Operator acts as a physical sorting mechanism that lifts ambiguity. 
+                            The Floquet ground state is rigorously defined as the simultaneous eigenstate of the Floquet Hamiltonian and the 
+                            Average Energy Operator that corresponds to the lowest average energy eigenvalue.
+                        </p>
+                        <p style="margin-top: 1rem;">
+                            (ii) Formulation in Sambe-Superspace: To handle time-periodicity variationally, the problem is mapped into Sambe-superspace 
+                            (an extended space combining the original physical Hilbert space with a space of periodic functions, represented via Fourier harmonics in time).
+                        </p>
+
+                        <p style="margin-top: 1rem;">
+                            (iii) Variational Optimization via Tensor Networks:
+                            The Floquet DMRG algorithm employs Matrix Product States (MPS) and Matrix Product Operators (MPOs) directly within this expanded Sambe-superspace framework. 
+                            By minimizing a cost function via sweeping algorithms, the method variationally optimize the Average Energy Operator. 
+                            And from this optimized Average Energy Operator, the Floquet ground state can be obtained using standered DMRG algorithms.
+                        </p>
+                        <p style="margin-top: 0.8rem;"><strong>Learn more from the reference →</strong></p>
+                        <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                            <li>
+                                S. M., Paul M. Schindler amd Marin Bukov,
+                                <em>Floquet ground state order</em>,
+                                <a href="https://doi.org/10.48550/arXiv.2610.28336" target="_blank">arXiv:2610.28336 (2026)</a>.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             <div class="research-topic" id="TEBD">
-                <h3>5. Time-Evolution Block Decimation</h3>
+                <h3>6. Time-Evolution Block Decimation</h3>
                 <div class="research-topic-content">
                     <img src="numerical/images/TEBD/tebd.svg" alt="TEBD" class="research-image-medium">
                     <div class="research-content">
@@ -202,7 +244,7 @@
             </div>
 
             <div class="research-topic" id="semiclassical-tebd">
-                <h3>6. Semi-classical TEBD</h3>
+                <h3>7. Semi-classical TEBD</h3>
                 <div class="research-topic-content">
                     <img src="numerical/images/MTETEBD/MTETEBD.png" alt="Semi-classical TEBD" class="research-image">
                     <div class="research-content">
