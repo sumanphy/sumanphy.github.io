@@ -100,13 +100,38 @@
 .wt-message[hidden] { display: none; }
 
 .wt-sessions { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.wt-sessions li {
-    font-size: 0.88rem; font-variant-numeric: tabular-nums;
-    padding: 0.3rem 0.7rem; border-radius: 8px;
+.wt-sessions li.live, .wt-chip {
+    font: inherit; font-size: 0.88rem; font-variant-numeric: tabular-nums;
+    padding: 0.3rem 0.7rem; border-radius: 8px; display: inline-block;
     background: var(--accent-tint); color: var(--accent-dark); border: 1px solid var(--accent-border);
 }
+.wt-chip { cursor: pointer; transition: background-color 0.2s ease, border-color 0.2s ease; }
+.wt-chip:hover { background: var(--accent-tint-hover); border-color: var(--accent); }
+.wt-chip:focus-visible, .wt-session-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .wt-sessions li.live { background: var(--green-tint); color: var(--accent-green); border-color: var(--green-border); }
+
+.wt-session-btn {
+    font: inherit; color: var(--text); width: 100%; text-align: left; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    background: none; border: 0; padding: 0.15rem 0.4rem; margin: 0 -0.4rem; border-radius: 6px;
+    font-variant-numeric: tabular-nums;
+}
+.wt-session-btn:hover { background: var(--accent-tint); }
+.wt-edit-hint { font-size: 0.85rem; color: var(--accent); font-weight: 500; }
+.wt-detail li.wt-editing { display: block; padding: 0.75rem 0; }
+.wt-edit-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.75rem 1rem; }
+.wt-edit-row label { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.85rem; color: var(--muted); font-weight: 500; }
+.wt-edit-row input {
+    font: inherit; padding: 0.4rem 0.55rem; min-width: 8rem;
+    border-radius: 8px; border: 1px solid var(--glass-inner-border);
+    background: var(--surface); color: var(--ink);
+}
+.wt-edit-row input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.wt-edit-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+.wt-btn.small { padding: 0.4rem 0.95rem; font-size: 0.92rem; }
 .wt-empty { color: var(--muted); font-size: 0.92rem; }
+.wt-hint { color: var(--muted); font-size: 0.88rem; font-style: italic; margin: -0.4rem 0 0.6rem; }
+.wt-hint[hidden] { display: none; }
 
 /* ---------- Calendar ---------- */
 .wt-cal-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
@@ -178,6 +203,8 @@
 .wt-form-status { margin-top: 0.9rem; font-size: 0.92rem; }
 .wt-form-status.error { color: var(--red); }
 .wt-form-status.ok { color: var(--accent-green); }
+.wt-editing .wt-form-status { margin-top: 0.6rem; }
+.wt-editing .wt-form-status:empty { display: none; }
 @media (max-width: 720px) {
     .wt-manual { padding: 1rem; }
     .wt-manual label { flex: 1 1 100%; }

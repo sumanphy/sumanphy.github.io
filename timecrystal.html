@@ -15,8 +15,16 @@
 
 </head>
 <body>
-    <!-- Header placeholder -->
-    <a id="header-placeholder"></a>
+    <nav>
+    <ul>
+        <li><a href="https://sumanphy.github.io/" title="Home" style="font-weight: bold;">Suman Mondal</a></li>
+        <li><a href="/research" title="Research">Research</a></li>
+        <li><a href="/numerical" title="Numerical Methods">Numerical Methods</a></li>
+        <li><a href="/publications" title="Publications">Publications</a></li>
+        <li><a href="/timecrystal" title="Time Crystal" class="active">Time Crystal</a></li>
+        <li><a href="/contact" title="Contact">Contact</a></li>
+    </ul>
+    </nav>
 
     <div class="container">
 
@@ -60,6 +68,7 @@
                     </label>
 
                     <h3 style="margin-top: 0.5rem;">Sessions today</h3>
+                    <p class="wt-hint" id="todayHint" hidden>Click to edit the laps.</p>
                     <ul class="wt-sessions" id="todaySessions"></ul>
                 </div>
             </div>
@@ -297,12 +306,17 @@
 
     function renderTodaySessions() {
         var k = todayKey(), day = state.days[k], items = [];
-        if (day) day.sessions.forEach(function (s) { items.push('<li>' + hhmm(s[0]) + '–' + hhmm(s[1]) + '</li>'); });
+        if (day) day.sessions.forEach(function (s, i) {
+            items.push('<li><button type="button" class="wt-chip" data-edit="' + i + '" aria-label="Edit session ' +
+                hhmm(s[0]) + ' to ' + hhmm(s[1]) + '">' + hhmm(s[0]) + '–' + hhmm(s[1]) + '</button></li>');
+        });
         if (state.running) {
             var from = Math.max(state.running, dayStart(Date.now()));
             items.push('<li class="live">' + hhmm(from) + '–now</li>');
         }
-        todaySessions.innerHTML = items.length ? items.join('') : '<li class="wt-empty" style="background:none;border:0;padding:0;">No sessions yet. Press Start to begin.</li>';
+        var html = items.length ? items.join('') : '<li class="wt-empty">No sessions yet. Press Start to begin.</li>';
+        $('todayHint').hidden = !(day && day.sessions.length);
+        if (html !== todaySessions.dataset.html) { todaySessions.innerHTML = html; todaySessions.dataset.html = html; }
     }
 
     function showMessage(text) { message.textContent = text; message.hidden = false; }
@@ -371,10 +385,13 @@
             '<span><strong>' + goalDays + '</strong> of ' + workedDays + ' work days met the goal</span>' +
             '<span>Current streak: <strong>' + s + ' ' + (s === 1 ? 'day' : 'days') + '</strong></span>';
 
-        renderDetail();
+        renderDetail(false);
     }
 
-    function renderDetail() {
+    var editing = null;   // index of the session being edited on the selected day
+
+    function renderDetail(force) {
+        if (editing !== null && !force) return;   // don't wipe the form while someone is typing
         var now = Date.now(), k = selectedKey, day = state.days[k];
         var date = dateOfKey(k), ms = totalMs(k, now), g = goalOf(k);
         var pct = Math.round(ms / (g * HOUR) * 100);
@@ -384,15 +401,29 @@
         if (!ms) {
             html += '<p class="wt-empty">No work recorded on this day.</p>';
         } else {
-            html += '<p><strong>' + hm(ms) + '</strong> worked, ' + pct + '% of the ' + goalText(g) + ' goal.</p><ul>';
+            html += '<p><strong>' + hm(ms) + '</strong> worked, ' + pct + '% of the ' + goalText(g) + ' goal.</p>' +
+                (day && day.sessions.length && editing === null ? '<p class="wt-hint">Click to edit the laps.</p>' : '') + '<ul>';
             if (day) day.sessions.forEach(function (s, i) {
-                html += '<li><span>' + hhmm(s[0]) + '–' + hhmm(s[1]) + ' (' + hm(s[1] - s[0]) + ')</span>' +
-                    '<button type="button" class="wt-link-btn" data-del="' + i + '">Delete</button></li>';
+                if (i === editing) {
+                    html += '<li class="wt-editing"><div class="wt-edit-row">' +
+                        '<label>Start <input type="time" id="eStart" value="' + hhmm(s[0]) + '"></label>' +
+                        '<label>End <input type="time" id="eEnd" value="' + hhmm(s[1]) + '"></label>' +
+                        '<div class="wt-edit-actions">' +
+                        '<button type="button" class="wt-btn primary small" data-save="' + i + '">Save</button>' +
+                        '<button type="button" class="wt-btn small" data-cancel>Cancel</button>' +
+                        '<button type="button" class="wt-link-btn" data-del="' + i + '">Delete</button>' +
+                        '</div></div><div class="wt-form-status error" id="eStatus" role="status" aria-live="polite"></div></li>';
+                } else {
+                    html += '<li><button type="button" class="wt-session-btn" data-edit="' + i + '" aria-label="Edit session ' +
+                        hhmm(s[0]) + ' to ' + hhmm(s[1]) + '"><span>' + hhmm(s[0]) + '–' + hhmm(s[1]) + ' (' + hm(s[1] - s[0]) + ')</span>' +
+                        '<span class="wt-edit-hint">Edit</span></button></li>';
+                }
             });
             if (liveMs(k, now)) html += '<li><span>' + hhmm(Math.max(state.running, date.getTime())) + '–now (running)</span></li>';
             html += '</ul>';
         }
         $('detail').innerHTML = html;
+        if (editing !== null && $('eStart')) $('eStart').focus();
     }
 
     /* ---------------- Actions ---------------- */
@@ -455,18 +486,80 @@
         var b = e.target.closest('.wt-day[data-key]');
         if (!b || b.disabled) return;
         selectedKey = b.getAttribute('data-key');
+        editing = null;
         renderCalendar();
     });
 
-    $('detail').addEventListener('click', function (e) {
-        var b = e.target.closest('[data-del]');
+    /* ---------------- Editing sessions ---------------- */
+    function atTime(dateKey, hhmmStr) {
+        var d = dateOfKey(dateKey), t = hhmmStr.split(':');
+        return new Date(d.getFullYear(), d.getMonth(), d.getDate(), +t[0], +t[1]).getTime();
+    }
+    // An end time of 00:00 means midnight at the end of that day
+    function atEnd(dateKey, hhmmStr) {
+        return hhmmStr === '00:00' ? nextMidnight(dateOfKey(dateKey).getTime()) : atTime(dateKey, hhmmStr);
+    }
+
+    // Returns an error message, or null if the session is fine. skip = index to ignore (the one being edited).
+    function checkSession(k, start, end, skip) {
+        if (end <= start) return 'The end time must be after the start time. For work past midnight, add one session for each day.';
+        if (end > Date.now()) return 'This session ends in the future. Choose an end time that has already passed.';
+        var day = state.days[k], clash = null;
+        if (day) day.sessions.forEach(function (x, i) { if (!clash && i !== skip && start < x[1] && end > x[0]) clash = x; });
+        if (clash) return 'This overlaps the session ' + hhmm(clash[0]) + '–' + hhmm(clash[1]) + ' on that day. Adjust the times or delete that session first.';
+        if (state.running && end > state.running) return 'This overlaps the timer that is running now (started ' + hhmm(state.running) + ').';
+        return null;
+    }
+
+    function openEditor(k, i) {
+        var d = dateOfKey(k);
+        selectedKey = k; viewYear = d.getFullYear(); viewMonth = d.getMonth();
+        editing = i;
+        renderCalendar();
+        renderDetail(true);
+    }
+
+    todaySessions.addEventListener('click', function (e) {
+        var b = e.target.closest('[data-edit]');
         if (!b) return;
-        var day = state.days[selectedKey];
-        if (!day) return;
-        var s = day.sessions[+b.getAttribute('data-del')];
-        if (!s || !confirm('Delete the session ' + hhmm(s[0]) + '–' + hhmm(s[1]) + '?')) return;
-        day.sessions.splice(+b.getAttribute('data-del'), 1);
-        save(); renderAll();
+        openEditor(todayKey(), +b.getAttribute('data-edit'));
+        $('detail').scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+    });
+
+    $('detail').addEventListener('click', function (e) {
+        var day = state.days[selectedKey], b;
+        if ((b = e.target.closest('[data-edit]'))) { openEditor(selectedKey, +b.getAttribute('data-edit')); return; }
+        if (e.target.closest('[data-cancel]')) { editing = null; renderDetail(true); return; }
+
+        if ((b = e.target.closest('[data-save]'))) {
+            var i = +b.getAttribute('data-save');
+            if (!day || !day.sessions[i]) return;
+            var sv = $('eStart').value, ev = $('eEnd').value;
+            if (!sv || !ev) { $('eStatus').textContent = 'Fill in both the start and end time.'; return; }
+            var start = atTime(selectedKey, sv), end = atEnd(selectedKey, ev);
+            var err = checkSession(selectedKey, start, end, i);
+            if (err) { $('eStatus').textContent = err; return; }
+            day.sessions[i] = [start, end];
+            sortDay(selectedKey);
+            editing = null; lastLoops = null;
+            save(); renderAll(); renderDetail(true);
+            return;
+        }
+
+        if ((b = e.target.closest('[data-del]'))) {
+            if (!day) return;
+            var s = day.sessions[+b.getAttribute('data-del')];
+            if (!s || !confirm('Delete the session ' + hhmm(s[0]) + '–' + hhmm(s[1]) + '?')) return;
+            day.sessions.splice(+b.getAttribute('data-del'), 1);
+            editing = null; lastLoops = null;
+            save(); renderAll(); renderDetail(true);
+        }
+    });
+
+    $('detail').addEventListener('keydown', function (e) {
+        if (editing === null) return;
+        if (e.key === 'Escape') { editing = null; renderDetail(true); }
+        if (e.key === 'Enter' && e.target.matches('input')) { var s = $('detail').querySelector('[data-save]'); if (s) s.click(); }
     });
 
     /* ---------------- Manual sessions ---------------- */
@@ -492,23 +585,12 @@
     manualBtn.addEventListener('click', function () { manualForm.hidden ? openManual() : closeManual(); });
     $('mCancel').addEventListener('click', closeManual);
 
-    function atTime(dateKey, hhmmStr) {
-        var d = dateOfKey(dateKey), t = hhmmStr.split(':');
-        return new Date(d.getFullYear(), d.getMonth(), d.getDate(), +t[0], +t[1]).getTime();
-    }
-
     $('mSave').addEventListener('click', function () {
         if (!mDate.value || !mStart.value || !mEnd.value) { formStatus('Fill in the date, start time and end time.', 'error'); return; }
         var k = mDate.value;
-        var start = atTime(k, mStart.value), end = atTime(k, mEnd.value), now = Date.now();
-
-        if (end <= start) { formStatus('The end time must be after the start time. For work past midnight, add one session for each day.', 'error'); return; }
-        if (end > now) { formStatus('This session ends in the future. Choose an end time that has already passed.', 'error'); return; }
-
-        var day = state.days[k], clash = null;
-        if (day) day.sessions.forEach(function (x) { if (!clash && start < x[1] && end > x[0]) clash = x; });
-        if (clash) { formStatus('This overlaps the session ' + hhmm(clash[0]) + '–' + hhmm(clash[1]) + ' on that day. Adjust the times or delete that session in the calendar first.', 'error'); return; }
-        if (state.running && end > state.running) { formStatus('This overlaps the timer that is running now (started ' + hhmm(state.running) + ').', 'error'); return; }
+        var start = atTime(k, mStart.value), end = atEnd(k, mEnd.value);
+        var err = checkSession(k, start, end, -1);
+        if (err) { formStatus(err, 'error'); return; }
 
         addSession(start, end);
         state.days[k].sessions.sort(function (a, b) { return a[0] - b[0]; });
@@ -516,7 +598,7 @@
 
         var d = dateOfKey(k);
         selectedKey = k; viewYear = d.getFullYear(); viewMonth = d.getMonth();
-        lastLoops = null;
+        lastLoops = null; editing = null;
         renderAll();
         formStatus('Saved ' + hhmm(start) + '–' + hhmm(end) + ' (' + hm(end - start) + ') on ' +
             d.toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long' }) + '.', 'ok');
