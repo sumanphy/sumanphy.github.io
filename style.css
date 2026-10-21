@@ -995,3 +995,76 @@ footer a:hover img {
         font-size: 0.66rem;
     }
 }
+
+
+/* --------------------------------------------------------------------------
+   Time Crystal promo card (homepage and contact page)
+   -------------------------------------------------------------------------- */
+
+.tc-promo {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.tc-promo-ring {
+    flex: 0 0 180px;
+    display: block;
+    align-self: center;
+    line-height: 0;
+    transition: transform 0.25s ease;
+}
+
+.tc-promo-ring:hover { transform: rotate(-6deg) scale(1.03); }
+
+.tc-promo-ring svg { width: 100%; height: auto; display: block; overflow: visible; }
+
+.tc-promo-ring circle {
+    fill: none;
+    stroke-linecap: round;
+}
+
+.tc-promo .tc-track { stroke: var(--green-tint); }
+.tc-promo .tc-base  { stroke: var(--accent-green); }
+.tc-promo .tc-arc   { stroke: #0f5026; filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.4)); }
+[data-theme="dark"] .tc-promo .tc-arc { stroke: #93d6aa; filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.7)); }
+
+.tc-promo .tc-time {
+    font-family: var(--font-sans);
+    font-size: 38px;
+    font-weight: 600;
+    fill: var(--ink);
+    letter-spacing: -0.02em;
+}
+
+.tc-promo .tc-sub {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    fill: var(--muted);
+}
+
+.tc-promo-body { flex: 1; }
+
+.tc-promo-body h2 { margin-bottom: 1rem; }
+
+.tc-promo-body p { margin-bottom: 0.75rem; }
+
+.tc-promo-note {
+    color: var(--muted);
+    font-size: 0.93rem;
+    margin-bottom: 1.25rem !important;
+}
+
+@media (max-width: 720px) {
+    .tc-promo {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.25rem;
+    }
+
+    .tc-promo-ring { flex: none; width: 150px; margin: 0 auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tc-promo-ring, .tc-promo-ring:hover { transition: none; transform: none; }
+}
