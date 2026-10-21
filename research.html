@@ -31,11 +31,11 @@
             <a href="#thouless" class="blue-text-tag">2.2. Thouless pumps</a>
 
             <a href="#non-equilibrium" class="green-text-tag"><strong>3. Non-Equilibrium Physics →</strong></a>
-            <a href="#few-body" class="blue-text-tag">3.1. Few-body dynamics</a>
-            <a href="#mbl" class="blue-text-tag">3.2. Many-body localization</a>
-            <a href="#kcms" class="blue-text-tag">3.3. Kinetically constrained systems</a>
-            <a href="#electron-phonon" class="blue-text-tag">3.4. Electron-Phonon systems</a>
-            <a href="#floquet" class="blue-text-tag">3.5. Periodically driven systems</a>
+            <a href="#floquet" class="blue-text-tag">3.1. Periodically driven systems</a>
+            <a href="#few-body" class="blue-text-tag">3.2. Few-body dynamics</a>
+            <a href="#mbl" class="blue-text-tag">3.3. Many-body localization</a>
+            <a href="#kcms" class="blue-text-tag">3.4. Kinetically constrained systems</a>
+            <a href="#electron-phonon" class="blue-text-tag">3.5. Electron-Phonon systems</a>
 
             <a href="#quantum-computation" class="green-text-tag"><strong>4. Quantum computation</strong></a>
         </div>
@@ -205,8 +205,47 @@
         <div id="non-equilibrium">
             <h2 style="margin-top: 1.5rem; color: var(--accent-green);">3. Non-Equilibrium Physics</h2>
 
+            <div class="research-topic" id="floquet">
+                <h3>3.1. Periodically driven systems</h3>
+                <div class="research-topic-content">
+                    <img src="research/images/floquet.png" alt="Periodically Driven Systems" class="research-image">
+                    <div class="research-content">
+                        <p>
+                            Periodically driven (Floquet) systems offer a powerful route to engineer
+                            non-equilibrium phases of matter that have no equilibrium counterpart such as
+                            Floquet topological phases, time crystals, and dynamically stabilised order.
+                        </p>
+                        <p style="margin-top: 0.8rem;">
+                            Clean, interacting, periodically driven systems are believed to thermalize to featureless, infinite-temperature states 
+                            that preclude the formation of stable ordered states. In our work, we show stable quantum order, distinct from prethermal order, 
+                            and its phase transitions in the ground state of the average-energy operator. Decomposing the time evolution into geometric 
+                            and average-energy dynamics, we apply Geometric Floquet theory to identify the Floquet ground state. 
+                            We derive a general variational principle to compute the Floquet ground state in large interacting periodically driven systems, 
+                            and use it to develop a matrix product state algorithm. 
+                            In driven nonintegrable chains of more than 100 interacting spins, our numerical simulations exhibit a gapped, area-law entangled Floquet 
+                            ground state in extended parameter regimes; the ground-state manifold can support both dressed equilibrium order (e.g., Floquet antiferromagnets) 
+                            and inherently nonequilibrium order (e.g., ground-state time crystals). This quantum order is protected by a finite average-energy gap, 
+                            which closes at phase transition points upon changing model parameters. We decompose Floquet phases of matter into their equilibrium and nonequilibrium elements: 
+                            whereas the Floquet ground state at any fixed time is a representative of an equilibrium phase of matter, the nonequilibrium content is entirely produced by the 
+                            drive holonomy and is geometric. As a mechanism for the stability against heating of gapped Floquet ground states in nonintegrable quantum systems, we identify quasilocal counterdiabatic driving, 
+                            and argue why Floquet ground states evade the Eigenstate Thermalization Hypothesis. Our work enables the study of interacting nonequilibrium matter deep into 
+                            the many-body regime, and lays the foundations for the engineering of strongly correlated ordered quantum states.
+                        </p>
+                        <p style="margin-top: 0.8rem;"><strong>Relevant publications:</strong></p>
+                        <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                            <li>
+                                S. M., Paul M. Schindler and Marin Bukov,
+                                <em>Floquet ground state order</em>,
+                                <a href="https://doi.org/10.48550/arXiv.2610.28336" target="_blank">arXiv:2610.28336 (2026)</a>.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+
             <div class="research-topic" id="few-body">
-                <h3>3.1. Few-body dynamics</h3>
+                <h3>3.2. Few-body dynamics</h3>
                 <div class="research-topic-content">
                     <img src="research/images/few_body.png" alt="Few-body Dynamics" class="research-image">
                     <div class="research-content">
@@ -248,7 +287,7 @@
             </div>
 
             <div class="research-topic" id="mbl">
-                <h3>3.2. Many-body localization</h3>
+                <h3>3.3. Many-body localization</h3>
                 <div class="research-topic-content">
                     <img src="research/images/mbl.png" alt="Many-body Localization" class="research-image">
                     <div class="research-content">
@@ -289,7 +328,7 @@
             </div>
 
             <div class="research-topic" id="kcms">
-                <h3>3.3. Kinetically constrained systems</h3>
+                <h3>3.4. Kinetically constrained systems</h3>
                 <div class="research-topic-content">
                     <img src="research/images/kcm.png" alt="Kinetically Constrained Models" class="research-image">
                     <div class="research-content">
@@ -319,7 +358,7 @@
             </div>
 
             <div class="research-topic" id="electron-phonon">
-                <h3>3.4. Electron-Phonon systems</h3>
+                <h3>3.5. Electron-Phonon systems</h3>
                 <div class="research-topic-content">
                     <img src="research/images/e_ph.png" alt="Electron-Phonon Systems" class="research-image">
                     <div class="research-content">
@@ -348,44 +387,6 @@
                                 S. M., E. Bertok, and F. Heidrich-Meisner,
                                 <em>Phonon-induced breakdown of Thouless pumping in the Rice-Mele-Holstein model</em>,
                                 <a href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.106.235118" target="_blank">Phys. Rev. B 106, 235118 (2022)</a>.
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="research-topic" id="floquet">
-                <h3>3.5. Periodically driven systems</h3>
-                <div class="research-topic-content">
-                    <img src="research/images/floquet.png" alt="Periodically Driven Systems" class="research-image">
-                    <div class="research-content">
-                        <p>
-                            Periodically driven (Floquet) systems offer a powerful route to engineer
-                            non-equilibrium phases of matter that have no equilibrium counterpart such as
-                            Floquet topological phases, time crystals, and dynamically stabilised order.
-                        </p>
-                        <p style="margin-top: 0.8rem;">
-                            Clean, interacting, periodically driven systems are believed to thermalize to featureless, infinite-temperature states 
-                            that preclude the formation of stable ordered states. In our work, we show stable quantum order, distinct from prethermal order, 
-                            and its phase transitions in the ground state of the average-energy operator. Decomposing the time evolution into geometric 
-                            and average-energy dynamics, we apply Geometric Floquet theory to identify the Floquet ground state. 
-                            We derive a general variational principle to compute the Floquet ground state in large interacting periodically driven systems, 
-                            and use it to develop a matrix product state algorithm. 
-                            In driven nonintegrable chains of more than 100 interacting spins, our numerical simulations exhibit a gapped, area-law entangled Floquet 
-                            ground state in extended parameter regimes; the ground-state manifold can support both dressed equilibrium order (e.g., Floquet antiferromagnets) 
-                            and inherently nonequilibrium order (e.g., ground-state time crystals). This quantum order is protected by a finite average-energy gap, 
-                            which closes at phase transition points upon changing model parameters. We decompose Floquet phases of matter into their equilibrium and nonequilibrium elements: 
-                            whereas the Floquet ground state at any fixed time is a representative of an equilibrium phase of matter, the nonequilibrium content is entirely produced by the 
-                            drive holonomy and is geometric. As a mechanism for the stability against heating of gapped Floquet ground states in nonintegrable quantum systems, we identify quasilocal counterdiabatic driving, 
-                            and argue why Floquet ground states evade the Eigenstate Thermalization Hypothesis. Our work enables the study of interacting nonequilibrium matter deep into 
-                            the many-body regime, and lays the foundations for the engineering of strongly correlated ordered quantum states.
-                        </p>
-                        <p style="margin-top: 0.8rem;"><strong>Relevant publications:</strong></p>
-                        <ul style="margin-left: 1.5rem; line-height: 1.8;">
-                            <li>
-                                S. M., Paul M. Schindler and Marin Bukov,
-                                <em>Floquet ground state order</em>,
-                                <a href="https://doi.org/10.48550/arXiv.2610.28336" target="_blank">arXiv:2610.28336 (2026)</a>.
                             </li>
                         </ul>
                     </div>
